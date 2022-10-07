@@ -1,0 +1,15 @@
+// NOTES //
+
+1. tcgetattr and tcgsetattr
+
+tcgetattr — get the parameters associated with the terminal
+
+The tcsetattr() function shall set the parameters associated with the terminal referred to by the open file descriptor fildes (an open file descriptor associated with a terminal) from the termios structure referenced by termios_p as follows:
+
+    -If optional_actions is TCSANOW, the change shall occur immediately.
+
+    -If optional_actions is TCSADRAIN, the change shall occur after all output written to fildes is transmitted. This function should be used when changing parameters that affect output.
+
+    -If optional_actions is TCSAFLUSH, the change shall occur after all output written to fildes is transmitted, and all input so far received but not read shall be discarded before the change is made.
+
+2.

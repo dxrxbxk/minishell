@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/04/11 16:48:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/07 13:46:11 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@
 # include <signal.h>
 # include <unistd.h>
 
+void	handle_signals(void);
 void	set_terminal(int status);
-void	ft_ignore_signal(int signal);
-void	ignore_sig(int sig);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_tab(char **tab);
 
 typedef struct s_token
 {
-	char *str; //split whitespaces
-	int type; //pipe, quote etc.
-	char *args;// agrs.
-	struct s_token *next;
+	char 	*str; //split whitespaces
+	int		type; //pipe, quote etc.
+	char	*args;// agrs.
+	struct	s_token *next;
 }			t_token;
 
 typedef struct s_env
