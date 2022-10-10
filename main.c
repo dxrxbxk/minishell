@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/07 14:55:58 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/10 16:17:17 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,19 @@ int	get_line(t_mini *data)
 	while (1)
 	{
 		handle_signals();
-		str = get_next_line(0);
+		str = readline("minishell :");
+		if (str == NULL) // EOF / CTRL + D
+			exit(1);
+		if (str[0] == 0)
+		{
+			//new prompt
+			printf("");
+		}
+		add_history(str); //idk
 		parse(str);
 	//	tab = ft_split(str, ' ');
 	//	print_tab(tab);
-		printf("%s", str);
+//		printf("%s", str);
 	}
 	return (0);
 }
@@ -47,9 +55,7 @@ int	get_env(t_mini *data, char **env)
 	{
 		*elm = malloc(sizeof(t_env));
 		(*elm)->key = ft_strndup(env[i], ft_findi(env[i], '='));
-		printf("key = %s ", (*elm)->key);
 		(*elm)->value = ft_strdup(ft_strchr(env[i], '=') + 1);
-		printf("value = %s", (*elm)->value);
 		elm = &((*elm)->next);
 		(*elm) = NULL;
 		i++;
@@ -85,8 +91,8 @@ int	main(int ac, char **av, char **env)
 	t_mini data;
 	(void)env;
 	(void)data;
-	get_env(&data, env);
-	get_path(&data, env);
+//	get_env(&data, env);
+//	get_path(&data, env);
 	if (ac == 1)
 	{
 		set_terminal(1);

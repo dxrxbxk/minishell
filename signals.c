@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:03:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/07 14:58:48 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/10 16:17:20 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	inthandler(int sig)
 {
 	(void)sig;
-	printf("\n");
 	ft_putendl_fd("", 1);
+	exit(1);
 	//set exit status at 1
 	//new line with rl
 	//replace buffer rl
