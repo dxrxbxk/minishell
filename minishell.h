@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/07 13:46:11 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/11 16:11:58 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,28 @@ void	set_terminal(int status);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_tab(char **tab);
 
+enum	token_type
+{
+	WHITE_SPACE,
+	NLINE,
+	PIPE,
+	BACKSLASH,
+	DOLLAR,
+	QUOTES,
+	D_QUOTE,
+	GREAT,
+	D_GREAT,
+	LESS,
+	D_LESS,
+	WORD = 1,
+};
+
 typedef struct s_token
 {
 	char 	*str; //split whitespaces
 	int		type; //pipe, quote etc.
-	char	*args;// agrs.
+	int		pos;
+//	char	*args;// agrs.
 	struct	s_token *next;
 }			t_token;
 
