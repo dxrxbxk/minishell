@@ -6,52 +6,74 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/11 16:56:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/12 15:00:37 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 /*
-int	parse(char *str)
+static token_type		token_type[] = {
+	{" ", WHITE_SPACE},
+	{"\t", WHITE_SPACE},
+	{"|", PIPE},
+	{"||", D_PIPE},
+	{"\\", BACKSLASH},
+	{"$", DOLLAR},
+	{"'", QUOTE},
+	{"\"", D_QUOTE},
+	{">", GREAT},
+	{">>", D_GREAT},
+	{"<", LESS},
+	{"<<", D_LESS},
+	{"&&", AND},
+	{NULL, -1},
+};
+*/
+int	free_data(t_mini *data)
 {
-	t_token	*token;
-	int	i;
+	t_env **env;
+	t_env	*tmp;
 
-	i = 0;
-	token = malloc(sizeof(*token)); //protec
-	while (str[i])
+	env = &data->env;
+	int	i = -1;
+	while (++i) 
+		free(data->sPATH[i]);
+	while (*env)
 	{
-		if (ft_strchr(token_type, str[i]))
-		{
-			token->str = ft_strndup(str, i);
-			token->type = token_type
-		}
-
+		tmp = (*env)->next;
+		free((*env)->key);
+		free((*env)->value);
+		free(*env);
+		*env = tmp;
 	}
 	return (0);
 }
+/*
+int	parse_token(char *str)
+{
+	t_token
+}
 */
+int	get_token_size();
+int	get_token_type(char *str);
+
 int	get_line(t_mini *data)
 {
 	char *str;
-
+	t_token_type token;	
+	(void)token;
 	(void)data;
+
 	while (1)
 	{
 		handle_signals();
 		str = readline("minishell :");
 		if (str == NULL) // EOF / CTRL + D
-			exit(1);
-		if (str[0] == 0)
-		{
-			//new prompt
-			ft_putstr_fd("", 1);
-		}
+			exit(free_data(data));
+		if (str[0] == '\n') //idk
+			printf("salut\n");
 		add_history(str); 
 //		parse(str);
-	//	tab = ft_split(str, ' ');
-	//	print_tab(tab);
-//		printf("%s", str);
 	}
 	return (0);
 }
@@ -96,6 +118,8 @@ int	get_path(t_mini *data, char **env)
 		i++;
 	}
 	data->sPATH = ft_split(data->PATH, ':');
+	if (!data->sPATH)
+		return (-1);
 	print_tab(data->sPATH);
 	free(data->PATH);
 	return (0);
@@ -108,12 +132,12 @@ int	main(int ac, char **av, char **env)
 	t_mini data;
 	(void)env;
 	(void)data;
-//	get_env(&data, env);
-//	get_path(&data, env);
+	get_env(&data, env);
+	get_path(&data, env);
 	if (ac == 1)
 	{
 		set_terminal(1);
-		get_line(&data);
-		set_terminal(0);
+		if (get_line(&data) == -1)
+			set_terminal(0);
 	}
 }

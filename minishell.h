@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/11 16:11:58 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:54:22 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@ void	set_terminal(int status);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_tab(char **tab);
 
-enum	token_type
+typedef	enum	e_token_type
 {
+	WORD,
 	WHITE_SPACE,
 	NLINE,
 	PIPE,
+	D_PIPE,
 	BACKSLASH,
 	DOLLAR,
-	QUOTES,
+	QUOTE,
 	D_QUOTE,
 	GREAT,
 	D_GREAT,
 	LESS,
 	D_LESS,
-	WORD = 1,
-};
+	AND,
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -63,6 +65,7 @@ typedef struct s_mini
 {
 	char *PATH;
 	char **sPATH;
+	char *content;
 	t_env *env;
 }				t_mini;
 

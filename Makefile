@@ -4,7 +4,7 @@ HEADERS			= minishell.h
 
 CC          	= cc
 
-CFLAGS      	= -Wall -Wextra -Werror
+#CFLAGS      	= -Wall -Wextra -Werror
 
 OBJDIR 			= obj
 
