@@ -6,29 +6,12 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/12 15:00:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:22:09 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-static token_type		token_type[] = {
-	{" ", WHITE_SPACE},
-	{"\t", WHITE_SPACE},
-	{"|", PIPE},
-	{"||", D_PIPE},
-	{"\\", BACKSLASH},
-	{"$", DOLLAR},
-	{"'", QUOTE},
-	{"\"", D_QUOTE},
-	{">", GREAT},
-	{">>", D_GREAT},
-	{"<", LESS},
-	{"<<", D_LESS},
-	{"&&", AND},
-	{NULL, -1},
-};
-*/
+
 int	free_data(t_mini *data)
 {
 	t_env **env;
@@ -48,21 +31,12 @@ int	free_data(t_mini *data)
 	}
 	return (0);
 }
-/*
-int	parse_token(char *str)
-{
-	t_token
-}
-*/
-int	get_token_size();
-int	get_token_type(char *str);
 
 int	get_line(t_mini *data)
 {
 	char *str;
-	t_token_type token;	
-	(void)token;
 	(void)data;
+//	t_token *tok;
 
 	while (1)
 	{
@@ -72,6 +46,7 @@ int	get_line(t_mini *data)
 			exit(free_data(data));
 		if (str[0] == '\n') //idk
 			printf("salut\n");
+	//	tok = lexer(str); 
 		add_history(str); 
 //		parse(str);
 	}

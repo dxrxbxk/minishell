@@ -1,10 +1,10 @@
-SRCS			= main.c utils.c signals.c term.c
+SRCS			= main.c utils.c signals.c term.c lexer.c
 
 HEADERS			= minishell.h
 
 CC          	= cc
 
-#CFLAGS      	= -Wall -Wextra -Werror
+CFLAGS      	= -Wall -Wextra -Werror
 
 OBJDIR 			= obj
 
