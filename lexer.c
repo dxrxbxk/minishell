@@ -6,12 +6,12 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/12 16:21:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:33:00 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 static t_token_type		token[] = {
 	{" ", WHITE_SPACE},
 	{"\t", WHITE_SPACE},
@@ -49,7 +49,7 @@ t_token	*lexer(char *str)
 }
 // parse token = filling the token structure
 
-int	get_token(char *str, t_token **tok, int *i)
+t	get_token(char *str, t_token **tok, int *i)
 {
 	t_token	*new;
 	char	*token_content;
@@ -59,10 +59,9 @@ int	get_token(char *str, t_token **tok, int *i)
 	size = get_token_size(str);
 	token_content = ft_strndup(str, size);
 	type = get_token_type(str);
+	if (!
 //	new = ft_lstnew(token_content, size, type)
 //	ft_lstadd_back(tok, new);
 	*i += size;
 
 }
-
-*/
