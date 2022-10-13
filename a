@@ -1,0 +1,13 @@
+a
+a.out
+lexer.c
+libft
+main.c
+Makefile
+minishell.h
+notes
+obj
+rl_leaks.txt
+signals.c
+term.c
+utils.c

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 16:33:07 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:55:16 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_terminal(int status);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_tab(char **tab);
 
-typedef enum	e_type
+typedef	enum	e_type
 {
 	WORD,
 	WHITE_SPACE,
@@ -44,6 +44,12 @@ typedef enum	e_type
 	D_LESS,
 	AND,
 }				t_type;
+
+typedef struct s_token_type
+{
+	char *value;
+	t_type	type;
+}			t_token_type;
 
 typedef struct s_token
 {
@@ -67,4 +73,5 @@ typedef struct s_mini
 	t_env *env;
 }				t_mini;
 
+t_token	*lexer(char *str);
 #endif

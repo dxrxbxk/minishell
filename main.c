@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/12 16:22:09 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:52:36 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int	free_data(t_mini *data)
 int	get_line(t_mini *data)
 {
 	char *str;
-	(void)data;
-//	t_token *tok;
+	t_token *tok;
 
+	tok = malloc(sizeof(t_token));
+	if (!tok)
+		return (-1);
 	while (1)
 	{
 		handle_signals();
@@ -46,9 +48,8 @@ int	get_line(t_mini *data)
 			exit(free_data(data));
 		if (str[0] == '\n') //idk
 			printf("salut\n");
-	//	tok = lexer(str); 
+		tok = lexer(str); 
 		add_history(str); 
-//		parse(str);
 	}
 	return (0);
 }
