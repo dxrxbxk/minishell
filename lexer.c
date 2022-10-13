@@ -6,29 +6,12 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 19:39:14 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/13 22:08:19 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-   static t_token_type		token[] = {
-   {" ", WHITE_SPACE},
-   {"\t", WHITE_SPACE},
-   {"|", PIPE},
-   {"||", D_PIPE},
-   {"\\", BACKSLASH},
-   {"$", DOLLAR},
-   {"'", QUOTE},
-   {"\"", D_QUOTE},
-   {">", GREAT},
-   {">>", D_GREAT},
-   {"<", LESS},
-   {"<<", D_LESS},
-   {"&&", AND},
-   {NULL, -1},
-   };
- */
+
 //lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 int	token_size(char *str, int *i)
 {
@@ -107,21 +90,19 @@ t_type	token_type(char *str)
 
 int	get_token(char *str, t_token **tok, int *i)
 {
-	t_token	*new;
 	char	*token_content;
-	int		type;
+	t_type		type;
 	int size = 0;
 
-	(void)**tok;
-	(void)type;(void)token_content;(void)new;
 	size = token_size(str, i);
 	token_content = ft_strndup(str + *i, size);
 
 	type = token_type(token_content);
 	printf("token = %s size = %d ", token_content, size);
 	printf("type %d\n", type);
-//	new = ft_lstnew(token_content, size, type)
-//	ft_lstadd_back(tok, new);
+	*tok = ft_new_token(token_content, type);
+	//printf("tok %s\n", (*tok)->str);
+	free(token_content);
 	*i += size;
 	return (0);
 }

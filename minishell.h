@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 19:17:22 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/13 21:52:48 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,8 @@ typedef struct s_mini
 	t_env *env;
 }				t_mini;
 
+void	print_list(t_token *print);
+void	ft_add_token(t_token **alst, t_token *new);
+t_token	*ft_new_token(void *content, t_type type);
 t_token	*lexer(char *str);
 #endif

@@ -1,4 +1,4 @@
-SRCS			= main.c utils.c signals.c term.c lexer.c
+SRCS			= main.c utils.c signals.c term.c lexer.c token.c
 
 HEADERS			= minishell.h
 
