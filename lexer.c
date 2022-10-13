@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 18:43:12 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/13 19:39:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,52 @@ int	token_size(char *str, int *i)
 	return (size);
 }
 
-int	token_type(char *str);
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 != *s2)
+		return ((unsigned char)*s1 - (unsigned char)*s2);
+	return (0);
+}
+
+//pas a la norme menfou
+t_type	token_type(char *str)
+{
+	if (!ft_strcmp(" ", str) || !ft_strcmp("\t", str))
+		return (WHITE_SPACE);
+	else if (!ft_strcmp("|", str))
+		return (PIPE);
+	else if (!ft_strcmp("\\", str))
+		return (BACKSLASH);
+	else if (!ft_strcmp("$", str))
+		return (DOLLAR);
+	else if (!ft_strcmp("'", str))
+		return (QUOTE);
+	else if (!ft_strcmp("\"", str))
+		return (D_QUOTE);
+	else if (!ft_strcmp(">", str))
+		return (GREAT);
+	else if (!ft_strcmp("<", str))
+		return (LESS);
+	else if (!ft_strcmp(">>", str))
+		return (D_GREAT);
+	else if (!ft_strcmp("<<", str))
+		return (D_LESS);
+	else if (!ft_strcmp("&&", str))
+		return (AND);
+	else if (!ft_strcmp("||", str))
+		return (D_PIPE);
+	else if (!ft_strcmp("(", str))
+		return (LEFT_P);
+	else if (!ft_strcmp(")", str))
+		return (RIGHT_P);
+	else
+		return (WORD);
+}
 
 
 // parse token = filling the token structure
@@ -72,10 +117,11 @@ int	get_token(char *str, t_token **tok, int *i)
 	size = token_size(str, i);
 	token_content = ft_strndup(str + *i, size);
 
-	printf("token = %s size %d\n", token_content, size);
-	//	type = get_token_type(str);
-	//	new = ft_lstnew(token_content, size, type)
-	//	ft_lstadd_back(tok, new);
+	type = token_type(token_content);
+	printf("token = %s size = %d ", token_content, size);
+	printf("type %d\n", type);
+//	new = ft_lstnew(token_content, size, type)
+//	ft_lstadd_back(tok, new);
 	*i += size;
 	return (0);
 }
