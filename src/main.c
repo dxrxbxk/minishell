@@ -6,11 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 22:08:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 20:07:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include	<minishell.h>
 
 int	free_data(t_mini *data)
 {

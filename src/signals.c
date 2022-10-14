@@ -6,11 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:03:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/11 16:55:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 20:23:05 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	inthandler(int sig)
 {

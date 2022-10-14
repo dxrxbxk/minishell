@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/04/08 15:29:12 by diroyer          ###   ########.fr       */
+/*   Created: 2022/04/11 16:28:44 by diroyer           #+#    #+#             */
+/*   Updated: 2022/10/14 20:08:12 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-void	print_tab(char **tab)
+void	set_terminal(int status)
 {
-	int	i;
+	struct termios	terminal;
+	static struct termios	tmp;
 
-	i = -1;
-	while (tab[++i])
-		printf("%s\n", tab[i]);
+	if (status)
+	{
+		tcgetattr(0, &tmp);
+		tcgetattr(0, &terminal);
+		terminal = tmp;
+		terminal.c_lflag &= ~ECHOCTL;
+		tcsetattr(0, TCSAFLUSH, &terminal);
+		return ;
+	}
+	tcsetattr(0, TCSAFLUSH, &tmp);
 }

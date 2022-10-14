@@ -6,15 +6,15 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 21:52:48 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 20:14:17 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
-# include "libft/libft.h"
-# include "libft/get_next_line.h"
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>

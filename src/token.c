@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 22:02:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 20:08:21 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	print_list(t_token *print)
 {

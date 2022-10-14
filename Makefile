@@ -1,40 +1,43 @@
-SRCS			= main.c utils.c signals.c term.c lexer.c token.c
+SRCS				= main.c utils.c signals.c term.c lexer.c token.c
 
-HEADERS			= minishell.h
+SRCSDIR				= src
 
-CC          	= cc
+INCDIR				= incdir
 
-CFLAGS      	= -Wall -Wextra -Werror
+HEADERS				= minishell.h
 
-OBJDIR 			= obj
+CC					= cc
 
-LIBFT = libft/libft.a
+CFLAGS				= -Wall -Wextra -Werror
 
-NAME			= a.out 
+OBJDIR				= obj
 
-OBJS		= $(SRCS:%.c=$(OBJDIR)/%.o)
+LIBFT				= libft/libft.a
+
+NAME				= a.out
+
+FILES				= $(addprefix $(SRCSDIR)/, $(SRCS))
+OBJS				= $(patsubst $(OBJDIR)/%.o, $(SRCSDIR)/%.c, $(FILES))
+
+##$(OBJDIR)/%.o:		%.c | $(OBJDIR)
+##					$(CC) $(CFLAGS) -c $< -o $@
+
+all:				$(NAME)
+
+$(NAME):	$(OBJS)
+					make -C libft
+					$(CC) $^ -o $(NAME) $(LIBFT) -lreadline -I$(INCDIR)
 
 
-$(OBJDIR)/%.o:%.c $(HEADERS) | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	make -C libft
-	$(CC) $^ -o $(NAME) $(LIBFT) -lreadline
-
-$(OBJDIR) :
-	mkdir -p $@
+$(OBJDIR)	:
+					mkdir -p $@
 
 clean:
-	make -C libft clean
-	rm -rf $(OBJDIR)
+					make -C libft clean
+					rm -rf $(OBJDIR)
 
-fclean:	clean
-	make -C libft fclean
-	rm -rf $(NAME)
+fclean:				clean
+					make -C libft fclean
+					rm -rf $(NAME)
 
-re:         fclean all
-
-.PHONY:     all clean fclean re
+re:					fclean all

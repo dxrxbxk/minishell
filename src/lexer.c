@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/13 22:08:19 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 20:21:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 //lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 int	token_size(char *str, int *i)
