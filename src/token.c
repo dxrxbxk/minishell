@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/14 20:08:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/14 21:12:29 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 void	print_list(t_token *print)
 {
@@ -22,31 +22,29 @@ void	print_list(t_token *print)
 	}
 }
 
-void	ft_add_token(t_token **alst, t_token *new)
+void	ft_tokenadd_back(t_token **first, t_token *new)
 {
-	t_token *curr;
+	t_token *current;
 
-	curr = *alst;
-	if (*alst == NULL)
-		*alst = new;
+	current = *first;
+	if (!*first)
+		*first = new;
 	else
 	{
-		while (curr->next)
-			curr = curr->next;
-		curr->next = new;
+		while (current->next)
+			current = current->next;
+		current->next = new;
 	}
 }
 
-t_token	*ft_new_token(void *content, t_type type)
+t_token	*ft_token_new(void *content, t_type type)
 {
 	t_token *new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->str = ft_strdup(content);
-	if (new->str)
-		return (NULL);
+	new->str = content;
 	new->type = type;
 	new->next = NULL;
 	return (new);

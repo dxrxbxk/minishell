@@ -1,4 +1,4 @@
-SRCS				= main.c utils.c signals.c term.c lexer.c token.c
+SRCS				= main.c utils.c signals.c term.c lexer.c token.c ft_strcmp.c
 
 SRCSDIR				= src
 
@@ -8,7 +8,7 @@ HEADERS				= minishell.h
 
 CC					= cc
 
-CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -g3
 
 OBJDIR				= obj
 
@@ -25,19 +25,18 @@ OBJS				= $(patsubst $(OBJDIR)/%.o, $(SRCSDIR)/%.c, $(FILES))
 all:				$(NAME)
 
 $(NAME):	$(OBJS)
-					make -C libft
-					$(CC) $^ -o $(NAME) $(LIBFT) -lreadline -I$(INCDIR)
-
+					make -s -C libft
+					$(CC) $(CFLAGS) $^ -o $(NAME) -lreadline -I$(INCDIR) -I./libft $(LIBFT)
 
 $(OBJDIR)	:
 					mkdir -p $@
 
 clean:
-					make -C libft clean
+					make -s -C libft clean
 					rm -rf $(OBJDIR)
 
 fclean:				clean
-					make -C libft fclean
+					make -s -C libft fclean
 					rm -rf $(NAME)
 
 re:					fclean all

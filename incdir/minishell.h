@@ -6,21 +6,21 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/14 20:14:17 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/15 18:50:57 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
 # include <signal.h>
 # include <unistd.h>
+# include "libft.h"
+# include "get_next_line.h"
 
 void	handle_signals(void);
 void	set_terminal(int status);
@@ -77,7 +77,11 @@ typedef struct s_mini
 }				t_mini;
 
 void	print_list(t_token *print);
-void	ft_add_token(t_token **alst, t_token *new);
-t_token	*ft_new_token(void *content, t_type type);
-t_token	*lexer(char *str);
+int		lexer(t_token **token, char *input);
+
+t_token	*ft_token_new(void *content, t_type type);
+void	ft_tokenadd_back(t_token **alst, t_token *new);
+
+int		ft_strcmp(const char *s1, const char *s2);
+
 #endif

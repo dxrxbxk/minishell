@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/14 20:07:43 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/15 19:44:27 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_line(t_mini *data)
 	char *str;
 	t_token *tok;
 
-	(void)tok;
+	tok = NULL;
 	while (1)
 	{
 		handle_signals();
@@ -46,7 +46,7 @@ int	get_line(t_mini *data)
 			exit(free_data(data));
 		if (str[0] == '\n') //idk
 			printf("salut\n");
-		tok = lexer(str);
+		lexer(&tok, str);
 //		print_list(tok);
 		add_history(str); 
 	}
