@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/15 18:50:57 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:50:48 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef	enum	e_type
 	LESS,
 	D_LESS,
 	AND,
-	BRACKET,
 	LEFT_P,
 	RIGHT_P,
 }				t_type;

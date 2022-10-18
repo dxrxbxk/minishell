@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/14 21:12:29 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:42:28 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	print_list(t_token *print)
 {
-	printf("saliti\n");
 	while (print)
 	{
 		printf("tok->str = %s and tok->type = %d\n", print->str, print->type);

@@ -6,12 +6,27 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/14 21:13:25 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:48:47 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
+static int	check_token(t_token *token)
+{
+	int	close;
 
+	close = 0;
+	while (token)
+	{
+		if (token->type == D_QUOTE || token->type = QUOTE || token->type == D_LEFT)
+		{
+			check_second(type);
+		}
+	}
+	return (0);
+}
+*/
 //lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 static int	ft_token_size(char *str, int *i)
 {
