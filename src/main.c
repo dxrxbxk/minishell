@@ -6,11 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/15 19:44:27 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:03:28 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<minishell.h>
+#include <minishell.h>
 
 int	free_data(t_mini *data)
 {
@@ -47,6 +47,8 @@ int	get_line(t_mini *data)
 		if (str[0] == '\n') //idk
 			printf("salut\n");
 		lexer(&tok, str);
+		printf("%d\n", parser(tok));
+		tok = NULL;
 //		print_list(tok);
 		add_history(str); 
 	}

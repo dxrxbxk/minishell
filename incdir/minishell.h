@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/17 16:50:48 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:15:23 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <unistd.h>
 # include "libft.h"
 # include "get_next_line.h"
+
+# define BRACKETS 0
+# define SQUOTES 1
+# define DQUOTES 2
 
 void	handle_signals(void);
 void	set_terminal(int status);
@@ -76,7 +80,15 @@ typedef struct s_mini
 }				t_mini;
 
 void	print_list(t_token *print);
+
 int		lexer(t_token **token, char *input);
+int		parser(t_token *token);
+int		ft_state_0(t_token **token, long separators[3]);
+int		ft_state_1(t_token **token, long separators[3]);
+int		ft_state_2(t_token **token, long separators[3]);
+int		ft_state_3(t_token **token, long separators[3]);
+int		ft_state_4(t_token **token, long separators[3]);
+int		ft_state_5(t_token **token, long separators[3]);
 
 t_token	*ft_token_new(void *content, t_type type);
 void	ft_tokenadd_back(t_token **alst, t_token *new);

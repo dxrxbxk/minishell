@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/18 16:48:47 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/20 20:04:02 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ int	lexer(t_token **token, char *input)
 			return (0);
 		ft_tokenadd_back(token, new);
 	}
-	print_list(*token);
+//	print_list(*token);
 	return (1);
 }
