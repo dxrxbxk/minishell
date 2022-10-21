@@ -38,6 +38,7 @@ int	get_line(t_mini *data)
 	t_token *tok;
 
 	tok = NULL;
+	(void)tok;
 	while (1)
 	{
 		handle_signals();
@@ -49,6 +50,8 @@ int	get_line(t_mini *data)
 		lexer(&tok, str);
 		printf("%d\n", parser(tok));
 		tok = NULL;
+//		lexer(&tok, str);
+		ft_export(data->env, str);
 //		print_list(tok);
 		add_history(str); 
 	}
@@ -70,7 +73,7 @@ int	get_env(t_mini *data, char **env)
 		if (!(*elm)->key)
 			return (-1);
 		(*elm)->value = ft_strdup(ft_strchr(env[i], '=') + 1);
-		if (!(*elm)->key)
+		if (!(*elm)->value)
 			return (-1);
 		elm = &((*elm)->next);
 		(*elm) = NULL;
@@ -104,8 +107,8 @@ int	get_path(t_mini *data, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
 	(void)av;
+	(void)ac;
 	t_mini data;
 	(void)env;
 	(void)data;

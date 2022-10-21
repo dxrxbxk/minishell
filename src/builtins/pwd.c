@@ -1,47 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/21 18:12:24 by diroyer          ###   ########.fr       */
+/*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
+/*   Updated: 2022/10/21 16:39:55 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*get_env_str(t_env *lst, char *get)
+int		ft_pwd(void)
 {
-	while (lst)
-	{
-		if (!ft_strcmp(lst->key, get))
-			return (lst->value);
-		lst = lst->next;
-	}
-	return (NULL);
+	char *cwd;
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (-1);
+	else
+		printf("%s\n", cwd);
+	free(cwd);
+	return (0);
 }
-
-void	ft_replace_env(t_env *lst, char *cmp, char *value)
-{
-	while (lst)
-	{
-		if (!ft_strcmp(lst->key, cmp))
-		{
-			free(lst->value);
-			lst->value = value;
-		}
-		lst = lst->next;
-	}
-}
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab[++i])
-		printf("%s\n", tab[i]);
-}
-
