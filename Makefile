@@ -1,4 +1,4 @@
-SRCS				= main.c utils.c signals.c term.c lexer.c token.c ft_strcmp.c
+SRCS				= main.c utils.c signals.c term.c lexer.c token.c ft_strcmp.c builtins/echo.c builtins/cd.c builtins/export.c
 
 SRCSDIR				= src
 

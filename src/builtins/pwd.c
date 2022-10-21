@@ -6,10 +6,21 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/19 18:49:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/21 16:39:55 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <minishell.h>
 
+int		ft_pwd(void)
+{
+	char *cwd;
 
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (-1);
+	else
+		printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}

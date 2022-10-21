@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/15 19:44:27 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:48:01 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	get_line(t_mini *data)
 	t_token *tok;
 
 	tok = NULL;
+	(void)tok;
 	while (1)
 	{
 		handle_signals();
@@ -46,7 +47,8 @@ int	get_line(t_mini *data)
 			exit(free_data(data));
 		if (str[0] == '\n') //idk
 			printf("salut\n");
-		lexer(&tok, str);
+//		lexer(&tok, str);
+		ft_export(data->env, str);
 //		print_list(tok);
 		add_history(str); 
 	}
@@ -68,7 +70,7 @@ int	get_env(t_mini *data, char **env)
 		if (!(*elm)->key)
 			return (-1);
 		(*elm)->value = ft_strdup(ft_strchr(env[i], '=') + 1);
-		if (!(*elm)->key)
+		if (!(*elm)->value)
 			return (-1);
 		elm = &((*elm)->next);
 		(*elm) = NULL;
@@ -102,8 +104,8 @@ int	get_path(t_mini *data, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
 	(void)av;
+	(void)ac;
 	t_mini data;
 	(void)env;
 	(void)data;

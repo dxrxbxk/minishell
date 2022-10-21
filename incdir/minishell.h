@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/17 16:50:48 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/21 17:42:38 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@
 # include <unistd.h>
 # include "libft.h"
 # include "get_next_line.h"
+
+//NOTES
+
+//we could make pointer fonction for builtins
+/*
+typdedef struct s_builtins
+{
+	char *content;
+	int		(*builtins)(struct s_cmd *)
+}
+*/
 
 void	handle_signals(void);
 void	set_terminal(int status);
@@ -72,9 +83,15 @@ typedef struct s_mini
 	char *PATH;
 	char **sPATH;
 	char *content;
+	int	ac;
+	char **av;
 	t_env *env;
 }				t_mini;
 
+int		ft_export(t_env *lst, char *str);
+char	*get_env_str(t_env *lst, char *get);
+void	ft_replace_env(t_env *lst, char *cmp, char *value);
+int		ft_cd(t_env *lst, char *str);
 void	print_list(t_token *print);
 int		lexer(t_token **token, char *input);
 

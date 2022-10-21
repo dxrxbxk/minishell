@@ -6,13 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/18 19:27:24 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:20:45 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
+#include <minishell.h>
 
 static	void ft_putstr(char *str)
 {
@@ -46,9 +44,5 @@ int		ft_echo(char **av, int ac)
 	}
 	else if (ac > 1)
 		return (ft_echo_print(av, ac, i, 1));
-}
-
-int		main(int ac, char **av)
-{
-	ft_echo(av, ac);
+	return (1);
 }
