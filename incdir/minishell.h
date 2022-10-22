@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 02:05:16 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 03:03:27 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_mini
 	t_env *env;
 }				t_mini;
 
+void	ft_env(t_env *lst);
 void	print_env(t_env *print);
 void	unset(t_env *lst, char *str);
 int		ft_export(t_env *lst, char *str);

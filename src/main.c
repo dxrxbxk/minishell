@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 02:20:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 03:02:37 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_line(t_mini *data)
 		ft_export(data->env, str);
 		printf("----------------------------------\n");
 		unset(data->env, "ABC");
-		print_env(data->env);
+		ft_env(data->env);
 //		print_list(tok);
 		add_history(str); 
 	}

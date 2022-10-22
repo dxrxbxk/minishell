@@ -6,20 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 02:04:09 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 03:17:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	print_env(t_env *print)
-{
-	while (print)
-	{
-		printf("key=%s value=%s\n", print->key, print->value);
-		print = print->next;
-	}
-}
 
 void	ft_env_addback(t_env **first, t_env *new)
 {
