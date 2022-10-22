@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/21 18:46:13 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 02:04:09 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int		ft_export(t_env *lst, char *str)
 	else
 		printf("error export\n");
 	if (*str == '\0')
+		print_env(lst);
+	else
 		print_env(lst);
 	return (0);
 }

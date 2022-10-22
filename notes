@@ -1,5 +1,7 @@
 // NOTES //
 
+
+
 1. tcgetattr and tcgsetattr
 
 tcgetattr — get the parameters associated with the terminal
@@ -13,3 +15,4 @@ The tcsetattr() function shall set the parameters associated with the terminal r
     -If optional_actions is TCSAFLUSH, the change shall occur after all output written to fildes is transmitted, and all input so far received but not read shall be discarded before the change is made.
 
 2.
+
