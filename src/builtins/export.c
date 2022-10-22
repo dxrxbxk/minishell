@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 03:17:53 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 13:53:08 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int		ft_export(t_env *lst, char *str)
 	if (*str == '\0')
 		print_env(lst);
 	else
-		print_env(lst);
+		print_env(lst); //del this
 	return (0);
 }

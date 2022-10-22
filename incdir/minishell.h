@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 03:03:27 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/22 15:29:13 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typdedef struct s_builtins
 }
 */
 
+int		ft_exit(char *av);
 void	handle_signals(void);
 void	set_terminal(int status);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
