@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/24 17:35:15 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:47:38 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_exit(char *av)
 	int	status;
 
 	ft_putstr_fd("exit\n", 2);
-	if (!av)
+	if (!*av)
 		return (0);
 	if (ft_isnum(av))
 		return (2);
