@@ -6,27 +6,12 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/24 17:37:41 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:43:28 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-static int	check_token(t_token *token)
-{
-	int	close;
 
-	close = 0;
-	while (token)
-	{
-		if (token->type == D_QUOTE || token->type = QUOTE || token->type == D_LEFT)
-		{
-			check_second(type);
-		}
-	}
-	return (0);
-}
-*/
 //lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 static int	ft_token_size(char *str, int *i)
 {
@@ -34,7 +19,7 @@ static int	ft_token_size(char *str, int *i)
 	int	y;
 
 	size = 0;
-	if (ft_strchr("\t |\\$'\"><&()", str[(*i)]))
+	if (ft_strchr("\t |\\$'\"><&()*", str[(*i)]))
 	{
 		if (!ft_strncmp("<<", str + *i, 2) || !ft_strncmp(">>",str + *i, 2))
 			return (2);
@@ -43,7 +28,7 @@ static int	ft_token_size(char *str, int *i)
 		return (1);
 	}
 	y = *i - 1;
-	while (!ft_strchr("\t |\\$'\"><()", str[++y]))
+	while (!ft_strchr("\t |\\$'\"><()*", str[++y]))
 	{
 		if (str[y + 1] == '&' && str[y + 2] == '&')
 			return (size + 1);

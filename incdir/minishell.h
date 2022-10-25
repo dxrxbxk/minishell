@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/24 17:37:42 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:41:48 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef	enum	e_type
 	PIPE,
 	D_PIPE,
 	BACKSLASH,
-	WILDCARDS,
 	DOLLAR,
 	QUOTE,
 	D_QUOTE,
@@ -61,6 +60,7 @@ typedef	enum	e_type
 	AND,
 	LEFT_P,
 	RIGHT_P,
+	WILDCARDS,
 }				t_type;
 
 typedef struct s_token_type
