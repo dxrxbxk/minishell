@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/25 17:41:48 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:45:15 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef	enum	e_type
 	NLINE,
 	PIPE,
 	D_PIPE,
-	BACKSLASH,
 	DOLLAR,
 	QUOTE,
 	D_QUOTE,

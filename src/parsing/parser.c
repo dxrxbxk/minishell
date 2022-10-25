@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/21 22:03:17 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:46:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	ft_state_4(t_token **lst, long separators[3])
 		return (separators[BRACKETS]++, ft_state_4(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));
-	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR
-		|| (*lst)->type == BACKSLASH))
+	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR))
 		return (ft_state_1(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == LESS || (*lst)->type == GREAT
 		|| (*lst)->type == D_LESS || (*lst)->type == D_GREAT))
@@ -70,8 +69,7 @@ int	ft_state_3(t_token **lst, long separators[3])
 		return (ft_state_2(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));
-	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR
-		|| (*lst)->type == BACKSLASH))
+	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR))
 		return (ft_state_1(&(*lst)->next, separators));
 	return (0);
 }
@@ -81,8 +79,7 @@ int	ft_state_2(t_token **lst, long separators[3])
 	ft_move_wspace(lst, WHITE_SPACE);
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));
-	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR
-		|| (*lst)->type == BACKSLASH))
+	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR))
 		return (ft_state_1(&(*lst)->next, separators));
 	return (0);
 }
@@ -94,8 +91,7 @@ int	ft_state_1(t_token **lst, long separators[3])
 	ft_move_wspace(lst, WHITE_SPACE);
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));
-	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR
-		|| (*lst)->type == BACKSLASH))
+	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR))
 		return (ft_state_1(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == LESS || (*lst)->type == GREAT
 		|| (*lst)->type == D_LESS || (*lst)->type == D_GREAT))
@@ -117,8 +113,7 @@ int	ft_state_0(t_token **lst, long separators[3])
 		return (separators[BRACKETS]++, ft_state_0(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));
-	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR
-		|| (*lst)->type == BACKSLASH))
+	if (*lst && ((*lst)->type == WORD || (*lst)->type == DOLLAR))
 		return (ft_state_1(&(*lst)->next, separators));
 	if (*lst && ((*lst)->type == LESS || (*lst)->type == GREAT
 		|| (*lst)->type == D_LESS || (*lst)->type == D_GREAT))

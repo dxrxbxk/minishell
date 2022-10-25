@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/25 17:43:28 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:44:56 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static t_type	ft_token_type(char *str)
 		return (WHITE_SPACE);
 	if (!ft_strcmp("|", str))
 		return (PIPE);
-	if (!ft_strcmp("\\", str))
-		return (BACKSLASH);
 	if (!ft_strcmp("*", str))
 		return (WILDCARDS);
 	if (!ft_strcmp("$", str))
