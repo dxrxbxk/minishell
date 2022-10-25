@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/24 18:47:22 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:09:25 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_isnum(char *str)
 	if (*str == '\0')
 		return (0);
 	else
-		exit_numeric(str);	
+		exit_numeric(str);
 	return (1);
 }
 
@@ -59,7 +59,8 @@ long	ft_atoi2(const char *nptr)
 	long	result;
 	int		sign;
 	size_t	i;
-	int over;
+	int		over;
+	long	tmp;
 
 	i = 0;
 	over = 0;
@@ -69,15 +70,14 @@ long	ft_atoi2(const char *nptr)
 	sign = 1 + ((nptr[i] == '-' && ++i) * -2);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		if (result != (result * 10) / 10)
-			over = 1;
-		if (result > 0 && ((result * 10) + (nptr[i]) - '0') == 0)
-			over = 1;
+		tmp = result;
 		result = result * 10 + (nptr[i++] - '0');
-		if (result - (sign < 0) < 0)
+		if ((unsigned long)result == LONG_MIN && sign == -1)
+			return (result_check(result, sign, 0, (char *)nptr));
+		if (tmp > result)
 			over = 1;
 	}
-	return (result_check(result, sign, over, (char*)nptr));
+	return (result_check(result, sign, over, (char *)nptr));
 }
 
 int	ft_exit(char *av)
