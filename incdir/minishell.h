@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/25 17:45:15 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:50:12 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ int		ft_state_2(t_token **token, long separators[3]);
 int		ft_state_3(t_token **token, long separators[3]);
 int		ft_state_4(t_token **token, long separators[3]);
 int		ft_state_5(t_token **token, long separators[3]);
+int		ft_move_wspace(t_token **lst, t_type type);
+int		ft_move_next(t_token **lst, t_type type, long *separators);
+int		ft_token_is_word(t_type type);
+int		ft_token_is_redir(t_type type);
 
 t_token	*ft_token_new(void *content, t_type type);
 void	ft_tokenadd_back(t_token **alst, t_token *new);
