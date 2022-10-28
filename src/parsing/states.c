@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/26 21:41:59 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:40:31 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_state_2(t_token **lst, long separators[3])
 int	ft_state_1(t_token **lst, long separators[3])
 {
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
-		ft_move_next(lst, (*lst)->type, &separators[(*lst)->type - 6]);
+		ft_move_next(lst, (*lst)->type, &separators[(*lst)->type - 5]); //potential problem
 	ft_move_wspace(lst, WHITE_SPACE);
 	if (*lst && ((*lst)->type == QUOTE || (*lst)->type == D_QUOTE))
 		return (ft_state_1(lst, separators));

@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/25 20:00:45 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:08:36 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	parser(t_token *first)
 
 	lst = &first;
 	separators[BRACKETS] = 0;
-	separators[DQUOTES] = 0;
 	separators[SQUOTES] = 0;
+	separators[DQUOTES] = 0;
 	return (ft_state_0(lst, separators));
 }
