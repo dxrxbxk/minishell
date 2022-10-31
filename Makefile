@@ -1,48 +1,93 @@
-##SRCS_UTILS			=	ft_strcmp.c ft_strdup.c ft_findi.c ft_strndup.c \
-						ft_strncmp.c ft_strchr.c ft_split.c ft_strlcpy.c \
-						ft_putendl_fd.c ft_strlen.c ft_putstr_fd.c ft_putchar_fd. \
-						$(addprefix utils/, $(SRCS_UTILS))
-SRCS				=	main.c utils.c signals.c term.c lexer.c token.c builtins/echo.c builtins/cd.c \
-						builtins/export.c parsing/parser.c utils/ft_strcmp.c utils/ft_strdup.c utils/ft_findi.c utils/ft_strndup.c \
-						utils/ft_strncmp.c utils/ft_strchr.c utils/ft_split.c utils/ft_strlcpy.c \
-						utils/ft_putendl_fd.c utils/ft_strlen.c utils/ft_putstr_fd.c utils/ft_putchar_fd.c utils/ft_isalnum.c utils/ft_isalpha.c utils/ft_isdigit.c builtins/unset.c builtins/env.c builtins/exit.c parsing/states.c utils/ft_swap_str.c
-SRCSDIR				=	src
+#
+#
+#                          M A K E F I L E
+################################################################################
 
-INCDIR				=	incdir
+.DELETE_ON_ERROR:
+.DEFAULT_GOAL			:= all
+SHELL					:= $(shell which zsh)
+.SHELLFLAGS				:= -eu -o pipefail -c
 
-HEADERS				=	minishell.h
+### C O M P I L E R   F L A G S ################################################
 
-CC					=	cc
+CC						:= $(shell which cc)
+STD						?=
+CFLAGS					:= -Wall -Wextra -Werror
+LDFLAGS					?=
 
-CFLAGS				=	-Wall -Wextra -Werror -g3
+override MKDIR			:= mkdir -pv
+override RM				:= rm -rvf
 
-OBJDIR				=	obj
+### D I R E C T O R Y ' S ######################################################
 
-LIBFT				=	libft/libft.a
+NAME					:= minishell
+override FILES			:= signals.c ft_strndup.c ft_putendl_fd.c ft_swap_str.c ft_isalpha.c ft_isalnum.c \
+						   ft_strcmp.c ft_isdigit.c ft_findi.c ft_strncmp.c ft_strlen.c ft_putstr_fd.c \
+						   ft_strchr.c ft_putchar_fd.c ft_split.c ft_strdup.c ft_strlcpy.c lexer.c \
+						   main.c unset.c exit.c cd.c env.c echo.c export.c pwd.c states.c token.c\
+						   parser.c term.c utils.c 
 
-NAME				=	a.out
+SRCDIR					:= src
+INCDIR					:= inc
+OBJDIR					:= _obj
+DEPDIR					:= _dep
 
-FILES				=	$(addprefix $(SRCSDIR)/, $(SRCS))
-OBJS				=	$(patsubst $(OBJDIR)/%.o, $(SRCSDIR)/%.c, $(FILES))
+### P A T T E R N   R U L E S ##################################################
 
-##$(OBJDIR)/%.o:		%.c | $(OBJDIR)
-##					$(CC) $(CFLAGS) -c $< -o $@
+override SUB			:= $(shell find $(SRCDIR) -type d)
+override OBJ			:= $(FILES:%.c=$(OBJDIR)/%.o)
+override DEP			:= $(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ))
 
-all:				$(NAME)
+### U T I L I T Y ##############################################################
 
-$(NAME):	$(OBJS)
-					make -s -C libft
-					$(CC) $(CFLAGS) $^ -o $(NAME) -lreadline -I$(INCDIR) -I./libft -g3 #$(LIBFT)
+COLOR					:= "\033[1;32m"
+RESET					:= "\033[m"
+NEWLINE					:= echo "\n\n"
+LINK					:= echo $(COLOR)L1NK$(RESET)
+LIBRARY					:= echo $(COLOR)L1BRARY$(RESET)
+COMPILE					:= echo $(COLOR)C0MPILATI0N$(RESET)
 
-$(OBJDIR)	:
-					mkdir -p $@
+### C O M P I L A T I O N   F U N C T I O N ####################################
 
-clean:
-					make -s -C libft clean
-					rm -rf $(OBJDIR)
+define COMPILE_RULE
+$(OBJDIR)/%.o:			$(1)/%.c Makefile | $(OBJDIR) $(DEPDIR)
+	@$$(COMPILE);
+	$$(CC) $$(STD) $$(CFLAGS) -I$$(INCDIR) \
+	-c $$< -o $$@ \
+	-MMD -MF $$(DEPDIR)/$$(*F).d;
+endef
 
-fclean:				clean
-					make -s -C libft fclean
-					rm -rf $(NAME)
+### R E C I P E S ##############################################################
 
-re:					fclean all
+.PHONY:					all clean fclean re ascii
+
+all:					ascii $(NAME)
+
+$(NAME):				$(OBJ)
+						@$(LINK)
+						$(CC) -lreadline $+ $(LDFLAGS) -o $@
+
+-include $(DEP)
+$(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE, $(DIR))))
+
+
+$(OBJDIR) $(DEPDIR):
+						@$(MKDIR) $@
+
+clean:					;
+						@$(RM) $(OBJDIR) $(DEPDIR)
+
+fclean:					clean
+						@$(RM) $(NAME)
+
+re:						fclean all
+
+ascii:
+						@echo \
+						$(COLOR) \
+						"   ▁▁▁▁▁▁▁▁  ▁▁▁▁▁▁▁▁  ▁▁▁▁ ▁▁▁  ▁▁▁▁▁▁▁▁	\n" \
+						"  ╱        ╲╱        ╲╱    ╱   ╲╱        ╲	\n" \
+						" ╱         ╱         ╱         ╱         ╱	\n" \
+						"╱         ╱         ╱        ▁╱       ▁▁╱	\n" \
+						"╲▁▁╱▁▁╱▁▁╱╲▁▁▁╱▁▁▁▁╱╲▁▁▁▁╱▁▁▁╱╲▁▁▁▁▁▁▁▁╱	\n" \
+						$(RESET);

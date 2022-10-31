@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 19:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/26 19:14:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:14:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <minishell.h>
 
 char	*ft_strchr(const char *s, int c)
 {

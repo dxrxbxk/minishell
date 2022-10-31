@@ -6,11 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:08:21 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/22 17:09:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:07:01 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
 void	ft_putendl_fd(char *s, int fd)
 {

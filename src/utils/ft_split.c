@@ -6,13 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:20:44 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/29 11:15:54 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:14:16 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <string.h>
-#include <stdlib.h>
+#include <minishell.h>
 
 static int	ft_count_words(char const *s, char c)
 {

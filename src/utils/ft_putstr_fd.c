@@ -6,12 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:06:16 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/25 16:54:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:17:15 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include <minishell.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {

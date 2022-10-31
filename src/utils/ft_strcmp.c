@@ -6,11 +6,11 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:35:10 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/14 15:35:34 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/31 20:14:37 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

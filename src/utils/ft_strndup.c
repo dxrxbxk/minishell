@@ -6,13 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 12:28:25 by diroyer           #+#    #+#             */
-/*   Updated: 2022/04/07 18:42:30 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:08:26 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <string.h>
+#include <minishell.h>
 
 char	*ft_strndup(const char *s1, int len)
 {

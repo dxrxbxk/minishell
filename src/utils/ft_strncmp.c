@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 19:50:08 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/23 20:46:17 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:15:19 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <minishell.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

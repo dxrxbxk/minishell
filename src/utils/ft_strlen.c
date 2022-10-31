@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 15:32:31 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/22 19:28:42 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 20:15:02 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <minishell.h>
 
 size_t	ft_strlen(const char *s)
 {
