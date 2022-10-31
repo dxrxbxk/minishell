@@ -1,4 +1,7 @@
 *.o
 a.out
+minishell
 *.swp
 *.a
+_dep
+*.d

@@ -10,7 +10,7 @@ SHELL					:= $(shell which zsh)
 
 ### C O M P I L E R   F L A G S ################################################
 
-CC						:= $(shell which cc)
+CC						:= cc #$(shell which gcc)
 STD						?=
 CFLAGS					:= -Wall -Wextra -Werror
 LDFLAGS					?=
@@ -65,7 +65,7 @@ all:					ascii $(NAME)
 
 $(NAME):				$(OBJ)
 						@$(LINK)
-						$(CC) -lreadline $+ $(LDFLAGS) -o $@
+						$(CC) $+ $(LDFLAGS) -o $@ -lreadline
 
 -include $(DEP)
 $(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE, $(DIR))))

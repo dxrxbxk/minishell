@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 20:12:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 22:36:16 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ typdedef struct s_builtins
 	int		(*builtins)(struct s_cmd *)
 }
 */
-
-int		ft_exit(char *av);
-void	handle_signals(void);
-void	set_terminal(int status);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	print_tab(char **tab);
 
 typedef	enum	e_type
 {
@@ -89,41 +83,6 @@ typedef struct s_mini
 	char **av;
 	t_env *env;
 }				t_mini;
-
-void	ft_putendl_fd(char *s, int fd);
-void	ft_error(char *msg, char *var, char *msg2);
-void	ft_env_addback(t_env **first, t_env *new);
-t_env	*ft_env_new(void *key, void *value);
-void	ft_swap_str(char **a, char **b);
-int		ft_echo(char **av, int ac);
-int		ft_export(t_env *lst, char **av, int ac);
-void	ft_env(t_env *lst);
-void	print_env(t_env *print);
-void	unset(t_env *lst, char *str);
-char	*get_env_str(t_env *lst, char *get);
-void	ft_replace_env(t_env *lst, char *cmp, char *value);
-int		ft_cd(t_env *lst, char *str);
-void	print_list(t_token *print);
-
-int		lexer(t_token **token, char *input);
-int		parser(t_token *token);
-int		expand(t_token **first, t_env *env);
-
-int		ft_state_0(t_token *token, long separators[3]);
-int		ft_state_1(t_token *token, long separators[3]);
-int		ft_state_2(t_token *token, long separators[3]);
-int		ft_state_3(t_token *token, long separators[3]);
-int		ft_state_4(t_token *token, long separators[3]);
-int		ft_state_5(t_token *token, long separators[3]);
-int		ft_move_wspace(t_token **lst, t_type type);
-int		ft_move_next(t_token **lst, t_type type, long *separators);
-int		ft_token_is_word(t_type type);
-int		ft_token_is_redir(t_type type);
-
-t_token	*ft_token_new(void *content, t_type type);
-void	ft_tokenadd_back(t_token **alst, t_token *new);
-
-int		ft_strcmp(const char *s1, const char *s2);
 
 // src/signals.c
 void inthandler(int sig);
@@ -197,7 +156,7 @@ long ft_atoi2(const char *nptr);
 int ft_exit(char *av);
 
 // src/builtins/cd.c
-int ft_cd(t_env *lst, char *str);
+int		ft_cd(t_env *lst, char **av, int ac);
 
 // src/builtins/env.c
 void ft_env(t_env *lst);

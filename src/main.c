@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 18:56:05 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 22:51:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,17 @@ int	free_data(t_mini *data)
 	t_env	*tmp;
 
 	env = &data->env;
-	int	i = -1;
-	while (++i) 
-		free(data->sPATH[i]);
+	//freedatapathplz
 	while (*env)
 	{
 		tmp = (*env)->next;
-		free((*env)->key);
-		free((*env)->value);
 		free(*env);
 		*env = tmp;
 	}
 	return (0);
 }
 
-static int	ft_count_words2(char const *s, char c)
+int	ft_count_words2(char const *s, char c)
 {
 	int	count;
 	int	i;
@@ -69,8 +65,9 @@ int	get_line(t_mini *data)
 		lexer(&tok, str);
 		printf("%d\n", parser(tok));
 		tok = NULL;
+		ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));
 //		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
-		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
+//		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
 //		lexer(&tok, str);
 //		ft_export(data->env, str);
 //		printf("----------------------------------\n");
