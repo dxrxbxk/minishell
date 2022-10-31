@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 18:25:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 18:30:13 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		ft_error(char *msg, char *var, char *msg2)
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(var, 2);
 	ft_putstr_fd(msg2, 2);
+	return (1);
 }
 
 void	ft_env_addback(t_env **first, t_env *new)
