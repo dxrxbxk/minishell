@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/26 21:50:12 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/31 04:44:55 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,14 @@ void	print_list(t_token *print);
 
 int		lexer(t_token **token, char *input);
 int		parser(t_token *token);
-int		ft_state_0(t_token **token, long separators[3]);
-int		ft_state_1(t_token **token, long separators[3]);
-int		ft_state_2(t_token **token, long separators[3]);
-int		ft_state_3(t_token **token, long separators[3]);
-int		ft_state_4(t_token **token, long separators[3]);
-int		ft_state_5(t_token **token, long separators[3]);
+int		expand(t_token **first, t_env *env);
+
+int		ft_state_0(t_token *token, long separators[3]);
+int		ft_state_1(t_token *token, long separators[3]);
+int		ft_state_2(t_token *token, long separators[3]);
+int		ft_state_3(t_token *token, long separators[3]);
+int		ft_state_4(t_token *token, long separators[3]);
+int		ft_state_5(t_token *token, long separators[3]);
 int		ft_move_wspace(t_token **lst, t_type type);
 int		ft_move_next(t_token **lst, t_type type, long *separators);
 int		ft_token_is_word(t_type type);
