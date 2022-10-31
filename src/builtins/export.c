@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 13:53:08 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/28 20:34:51 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,32 @@ int		export_key(char *str)
 	return (-1);
 }
 
-int		ft_export(t_env *lst, char *str)
+int		ft_export(t_env *lst, char **av, int ac)
 {
 	t_env	*new;
 	char *key;
 	char *value;
+	int	i;
 
-	if (str && export_key(str) > 0)
+	i = 0;
+	if (ac == 1)
+		ft_env(lst);
+	while (++i < ac)
 	{
-		key = ft_strndup(str, ft_findi(str, '='));
-		value = ft_strdup(ft_strchr(str, '=') + 1);
-		if (get_env_str(lst, key) != NULL)
-			ft_replace_env(lst, key, value);
-		else
+		if (av[i] && export_key(av[i]) > 0)
 		{
-			new = ft_env_new(key, value);
-			ft_env_addback(&lst, new);
+			key = ft_strndup(av[i], ft_findi(av[i], '='));
+			value = ft_strdup(ft_strchr(av[i], '=') + 1);
+			if (get_env_str(lst, key) != NULL)
+				ft_replace_env(lst, key, value);
+			else
+			{
+				new = ft_env_new(key, value);
+				ft_env_addback(&lst, new);
+			}
 		}
+		else
+			printf("not valid id %s\n", av[i]);
 	}
-	else
-		printf("error export\n");
-	if (*str == '\0')
-		print_env(lst);
-	else
-		print_env(lst); //del this
 	return (0);
 }
