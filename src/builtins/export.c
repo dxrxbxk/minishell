@@ -6,39 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/28 20:34:51 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 18:25:59 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	ft_env_addback(t_env **first, t_env *new)
-{
-	t_env *current;
-
-	current = *first;
-	if (!*first)
-		*first = new;
-	else
-	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-	}
-}
-
-t_env	*ft_env_new(void *key, void *value)
-{
-	t_env *new;
-
-	new = malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->key= key;
-	new->value = value;
-	new->next = NULL;
-	return (new);
-}
 
 int		export_key(char *str)
 {
@@ -54,6 +26,45 @@ int		export_key(char *str)
 	return (-1);
 }
 
+t_env	*lst_copy(t_env *lst)
+{
+	t_env	*new;
+
+	new = ft_env_new(lst->key, lst->value);
+	while (lst->next)
+	{
+		lst = lst->next;
+		ft_env_addback(&new, ft_env_new(lst->key, lst->value));
+	}
+	return (new);
+}
+
+
+void	sort_list(t_env *tosort)
+{
+	t_env	*lst;
+	t_env	*cmp;
+
+	lst = lst_copy(tosort);
+	cmp = lst;
+	while (lst)
+	{
+		if (lst->next)
+			cmp = lst->next;
+		while (cmp)
+		{
+			if (ft_strcmp(lst->key, cmp->key) > 0)
+			{
+				ft_swap_str(&lst->key, &cmp->key);
+				ft_swap_str(&lst->value, &cmp->value);
+			}
+			cmp = cmp->next;
+		}
+		printf("export %s %s\n", lst->key, lst->value);
+		lst = lst->next;
+	}
+}
+
 int		ft_export(t_env *lst, char **av, int ac)
 {
 	t_env	*new;
@@ -63,7 +74,7 @@ int		ft_export(t_env *lst, char **av, int ac)
 
 	i = 0;
 	if (ac == 1)
-		ft_env(lst);
+		sort_list(lst);
 	while (++i < ac)
 	{
 		if (av[i] && export_key(av[i]) > 0)
@@ -79,7 +90,7 @@ int		ft_export(t_env *lst, char **av, int ac)
 			}
 		}
 		else
-			printf("not valid id %s\n", av[i]);
+			ft_error("export: `", av[i], "': not a valid identifier\n");
 	}
 	return (0);
 }

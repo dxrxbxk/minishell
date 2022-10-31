@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 04:44:55 by momadani         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:20:50 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 
+# define EXIT_STATUS 0
 # define BRACKETS 0
 # define SQUOTES 1
 # define DQUOTES 2
@@ -92,10 +93,15 @@ typedef struct s_mini
 	t_env *env;
 }				t_mini;
 
+int		ft_error(char *msg, char *var, char *msg2);
+void	ft_env_addback(t_env **first, t_env *new);
+t_env	*ft_env_new(void *key, void *value);
+void	ft_swap_str(char **a, char **b);
+int		ft_echo(char **av, int ac);
+int		ft_export(t_env *lst, char **av, int ac);
 void	ft_env(t_env *lst);
 void	print_env(t_env *print);
 void	unset(t_env *lst, char *str);
-int		ft_export(t_env *lst, char *str);
 char	*get_env_str(t_env *lst, char *get);
 void	ft_replace_env(t_env *lst, char *cmp, char *value);
 int		ft_cd(t_env *lst, char *str);

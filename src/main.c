@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/22 16:14:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/10/31 15:58:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ int	free_data(t_mini *data)
 	return (0);
 }
 
+static int	ft_count_words2(char const *s, char c)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+			count++;
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (count);
+}
+
 int	get_line(t_mini *data)
 {
 	char *str;
@@ -50,11 +69,12 @@ int	get_line(t_mini *data)
 		lexer(&tok, str);
 		printf("%d\n", parser(tok));
 		tok = NULL;
+//		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
+		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
 //		lexer(&tok, str);
 //		ft_export(data->env, str);
 //		printf("----------------------------------\n");
 //		unset(data->env, "ABC");
-		printf("\nret %d\n", ft_exit(str));
 //		print_list(tok);
 		add_history(str); 
 	}
