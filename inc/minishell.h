@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 22:36:16 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:18:02 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void exit_numeric(char *str);
 int ft_isnum(char *str);
 long result_check(long result, int sign, int over, char *nptr);
 long ft_atoi2(const char *nptr);
-int ft_exit(char *av);
+int	ft_exit(char **av, int ac);
 
 // src/builtins/cd.c
 int		ft_cd(t_env *lst, char **av, int ac);

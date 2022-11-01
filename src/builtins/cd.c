@@ -6,39 +6,39 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 23:00:20 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:53:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+void	replace_pwd(char *replace, t_env *lst)
+{
+	char *cwd;
+
+	cwd = getcwd(NULL, 0);
+	ft_replace_env(lst, replace, cwd);
+	free(cwd);
+}
+
 int		ft_cd(t_env *lst, char **av, int ac)
 {
 	int	i;
-	char *cwd;
 
 	i = 1;
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (-1);
-	ft_replace_env(lst, "OLDPWD", cwd);
 	while (ac > 1 && av[i][0] == '-' && ac--)
 		i++;
-	free(cwd);
-	if (ac == 2)
+	if (ac == 1 || ac == 2)
 	{
-		if (!chdir(av[i]))
+		replace_pwd("OLDPWD", lst);
+		if (ac == 1)
+			chdir(get_env_str(lst, "HOME")); //set exit status @ 1?
+		if (ac == 2)
 		{
-			cwd = getcwd(NULL, 0);
-			ft_replace_env(lst, "PWD", cwd);
-			free(cwd);
-			printf("NEW %s\n", get_env_str(lst, "PWD"));
-
-		}
-		else
-		{
-			write(2, "cd: ", 4);
-			perror(av[i]);
+			if (!chdir(av[i]))
+				replace_pwd("PWD", lst);
+			else
+				ft_error("cd: ", av[i], ": No such file or directory\n");
 		}
 	}
 	else

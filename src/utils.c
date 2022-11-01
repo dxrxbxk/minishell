@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 19:05:50 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/01 16:05:33 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_replace_env(t_env *lst, char *cmp, char *value)
 		if (!ft_strcmp(lst->key, cmp))
 		{
 			free(lst->value);
-			lst->value = value;
+			lst->value = NULL;
+			lst->value = ft_strdup(value);
 		}
 		lst = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/25 16:09:25 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:48:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 #define LONG_MAX 0x7fffffffffffffff
 #define LONG_MIN 0x8000000000000000
 
-void	exit_numeric(char *str)
-{
-	ft_putstr_fd("exit: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(" numeric argument required\n", 2);
-}
-
 int	ft_isnum(char *str)
 {
+	int	i;
+
+	i = 0;
 	if (!*str)
 	{
-		exit_numeric(str);
+		ft_error("exit: ", str, " numeric argument required\n");
 		return (1);
 	}
-	if (*str == '+' || *str == '-')
-		str++;
-	while (ft_isdigit(*str))
-		str++;
-	if (*str == '\0')
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '\0')
 		return (0);
 	else
-		exit_numeric(str);
+		ft_error("exit: ", str, " numeric argument required\n");
 	return (1);
 }
 
@@ -43,12 +39,12 @@ long	result_check(long result, int sign, int over, char *nptr)
 {
 	if ((result > LONG_MAX && sign == 1) || over == 1)
 	{
-		exit_numeric(nptr);
+		ft_error("exit: ", nptr, " numeric argument required\n");
 		return (2);
 	}
 	if ((long unsigned)result > LONG_MIN && sign == -1)
 	{
-		exit_numeric(nptr);
+		ft_error("exit: ", nptr, " numeric argument required\n");
 		return (2);
 	}
 	return (result * sign);
@@ -80,23 +76,17 @@ long	ft_atoi2(const char *nptr)
 	return (result_check(result, sign, over, (char *)nptr));
 }
 
-int	ft_exit(char *av)
+int	ft_exit(char **av, int ac)
 {
 	long	status;
 
 	ft_putstr_fd("exit\n", 2);
-	if (!*av)
+	if (ac == 1)
 		return (0);
-	if (ft_isnum(av))
+	if (ac > 2)
+		ft_error("exit:", "", " too many arguments\n");
+	if (ac == 2 && ft_isnum(av[1]))
 		return (2);
-	status = ft_atoi2(av);
-	if (status < 0)
-	{
-		if (status < 255)
-			status = status % 256;
-		status = status + 256;
-	}
-	if (status > 255)
-		status = status % 256;
-	return (status);
+	status = ft_atoi2(av[1]);
+	return ((unsigned char)status);
 }
