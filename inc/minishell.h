@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/01 17:18:02 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:46:49 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ char *ft_strdup(const char *s1);
 // src/utils/ft_strlcpy.c
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
+// src/utils/ft_strlcat.c
+size_t ft_strlcat(char *dst, const char *src, size_t size);
+
+// src/utils/ft_strjoin.c
+char	*ft_strjoin(char const *s1, char const *s2);
+
 // src/lexer.c
 int lexer(t_token **token, char *input);
 
@@ -177,10 +183,26 @@ int ft_pwd(void);
 
 // src/parsing/expand.c
 //int ft_dollar_expansion(t_token **first, t_env *env, );
-int expand(t_token **first, t_env *env);
+
+/*-----------------------------expand----------------------------------------*/
+
+int		expand(t_token **first, t_env *env);
+int		ft_tokencat(t_token **lst);
+int		ft_quotes_expand(t_token *lst);
+void	ft_token_delone(t_token *token);
+void	ft_remove_token(t_token *a, t_token *b);
+void	ft_merge_tokens(t_token *a, t_token *b);
+
+int		ft_dollar_expand(t_token *lst, t_env *env);
+void	ft_usual_dollar_expand(t_token *lst, t_env *env);
+void	ft_dquotes_dollar_expand(t_token *lst, t_env *env);
+void	ft_squotes_dollar_expand(t_token *lst, t_env *env);
+char	*ft_extract_env_value(t_env *env, char *key);
+size_t	ft_getkey_size_usual_expand(char *token);
+
 
 // src/parsing/states.c
-void ft_parserror(char *msg1, char *msg2);
+void ft_parserror(char *msg1);
 int ft_checkerror(int state, t_token *lst, long separators[3]);
 int ft_state_5(t_token *lst, long separators[3]);
 int ft_state_4(t_token *lst, long separators[3]);
@@ -209,7 +231,8 @@ void ft_replace_env(t_env *lst, char *cmp, char *value);
 void print_tab(char **tab);
 
 // src/token.c
-void print_list(t_token *print);
-void ft_tokenadd_back(t_token **first, t_token *new);
+void	print_list(t_token *print);
+void	ft_tokenadd_back(t_token **first, t_token *new);
+void	ft_tokenadd_inside(t_token *current, t_token *new);
 t_token *ft_token_new(void *content, t_type type);
 #endif

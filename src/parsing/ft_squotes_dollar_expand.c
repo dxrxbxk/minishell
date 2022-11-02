@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findi.c                                         :+:      :+:    :+:   */
+/*   ft_squotes_dollar_expand.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 18:44:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/02 20:40:49 by momadani         ###   ########.fr       */
+/*   Created: 2022/11/01 19:22:34 by momadani          #+#    #+#             */
+/*   Updated: 2022/11/02 01:46:11 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-int	ft_findi(char *str, char find)
+void	ft_squotes_dollar_expand(t_token *lst, t_env *env)
 {
-	int	i;
-
-	i = 0;
-	if (!str || !find)
-		return (-1);
-	while (str[i] && str[i] != find)
-		i++;
-	if (str[i] == find)
-		return (i);
-	return (-1);
+	(void)lst;
+	(void)env;
 }

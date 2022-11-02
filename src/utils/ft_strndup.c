@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 12:28:25 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 20:08:26 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:39:38 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strndup(const char *s1, int len)
 {
 	char	*array;
 
-	if (len <= 0)
+	if (len < 0)
 		return (NULL);
 	array = malloc(sizeof(char) * (len + 1));
 	if (!array)

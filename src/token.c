@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/18 16:42:28 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:32:23 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ void	ft_tokenadd_back(t_token **first, t_token *new)
 			current = current->next;
 		current->next = new;
 	}
+}
+
+void	ft_tokenadd_inside(t_token *current, t_token *new)
+{
+	t_token	*next;
+
+	if (!current)
+		return ;
+	next = current->next;
+	current->next = new;
+	new->next = next;
 }
 
 t_token	*ft_token_new(void *content, t_type type)

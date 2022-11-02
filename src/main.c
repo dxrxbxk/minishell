@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/01 18:46:19 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:28:51 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	get_line(t_mini *data)
 		if (str[0] == '\n') //idk
 			printf("salut\n");
 		lexer(&tok, str);
-	//	printf("%d\n", parser(tok));
+		if (parser(tok))
+			expand(&tok, data->env);
+		print_list(tok);
 		tok = NULL;
 	//	ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));
 //		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
@@ -74,7 +76,7 @@ int	get_line(t_mini *data)
 //		printf("----------------------------------\n");
 //		unset(data->env, "ABC");
 //		print_list(tok);
-		printf("exit ret = %d\n", ft_exit(ft_split(str, ' '), ft_count_words2(str, ' ')));
+//		printf("exit ret = %d\n", ft_exit(ft_split(str, ' '), ft_count_words2(str, ' ')));
 		add_history(str); 
 	}
 	return (0);

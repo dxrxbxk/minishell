@@ -25,7 +25,10 @@ override FILES			:= signals.c ft_strndup.c ft_putendl_fd.c ft_swap_str.c ft_isal
 						   ft_strcmp.c ft_isdigit.c ft_findi.c ft_strncmp.c ft_strlen.c ft_putstr_fd.c \
 						   ft_strchr.c ft_putchar_fd.c ft_split.c ft_strdup.c ft_strlcpy.c lexer.c \
 						   main.c unset.c exit.c cd.c env.c echo.c export.c pwd.c states.c token.c\
-						   parser.c term.c utils.c 
+						   parser.c term.c utils.c\
+						   expand.c ft_tokencat.c ft_usual_dollar_expand.c ft_dollar_expand.c\
+						   ft_quotes_expand.c ft_dquotes_dollar_expand.c\
+						   ft_squotes_dollar_expand.c ft_strjoin.c ft_strlcat.c
 
 SRCDIR					:= src
 INCDIR					:= inc

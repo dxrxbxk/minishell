@@ -6,9 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 17:49:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 18:12:09 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:41:56 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <minishell.h>
 
 void	ft_swap_str(char **a, char **b)
 {

@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/01 19:08:25 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/02 20:27:01 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_token_size(char *str, int *i)
 			return (2);
 		if (!ft_strncmp("&&", str + *i, 2) || !ft_strncmp("||", str + *i, 2))
 			return (2);
-		else if (ft_strncmp("&", str + *i, 1))
+		if (ft_strncmp("&", str + *i, 1))
 			return (1);
 	}
 	y = *i - 1;
@@ -80,7 +80,7 @@ static t_token	*ft_extract_token(char *input, int *i)
 	t_type	type;
 
 	size = ft_token_size(input, i);
-	content = ft_strndup(input + *i, size);
+	content = ft_strndup(input + *i, size); //protect if strndup fails
 	type = ft_token_type(content);
 //	printf("token = %s size = %d \n", content, size);
 	*i += size;

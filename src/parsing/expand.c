@@ -6,43 +6,38 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/28 20:40:37 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:27:29 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_dollar_expansion(t_token **first, t_env *env, );
+void	ft_token_delone(t_token *token)
+{
+	free(token->str);
+	free(token);
+}
+
+void	ft_remove_token(t_token *a, t_token *b)
+{
+	a->next = b->next;
+	ft_token_delone(b);
+}
+
+void	ft_merge_tokens(t_token *a, t_token *b)
+{
+	char	*content;
+
+	content = ft_strjoin(a->str, b->str);
+	free(a->str);
+	a->str = content;
+	ft_remove_token(a, b);
+}
 
 int	expand(t_token **first, t_env *env)
 {
-	void	(*ft_dollar_expands[3])(t_token, t_env);
-	void	(*ft_current_dollar_expand)(t_token, t_env);
-	int		inside_quotes;
-	t_token	*lst;
-
-	ft_dollar_expands[0] = &ft_usual_dollar_expand();
-	ft_dollar_expands[1] = &ft_squotes_dollar_expand();
-	ft_dollar_expands[2] = &ft_dquotes_dollar_expand();
-	ft_current_dollar_expand = &ft_usual_dollar_expand();
-	inside_quotes = 0;
-	lst = *first;
-	
-	while (lst)
-	{
-		if (!inside_quotes && (lst->type == D_QUOTES || lst->type == S_QUOTES))
-		{
-			ft_current_dollar_expand = ft_dollar_expands[lst->type - 5]
-			inside_quotes = lst->type - 5;
-		}
-		else if ((inside_quotes == 1 && lst->type == S_QUOTES)
-				|| (inside_quotes == 2 && lst->type == D_QUOTES))
-		{
-			ft_current_dollar_expand = ft_dollar_expands[lst->type - 5]
-			inside_quotes = 0;
-		}
-		if (lst->type == DOLLAR)
-			(*ft_current_dollar_expand)(first, lst, env);
-		lst = lst->next;
-	}
+	ft_dollar_expand(*first, env);
+	ft_quotes_expand(*first);
+	ft_tokencat(first);
+	return (0);
 }

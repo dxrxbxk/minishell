@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findi.c                                         :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 18:44:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/02 20:40:49 by momadani         ###   ########.fr       */
+/*   Created: 2021/11/22 12:50:18 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/02 20:38:48 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_findi(char *str, char find)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
+	size_t	len;
+	char	*array;
 
-	i = 0;
-	if (!str || !find)
-		return (-1);
-	while (str[i] && str[i] != find)
-		i++;
-	if (str[i] == find)
-		return (i);
-	return (-1);
+	if (!s1 || !s2)
+		return (NULL);
+	len = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	array = malloc(sizeof(char) * (len + 1));
+	if (!array)
+		return (NULL);
+	ft_strlcpy(array, s1, ft_strlen(s1) + 1);
+	ft_strlcat(array, s2, len + 1);
+	return (array);
 }

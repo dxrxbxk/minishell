@@ -6,34 +6,33 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/31 05:02:46 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/02 01:32:27 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parserror(char *msg1, char *msg2)
+void	ft_parserror(char *msg)
 {
-	ft_putstr_fd("minishell: " , STDERR_FILENO);
-	ft_putstr_fd(msg1 , STDERR_FILENO);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd("syntax error near unexpected token ", STDERR_FILENO);
 	ft_putchar_fd('`', STDERR_FILENO);
-	ft_putstr_fd(msg2 , STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
 	ft_putchar_fd('\'', STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 int	ft_checkerror(int state, t_token *lst, long separators[3])
 {
-	if ((state == 0 || state == 1 || state == 5) && !lst && !separators[0] && !separators[1] && !separators[2])
+	if ((state == 0 || state == 1 || state == 5)
+		&& !lst && !separators[0] && !separators[1] && !separators[2])
 		return (0);
 	if (state == 5 && separators[0] < 0)
-		ft_parserror("syntax error near unexpected token ", ")");
-//	else if (state == 1 || (state == 5 && separators[0] > 0))
-//		ft_parserror("syntax error near unexpected token ", "newline");
+		ft_parserror(")");
 	else if (!lst)
-		ft_parserror("syntax error near unexpected token ", "newline");
+		ft_parserror("newline");
 	else
-		ft_parserror("syntax error near unexpected token ", lst->str);
+		ft_parserror(lst->str);
 	return (1);
 }
 
