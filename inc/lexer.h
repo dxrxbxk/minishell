@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:25:59 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/03 16:31:19 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/03 16:31:27 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef LEXER_H
+# define LEXER_H
 
-void	ft_error(char *msg, char *var, char *msg2)
-{
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd(var, 2);
-	ft_putstr_fd(msg2, 2);
-}
+// lexer.c
+int lexer(t_token **token, char *input);
 
-void	print_tab(char **tab)
-{
-	int	i;
+// token.c
+void print_list(t_token *print);
+void ft_tokenadd_back(t_token **first, t_token *new);
+void ft_tokenadd_inside(t_token *current, t_token *new);
+t_token *ft_token_new(void *content, t_type type);
 
-	i = -1;
-	while (tab[++i])
-		printf("%s\n", tab[i]);
-}
-
+#endif

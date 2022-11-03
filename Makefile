@@ -11,9 +11,9 @@ SHELL					:= $(shell which zsh)
 ### C O M P I L E R   F L A G S ################################################
 
 CC						:= cc #$(shell which gcc)
-STD						?=
+STD						:= -std=c99
 CFLAGS					:= -Wall -Wextra -Werror -g3
-LDFLAGS					?=
+LDFLAGS					?= -MMD -MF
 
 override MKDIR			:= mkdir -pv
 override RM				:= rm -rvf
@@ -21,14 +21,46 @@ override RM				:= rm -rvf
 ### D I R E C T O R Y ' S ######################################################
 
 NAME					:= minishell
-override FILES			:= signals.c ft_strndup.c ft_putendl_fd.c ft_swap_str.c ft_isalpha.c ft_isalnum.c \
-						   ft_strcmp.c ft_isdigit.c ft_findi.c ft_strncmp.c ft_strlen.c ft_putstr_fd.c \
-						   ft_strchr.c ft_putchar_fd.c ft_split.c ft_strdup.c ft_strlcpy.c lexer.c \
-						   main.c unset.c exit.c cd.c env.c echo.c export.c pwd.c states.c token.c\
-						   parser.c term.c utils.c\
-						   expand.c ft_tokencat.c ft_usual_dollar_expand.c ft_dollar_expand.c\
-						   ft_quotes_expand.c ft_dquotes_dollar_expand.c\
-						   ft_squotes_dollar_expand.c ft_strjoin.c ft_strlcat.c
+
+override FILES			:=	main.c \
+							env.c \
+							ft_strndup.c \
+							ft_putendl_fd.c \
+							ft_swap_str.c \
+							ft_isalpha.c \
+							ft_isalnum.c \
+							ft_strcmp.c \
+							ft_isdigit.c \
+							ft_findi.c \
+							ft_strncmp.c \
+							ft_strlen.c \
+							ft_putstr_fd.c \
+							ft_strchr.c \
+							ft_putchar_fd.c \
+							ft_strjoin.c \
+							ft_split.c \
+							ft_strlcat.c \
+							ft_strdup.c \
+							ft_strlcpy.c \
+							unset.c \
+							exit.c \
+							cd.c \
+							export.c \
+							pwd.c \
+							signals.c \
+							expand.c \
+							ft_squotes_dollar_expand.c \
+							ft_usual_dollar_expand.c \
+							ft_quotes_expand.c \
+							states.c \
+							parser.c \
+							ft_dquotes_dollar_expand.c \
+							ft_tokencat.c \
+							ft_dollar_expand.c \
+							lexer.c \
+							token.c \
+							utils.c \
+							env_utils.c
 
 SRCDIR					:= src
 INCDIR					:= inc
@@ -55,7 +87,7 @@ COMPILE					:= echo $(COLOR)C0MPILATI0N$(RESET)
 define COMPILE_RULE
 $(OBJDIR)/%.o:			$(1)/%.c Makefile | $(OBJDIR) $(DEPDIR)
 	@$$(COMPILE);
-	$$(CC) $$(STD) $$(CFLAGS) -I$$(INCDIR) \
+	$$(CC) $$(STD) -I$$(INCDIR) $$(CFLAGS) \
 	-c $$< -o $$@ \
 	-MMD -MF $$(DEPDIR)/$$(*F).d;
 endef
@@ -68,11 +100,19 @@ all:					ascii $(NAME)
 
 $(NAME):				$(OBJ)
 						@$(LINK)
-						$(CC) $+ $(LDFLAGS) -o $@ -lreadline
+						$(CC) $^ -lreadline -o $@
 
 -include $(DEP)
 $(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE, $(DIR))))
 
+debug:					
+						@echo $(FILES) \
+						@echo $(NEWLINE) \
+						@echo $(SUB) \
+						@echo $(NEWLINE) \
+						@echo $(OBJ) \
+						@echo $(NEWLINE) \
+						@echo $(INCDIR)
 
 $(OBJDIR) $(DEPDIR):
 						@$(MKDIR) $@

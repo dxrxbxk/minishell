@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/02 20:32:23 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:12:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_list(t_token *print)
 {
 	while (print)
 	{
-		printf("tok->str = %s and tok->type = %d\n", print->str, print->type);
+		printf("tok->str = \"%s\" and tok->type = %d\n", print->str, print->type);
 		print = print->next;
 	}
 }
