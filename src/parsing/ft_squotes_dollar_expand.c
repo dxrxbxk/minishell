@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:22:34 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 01:46:11 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:26:22 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_squotes_dollar_expand(t_token *lst, t_env *env)
 {
-	(void)lst;
+	lst->type = WORD;
 	(void)env;
 }

@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:22:34 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 01:48:24 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/03 02:23:03 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static int	ft_add_expanded_token(t_token *current, char *value)
 		if (!new)
 			return (0);
 		ft_tokenadd_inside(current, new);
+		current = current->next;
 	}
 	return (1);
 }
@@ -104,6 +105,8 @@ void	ft_usual_dollar_expand(t_token *lst, t_env *env)
 	free(key);
 	if (!value)
 		return ;
+	if (!*next->str)
+		ft_remove_token(lst, next);
 	free(lst->str);
 	ft_add_expanded_token(lst, value);
 	free(value);

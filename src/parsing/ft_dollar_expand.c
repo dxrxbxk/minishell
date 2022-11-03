@@ -6,11 +6,35 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 02:19:05 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/03 01:36:38 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_skip_heredoc_delimiter_expand(t_token *lst, t_env *env,
+						void (*ft_heredoc_delimiter_expand)(t_token *, t_env *))
+{
+	int	inside_quotes;
+
+	while (lst && lst->type == WHITE_SPACE)
+		lst = lst->next;
+	inside_quotes = 0;
+	while (lst && (lst->type != WHITE_SPACE || inside_quotes))
+	{
+		if (lst->type == QUOTE && !inside_quotes)
+			inside_quotes = 1;
+		else if (lst->type == D_QUOTE && !inside_quotes)
+			inside_quotes = 2;
+		else if (lst->type == QUOTE && inside_quotes == 1)
+			inside_quotes = 0;
+		else if (lst->type == D_QUOTE && inside_quotes == 2)
+			inside_quotes = 0;
+		else if (lst->type == DOLLAR)
+			(*ft_heredoc_delimiter_expand)(lst, env);
+		lst = lst->next;
+	}
+}
 
 char	*ft_extract_env_value(t_env *env, char *key)
 {
@@ -68,7 +92,10 @@ int	ft_dollar_expand(t_token *lst, t_env *env)
 	ft_current_dollar_expand = &ft_usual_dollar_expand;
 	while (lst)
 	{
-		if (lst->type == D_QUOTE || lst->type == QUOTE)
+		if (lst->type == D_LESS)
+			ft_skip_heredoc_delimiter_expand(lst->next, env,
+				&ft_squotes_dollar_expand);
+		else if (lst->type == D_QUOTE || lst->type == QUOTE)
 			ft_change_dollar_expand(&ft_current_dollar_expand, lst);
 		else if (lst->type == DOLLAR)
 			(*ft_current_dollar_expand)(lst, env);
