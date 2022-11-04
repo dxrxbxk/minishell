@@ -129,6 +129,10 @@ fclean:					clean
 
 re:						fclean all
 
+leak:
+						@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > $@
+
+
 compile:				
 						@$(COMPILE)
 
