@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:28:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:55:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/04 15:35:30 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int ft_echo(char **av, int ac);
 int export_key(char *str);
 t_env *lst_copy(t_env *lst);
 void sort_list(t_env *tosort);
-int ft_export(t_env *lst, char **av, int ac);
+int ft_export(t_env *lst, t_env *cpy, char **av, int ac);
 
 // pwd.c
 int ft_pwd(void);

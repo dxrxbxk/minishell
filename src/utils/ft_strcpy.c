@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 14:35:51 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/04 17:33:28 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/04 17:43:47 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <stddef.h>
 
-int	ft_pwd(void)
+void	ft_strcpy(char *dst, const char *src)
 {
-	char	*cwd;
+	size_t	i;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (-1);
-	else
-		printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	if (!src)
+		return ;
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
 }
+

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 18:25:59 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/04 16:55:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		export_key(char *str)
 		i++;
 	if (str[i] == '=')
 		return (i);
+	else if (str[i] == '\0')
+		return (0);
 	return (-1);
 }
 
@@ -31,6 +33,8 @@ t_env	*lst_copy(t_env *lst)
 	t_env	*new;
 
 	new = ft_env_new(lst->key, lst->value);
+	if (!new)
+		return (NULL);
 	while (lst->next)
 	{
 		lst = lst->next;
@@ -40,12 +44,10 @@ t_env	*lst_copy(t_env *lst)
 }
 
 
-void	sort_list(t_env *tosort)
+void	sort_list(t_env *lst)
 {
-	t_env	*lst;
 	t_env	*cmp;
 
-	lst = lst_copy(tosort);
 	cmp = lst;
 	while (lst)
 	{
@@ -60,35 +62,54 @@ void	sort_list(t_env *tosort)
 			}
 			cmp = cmp->next;
 		}
-		printf("export %s %s\n", lst->key, lst->value);
 		lst = lst->next;
+	}
+	//free
+}
+
+void	fill_env(t_env *lst, t_env *cpy, char *av, int state)
+{
+	char *key;
+	char *value;
+	t_env *new;
+
+	if (state == 1)
+	{	
+		key = ft_strndup(av, ft_findi(av, '='));
+		value = ft_strdup(ft_strchr(av, '=') + 1);
+		if (get_env_str(lst, key) != NULL)
+			ft_replace_env(lst, key, value);
+		else
+		{
+			new = ft_env_new(key, value);
+			ft_env_addback(&lst, new);
+		}
+	}
+	if (state == 2)
+	{	
+		key = ft_strndup(av, ft_strlen(av));
+		value = ft_strndup("", 0);
+		new = ft_env_new(key, value);
+		ft_env_addback(&cpy, new);
 	}
 }
 
-int		ft_export(t_env *lst, char **av, int ac)
+int		ft_export(t_env *lst, t_env *cpy, char **av, int ac)
 {
-	t_env	*new;
-	char *key;
-	char *value;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ac == 1)
-		sort_list(lst);
+	{
+		sort_list(cpy);
+		print_env(cpy);
+	}
 	while (++i < ac)
 	{
-		if (av[i] && export_key(av[i]) > 0)
-		{
-			key = ft_strndup(av[i], ft_findi(av[i], '='));
-			value = ft_strdup(ft_strchr(av[i], '=') + 1);
-			if (get_env_str(lst, key) != NULL)
-				ft_replace_env(lst, key, value);
-			else
-			{
-				new = ft_env_new(key, value);
-				ft_env_addback(&lst, new);
-			}
-		}
+		if (export_key(av[i]) > 0)
+			fill_env(lst, cpy, av[i], 1);
+		else if (export_key(av[i]) == 0)
+			fill_env(lst, cpy, av[i], 2);
 		else
 			ft_error("export: `", av[i], "': not a valid identifier\n");
 	}

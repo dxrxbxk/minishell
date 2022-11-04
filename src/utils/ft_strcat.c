@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 14:35:51 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/04 17:32:11 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/04 17:32:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <string.h>
 
-int	ft_pwd(void)
+void	ft_strcat(char *dst, char const *src)
 {
-	char	*cwd;
+	size_t	i;
+	size_t	j;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (-1);
-	else
-		printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	i = 0;
+	j = 0;
+	while (dst[i])
+		i++;
+	while (src[j])
+	{
+		dst[i + j] = src[j];
+		j++;
+	}
+	dst[i + j] = 0;
 }
+
+

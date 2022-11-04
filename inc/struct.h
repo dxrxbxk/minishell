@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:50:51 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/04 15:22:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_mini
 	int	ac;
 	char **av;
 	t_env *env;
+	t_env *env_cpy;
 }				t_mini;
 
 #endif

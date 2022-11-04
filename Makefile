@@ -45,6 +45,7 @@ override FILES			:=	main.c \
 							unset.c \
 							exit.c \
 							cd.c \
+							echo.c \
 							export.c \
 							pwd.c \
 							signals.c \
@@ -60,7 +61,11 @@ override FILES			:=	main.c \
 							lexer.c \
 							token.c \
 							utils.c \
-							env_utils.c
+							env_utils.c \
+							ft_error.c \
+							ft_strcpy.c \
+							ft_strcat.c \
+							ft_words_count.c
 
 SRCDIR					:= src
 INCDIR					:= inc
@@ -86,7 +91,6 @@ COMPILE					:= echo $(COLOR)C0MPILATI0N$(RESET)
 
 define COMPILE_RULE
 $(OBJDIR)/%.o:			$(1)/%.c Makefile | $(OBJDIR) $(DEPDIR)
-	@$$(COMPILE);
 	$$(CC) $$(STD) -I$$(INCDIR) $$(CFLAGS) \
 	-c $$< -o $$@ \
 	-MMD -MF $$(DEPDIR)/$$(*F).d;
@@ -125,12 +129,15 @@ fclean:					clean
 
 re:						fclean all
 
+compile:				
+						@$(COMPILE)
+
 ascii:
 						@echo \
 						$(COLOR) \
-						"     _______  ________  ________  ________ \n" \
-						"   ╱╱       ╲╱        ╲╱        ╲╱        ╲ \n" \
-						"  ╱╱        ╱         ╱         ╱         ╱ \n" \
-						" ╱       --╱         ╱       --╱         ╱   \n" \
-						" ╲________╱╲___╱____╱╲________╱╲___╱____╱ \n " \
+						"███    ██████████   ████████ \n" \
+						"████  █████   ███  ████		\n" \
+						"██ ████ ████████████ █████		\n" \
+						"██  ██  ███   ███  ████		\n" \
+						"██      ███   ███   ████████	\n" \
 						$(RESET);

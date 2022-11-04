@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_words_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 14:35:51 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/04 17:51:39 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/04 17:51:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
-
-int	ft_pwd(void)
+int	ft_words_count(char const *s, char c)
 {
-	char	*cwd;
+	int	count;
+	int	i;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (-1);
-	else
-		printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+			count++;
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (count);
 }
