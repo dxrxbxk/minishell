@@ -23,7 +23,7 @@ override RM				:= rm -rvf
 NAME					:= minishell
 
 override FILES			:=	main.c \
-							env.c \
+							ft_env.c \
 							ft_strndup.c \
 							ft_putendl_fd.c \
 							ft_swap_str.c \
@@ -61,6 +61,7 @@ override FILES			:=	main.c \
 							lexer.c \
 							token.c \
 							utils.c \
+							env.c \
 							env_utils.c \
 							ft_error.c \
 							ft_strcpy.c \

@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:33:59 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 17:42:34 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/07 15:55:04 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*ft_strjoin_error(char *s1, char *s2, char *s3)
 
 	if (!s1 && !s2 && !s3)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2); + ft_strlen(s3);
+	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
 	array = malloc(sizeof(char) * (len + 1));
 	if (!array)
 		return (NULL);
