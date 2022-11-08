@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 19:58:03 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/08 19:37:21 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <struct.h>
 
 // env.c
+int	get_shlvl(t_mini *data);
+char	**create_env(void);
 int free_data(t_mini *data);
 int get_env(t_mini *data, char **env);
 int get_path(t_mini *data, char **env);

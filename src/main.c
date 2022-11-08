@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/07 16:01:04 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/08 21:40:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_line(t_mini *data)
 			expand(&tok, data->env);
 		print_list(tok);
 		tok = NULL;
+		ft_env(data->env);
 	//	ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));
 //		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
 //		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
@@ -40,7 +41,6 @@ int	get_line(t_mini *data)
 //		printf("----------------------------------\n");
 //		unset(data->env, "ABC");
 //		print_list(tok);
-//		printf("exit ret = %d\n", ft_exit(ft_split(str, ' '), ft_count_words2(str, ' ')));
 		add_history(str); 
 	}
 	return (0);
@@ -51,10 +51,12 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	t_mini data;
-	(void)env;
-	(void)data;
+	if (!*env)
+		env = create_env();
 	get_env(&data, env);
 	get_path(&data, env);
+	get_shlvl(&data);
+//	print_tab(env);
 	if (ac == 1)
 	{
 		if (get_line(&data) == -1)

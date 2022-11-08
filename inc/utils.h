@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 17:50:59 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/08 19:27:55 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define UTILS_H
 
 #include <string.h>
+
+// ft_atoi.c
+int ft_atoi(const char *nptr);
+
+// ft_itoa.c
+char *ft_itoa(int nb);
 
 // ft_count_words.c
 int	ft_words_count(char const *s, char c);

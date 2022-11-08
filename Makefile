@@ -66,7 +66,9 @@ override FILES			:=	main.c \
 							ft_error.c \
 							ft_strcpy.c \
 							ft_strcat.c \
-							ft_words_count.c
+							ft_words_count.c \
+							ft_atoi.c \
+							ft_itoa.c
 
 SRCDIR					:= src
 INCDIR					:= inc
@@ -111,13 +113,13 @@ $(NAME):				$(OBJ)
 $(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE, $(DIR))))
 
 debug:					
-						@echo $(FILES) \
-						@echo $(NEWLINE) \
-						@echo $(SUB) \
-						@echo $(NEWLINE) \
-						@echo $(OBJ) \
-						@echo $(NEWLINE) \
-						@echo $(INCDIR)
+					@echo $(FILES) \
+					@echo $(NEWLINE) \
+					@echo $(SUB) \
+					@echo $(NEWLINE) \
+					@echo $(OBJ) \
+					@echo $(NEWLINE) \
+					@echo $(INCDIR)
 
 $(OBJDIR) $(DEPDIR):
 						@$(MKDIR) $@

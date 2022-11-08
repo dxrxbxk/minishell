@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:25:41 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:47:16 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_env(t_env *print)
 {
 	while (print)
 	{
-		printf("%s %s\n", print->key, print->value);
+		printf("%s %s \n", print->key, print->value);
 		print = print->next;
 	}
 }
