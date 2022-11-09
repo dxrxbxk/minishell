@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 16:55:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 14:40:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int		export_key(char *str)
+static int		export_key(char *str)
 {
 	int	i;
 
@@ -28,66 +28,37 @@ int		export_key(char *str)
 	return (-1);
 }
 
-t_env	*lst_copy(t_env *lst)
-{
-	t_env	*new;
-
-	new = ft_env_new(lst->key, lst->value);
-	if (!new)
-		return (NULL);
-	while (lst->next)
-	{
-		lst = lst->next;
-		ft_env_addback(&new, ft_env_new(lst->key, lst->value));
-	}
-	return (new);
-}
-
-
-void	sort_list(t_env *lst)
-{
-	t_env	*cmp;
-
-	cmp = lst;
-	while (lst)
-	{
-		if (lst->next)
-			cmp = lst->next;
-		while (cmp)
-		{
-			if (ft_strcmp(lst->key, cmp->key) > 0)
-			{
-				ft_swap_str(&lst->key, &cmp->key);
-				ft_swap_str(&lst->value, &cmp->value);
-			}
-			cmp = cmp->next;
-		}
-		lst = lst->next;
-	}
-	//free
-}
-
-void	fill_env(t_env *lst, t_env *cpy, char *av, int state)
+static void	fill_env(t_env *lst, t_env *cpy, char *av)
 {
 	char *key;
 	char *value;
 	t_env *new;
 
-	if (state == 1)
-	{	
 		key = ft_strndup(av, ft_findi(av, '='));
 		value = ft_strdup(ft_strchr(av, '=') + 1);
-		if (get_env_str(lst, key) != NULL)
+		if (get_env_str(cpy, key) != NULL)
+		{
 			ft_replace_env(lst, key, value);
+			ft_replace_env(cpy, key, value);
+		}
 		else
 		{
+			printf("2222222222222222222222222222\n");
 			new = ft_env_new(key, value);
 			ft_env_addback(&lst, new);
+			ft_env_addback(&cpy, new);
 		}
-	}
-	if (state == 2)
-	{	
-		key = ft_strndup(av, ft_strlen(av));
+}
+
+static void	fill_env_cpy(t_env *cpy, char *av)
+{
+	char *key;
+	char *value;
+	t_env *new;
+
+	key = ft_strndup(av, ft_strlen(av));
+	if (!get_env_str(cpy, key))
+	{
 		value = ft_strndup("", 0);
 		new = ft_env_new(key, value);
 		ft_env_addback(&cpy, new);
@@ -102,14 +73,15 @@ int		ft_export(t_env *lst, t_env *cpy, char **av, int ac)
 	if (ac == 1)
 	{
 		sort_list(cpy);
-		print_env(cpy);
+		print_env(cpy, 1);
+		print_env(lst, 0);
 	}
 	while (++i < ac)
 	{
 		if (export_key(av[i]) > 0)
-			fill_env(lst, cpy, av[i], 1);
+			fill_env(lst, cpy, av[i]);
 		else if (export_key(av[i]) == 0)
-			fill_env(lst, cpy, av[i], 2);
+			fill_env_cpy(cpy, av[i]);
 		else
 			ft_error("export: `", av[i], "': not a valid identifier\n");
 	}

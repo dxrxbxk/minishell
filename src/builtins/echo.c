@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/28 19:59:33 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 14:41:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	void ft_putstr(char *str)
 		write(1, str++, 1);
 }
 
-int		ft_cmpchar(char *str, char c)
+static int		ft_cmpchar(char *str, char c)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int		ft_cmpchar(char *str, char c)
 	return (0);
 }
 
-int		ft_echo_print(char **av, int ac, int i, int n)
+static int		ft_echo_print(char **av, int ac, int i, int n)
 {
 	while (i < ac)
 	{

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/08 21:51:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 15:17:00 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	free_data(t_mini *data)
 	return (0);
 }
 
-char	*ret_pwd(void)
+static char	*ret_pwd(void)
 {
 	char *cwd;
 
@@ -108,6 +108,11 @@ int	get_shlvl(t_mini *data)
 	if (!value)
 		return (-1);
 	ret = ft_atoi(value) + 1;
+	if (ret > 999)
+	{
+		ft_error("warning: shell level (1000) too high, resetting to 1\n", "", "");
+		ret = 1;
+	}
 	value = ft_itoa(ret);
 	ft_replace_env(data->env, "SHLVL", value);
 	return (0);

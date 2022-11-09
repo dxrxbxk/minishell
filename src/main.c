@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/08 21:40:34 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 13:59:57 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	get_line(t_mini *data)
 			expand(&tok, data->env);
 		print_list(tok);
 		tok = NULL;
-		ft_env(data->env);
+		ft_export(data->env, data->env_cpy, ft_split(str, ' '), ft_count_words2(str, ' '));
+		//printf("%s\n",get_env_str(data->env, "SHLVL"));
 	//	ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));
 //		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
-//		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
 //		lexer(&tok, str);
 //		ft_export(data->env, str);
 //		printf("----------------------------------\n");
@@ -56,6 +56,7 @@ int	main(int ac, char **av, char **env)
 	get_env(&data, env);
 	get_path(&data, env);
 	get_shlvl(&data);
+	data.env_cpy = lst_copy(data.env);
 //	print_tab(env);
 	if (ac == 1)
 	{

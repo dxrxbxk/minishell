@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/08 19:37:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 14:31:41 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,18 @@ int get_path(t_mini *data, char **env);
 // env_utils.c
 void ft_env_addback(t_env **first, t_env *new);
 t_env *ft_env_new(void *key, void *value);
-void print_env(t_env *print);
+void	print_env(t_env *print, int export);
 char *get_env_str(t_env *lst, char *get);
 void ft_replace_env(t_env *lst, char *cmp, char *value);
+
+
+// env_utils_2.c
+t_env	*lst_copy(t_env *lst);
+void	sort_list(t_env *lst);
+
+
+
+
+int	ft_count_words2(char const *s, char c); // delete this
 
 #endif

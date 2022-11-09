@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/01 17:48:43 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 15:11:49 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define LONG_MAX 0x7fffffffffffffff
 #define LONG_MIN 0x8000000000000000
 
-int	ft_isnum(char *str)
+static int	ft_isnum(char *str)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int	ft_isnum(char *str)
 	return (1);
 }
 
-long	result_check(long result, int sign, int over, char *nptr)
+static long	result_check(long result, int sign, int over, char *nptr)
 {
 	if ((result > LONG_MAX && sign == 1) || over == 1)
 	{
@@ -50,7 +50,7 @@ long	result_check(long result, int sign, int over, char *nptr)
 	return (result * sign);
 }
 
-long	ft_atoi2(const char *nptr)
+static long	ft_atoi2(const char *nptr)
 {
 	long	result;
 	int		sign;
