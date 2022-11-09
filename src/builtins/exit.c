@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 15:11:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 18:06:47 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ static long	ft_atoi2(const char *nptr)
 	return (result_check(result, sign, over, (char *)nptr));
 }
 
-int	ft_exit(char **av, int ac)
+int	ft_exit(t_env *lst, char **av, int ac)
 {
 	long	status;
 
+	(void)lst;
 	ft_putstr_fd("exit\n", 2);
 	if (ac == 1)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 14:41:24 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/09 18:06:29 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ static int		ft_echo_print(char **av, int ac, int i, int n)
 	return (0);
 }
 
-int		ft_echo(char **av, int ac)
+int		ft_echo(t_env *lst, char **av, int ac)
 {
 	int	i;
 
 	i = 1;
+	(void)lst;
 	if (ac > 1 && av[1][0] == '-' && !ft_cmpchar(av[1] + 1, 'n'))
 	{
 		while (i < ac && strlen(av[i]) > 1 && av[i][0] == '-' && !ft_cmpchar(av[i] + 1, 'n'))
