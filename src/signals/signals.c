@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:03:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:39:24 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 17:08:45 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	inthandler(int sig)
 	//new line with rl
 	//replace buffer rl
 	// display new line
+	// control c = mettre exit status = 130
 }
 
 void	handle_signals(void)
