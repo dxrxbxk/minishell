@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 13:44:47 by diroyer           #+#    #+#             */
-/*   Updated: 2021/11/29 11:16:05 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 12:14:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_itoa(int nb)
 	char	*array;
 	int		len;
 	int		sign;
+	int		data[2];
 	long	n;
 
 	n = nb;

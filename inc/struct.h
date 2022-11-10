@@ -6,14 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 11:47:06 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 12:37:39 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef	int	(*builtins[
 typedef	enum	e_type
 {
 	WORD,
@@ -60,6 +59,8 @@ typedef struct s_mini
 	char **sPATH;
 	t_env *env;
 	t_env *env_cpy;
+	int	(*builtins[6])(t_env *, char **, int);
+
 }				t_mini;
 
 #endif
