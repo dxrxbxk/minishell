@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 12:37:39 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 22:50:10 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@ typedef	enum	e_type
 	LEFT_P,
 	RIGHT_P,
 	WILDCARDS,
+	OP_SEQ,
+	PIPE_SEQ,
+	CMD,
 }				t_type;
 
-typedef struct s_token_type
+typedef struct s_ast
 {
-	char *value;
-	t_type	type;
-}			t_token_type;
+	struct s_token	*token;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}			t_ast;
 
 typedef struct s_token
 {
-	char 	*str; //split whitespaces
-	t_type	type; //pipe, quote etc.
+	char 	*str;
+	t_type	type;
 	struct	s_token *next;
 }			t_token;
 
