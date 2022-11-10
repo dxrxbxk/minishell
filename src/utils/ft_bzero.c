@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 10:21:36 by diroyer          ###   ########.fr       */
+/*   Created: 2021/11/16 15:42:33 by diroyer           #+#    #+#             */
+/*   Updated: 2021/12/02 20:00:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <string.h>
 
-void	print_tab(char **tab)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (tab[i])
-		printf("%s\n", tab[i++]);
+	while (i < n)
+		((char *)s)[i++] = 0;
 }
-

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 19:17:31 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 10:38:11 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int	get_line(t_mini *data)
 {
 	char *str;
+	char **env;
 	t_token *tok;
 
 	tok = NULL;
-	(void)tok;
+	env = NULL;
 	while (1)
 	{
 		handle_signals();
@@ -32,8 +33,11 @@ int	get_line(t_mini *data)
 			expand(&tok, data->env);
 		print_list(tok);
 		tok = NULL;
-		ft_unset(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
-		print_env(data->env, 0);
+		env = lst_to_tab(data->env);
+		(void)env;
+		print_tab(env);
+		//ft_unset(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
+		//print_env(data->env, 0);
 //		ft_export(data->env, data->env_cpy, ft_split(str, ' '), ft_count_words2(str, ' '));
 		//printf("%s\n",get_env_str(data->env, "SHLVL"));
 	//	ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));

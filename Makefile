@@ -43,6 +43,8 @@ override FILES			:=	$(addsuffix .c, \
 							ft_strlcat \
 							ft_strdup \
 							ft_strlcpy \
+							ft_calloc \
+							ft_bzero \
 							unset \
 							exit \
 							cd \
@@ -70,6 +72,7 @@ override FILES			:=	$(addsuffix .c, \
 							ft_words_count \
 							ft_atoi \
 							env_utils_2 \
+							lst_to_tab \
 							ft_itoa)
 
 SRCDIR					:= src

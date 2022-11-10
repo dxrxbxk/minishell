@@ -6,15 +6,20 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/08 19:27:55 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:35:36 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+#include <struct.h>
 #include <string.h>
 
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+
+char	**lst_to_tab(t_env *lst);
 // ft_atoi.c
 int ft_atoi(const char *nptr);
 

@@ -6,13 +6,14 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 19:03:53 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:47:06 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef	int	(*builtins[
 typedef	enum	e_type
 {
 	WORD,
