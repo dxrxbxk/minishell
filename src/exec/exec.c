@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 19:23:13 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 23:23:01 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,41 @@ static int	is_builtin(char **av, t_mini *shell)
 	}
 	return (1);
 }
-/*
+
 int	exec_path(char *npath, char **av, char **env)
 {
-	pit_t	pid;
+	pid_t pid;
+	int status;
 
 	pid = fork();
-	if (pid)
+	if (pid < 0)
+		printf("failed\n");
+	else if (pid == 0)
 	{
-		execve(
+		execve(npath, av, env);
 	}
+	else
+	{
+		if (waitpid(pid, &status, 0) > 0)
+		{
+			if (WIFEXITED(status) && !WEXITSTATUS(status))
+            	printf("program execution successful\n");
+            else if (WIFEXITED(status) && WEXITSTATUS(status))
+			{
+                if (WEXITSTATUS(status) == 127)
+                    printf("execv failed\n");
+                else
+                    printf("program terminated normally,"
+                    " but returned a non-zero status\n");
+            }
+            else
+				printf("program didn't terminate normally\n");
+        }
+        else 
+        	printf("waitpid() failed\n");
+	}
+	return (0);
 }
-*/
 
 int init_exec(char **av, t_mini *shell)
 {
@@ -114,13 +137,11 @@ int init_exec(char **av, t_mini *shell)
 		return (1);
 	if (!is_builtin(av, shell))
 		return (0);
-	/*
 	else
 	{
 		npath = check_path(shell->sPATH, av[0]);
 		if (npath)
 			exec_path(npath, av, env);
 	}
-	*/
 	return (0);
 }
