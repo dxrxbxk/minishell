@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 15:12:03 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 19:23:13 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,43 @@ t_built	*init_fpointer(void)
 	return (data);
 }
 
-static int check_path()
+char	*check_cmd(char *path, char *cmd)
+{
+	char *tmp;
+
+	tmp = ft_mega_join(path, "/", cmd);
+	if (!access(tmp, F_OK | X_OK))
+		return (tmp);
+	return (NULL);
+}
+
+char	*check_path(char **path, char *cmd)
+{
+	int i;
+	char *npath;
+
+	i = -1;
+	if (!path || !*path)
+		return (NULL);
+	while (path[++i])
+	{
+		if (ft_strchr(path[i], '/'))
+		{
+			npath = check_cmd(path[i], cmd);
+			if (npath)
+				return (npath);
+		}
+	}
+	if (path[i] == NULL)
+		ft_error(cmd, ": command not found", "\n");
+	return (NULL);
+}
 
 static int	tab_len(char **av)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (av[i])
 		i++;
 	return (i);
@@ -57,16 +89,38 @@ static int	is_builtin(char **av, t_mini *shell)
 	}
 	return (1);
 }
-
-int	ft_execve(char *path, char **av, char **env, t_mini *shell)
+/*
+int	exec_path(char *npath, char **av, char **env)
 {
-	(void)path;
-	(void)env;
-	if (!path || !*av || !*env)
-		return (1);
+	pit_t	pid;
 
+	pid = fork();
+	if (pid)
+	{
+		execve(
+	}
+}
+*/
+
+int init_exec(char **av, t_mini *shell)
+{
+	char *npath;
+	char **env;
+
+	(void)npath;
+	(void)env;
+	env = lst_to_tab(shell->env);
+	if (!*av || !av)
+		return (1);
 	if (!is_builtin(av, shell))
 		return (0);
+	/*
 	else
-		check_path(path, av[0]);
+	{
+		npath = check_path(shell->sPATH, av[0]);
+		if (npath)
+			exec_path(npath, av, env);
+	}
+	*/
+	return (0);
 }

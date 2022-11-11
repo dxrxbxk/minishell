@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 14:47:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 16:27:39 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <struct.h>
 
-int	ft_execve(char *path, char **av, char **env, t_mini *data);
+int init_exec(char **av, t_mini *shell);
 t_built	*init_fpointer(void);
 
 #endif

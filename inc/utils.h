@@ -6,16 +6,19 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 11:35:36 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 18:07:02 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+#include <stdlib.h>
 #include <struct.h>
 #include <string.h>
 
+
+char	*ft_mega_join(char *s1, char *s2, char *s3);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 

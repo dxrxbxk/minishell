@@ -74,6 +74,7 @@ override FILES			:=	$(addsuffix .c, \
 							env_utils_2 \
 							lst_to_tab \
 							exec \
+							ft_mega_join \
 							ft_itoa)
 
 SRCDIR					:= src

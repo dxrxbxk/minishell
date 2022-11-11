@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 16:25:28 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 21:15:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	print_env_export(t_env *print)
 	curr = tmp;
 	while (tmp)
 	{
-		printf("export %s=\"%s\"\n", tmp->key, tmp->value);
+		if (tmp->value)
+			printf("export %s=\"%s\"\n", tmp->key, tmp->value);
+		else
+			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}
 	while (curr)
@@ -64,7 +67,7 @@ void	print_env(t_env *print)
 {
 	while (print)
 	{
-		if (*print->value != '\0')
+		if (print->value != NULL)
 			printf("%s=%s \n", print->key, print->value);
 		print = print->next;
 	}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_mega_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 17:33:59 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 16:34:26 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/11 18:05:58 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/11 18:06:41 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <utils.h>
 
-static char	*ft_strjoin_error(char *s1, char *s2, char *s3)
+char	*ft_mega_join(char *s1, char *s2, char *s3)
 {
 	size_t	len;
 	char	*array;
@@ -30,13 +30,4 @@ static char	*ft_strjoin_error(char *s1, char *s2, char *s3)
 	return (array);
 }
 
-void	ft_error(char *msg, char *var, char *msg2)
-{
-	char *print;
 
-	print = ft_strjoin_error(msg, var, msg2);
-	if (!print)
-		return ;
-	ft_putstr_fd(print, 2);
-	free(print);
-}
