@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 20:03:26 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 13:50:41 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typdedef struct s_builtins
 */
 void	ft_error(char *msg, char *var, char *msg2);
 void	print_tab(char **tab);
+
 #include <struct.h>
 #include <env.h>
 #include <lexer.h>
@@ -42,5 +43,6 @@ void	print_tab(char **tab);
 #include <utils.h>
 #include <builtins.h>
 #include <signals.h>
+#include <exec.h>
 
 #endif

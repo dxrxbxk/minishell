@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 22:50:10 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:41:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,18 @@ typedef struct s_env
 	struct s_env *next;
 }				t_env;
 
+typedef struct s_built
+{
+	char *cmd;
+	int	(*builtins)(t_env *, char **, int);
+}				t_built;
+
 typedef struct s_mini
 {
 	char *PATH;
 	char **sPATH;
 	t_env *env;
-	t_env *env_cpy;
-	int	(*builtins[6])(t_env *, char **, int);
+	t_built	*built;
 
 }				t_mini;
 

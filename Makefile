@@ -73,6 +73,7 @@ override FILES			:=	$(addsuffix .c, \
 							ft_atoi \
 							env_utils_2 \
 							lst_to_tab \
+							exec \
 							ft_itoa)
 
 SRCDIR					:= src

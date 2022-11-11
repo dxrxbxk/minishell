@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 18:06:29 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 15:01:00 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ int		ft_echo(t_env *lst, char **av, int ac)
 	}
 	else if (ac > 1)
 		return (ft_echo_print(av, ac, i, 1));
-	return (1);
+	return (0);
 }

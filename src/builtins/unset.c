@@ -6,13 +6,13 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 19:24:02 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 14:03:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_unset(t_env *lst, char **av, int ac)
+int	ft_unset(t_env *lst, char **av, int ac)
 {
 	t_env *tmp;
 	t_env *curr;
@@ -27,7 +27,7 @@ void	ft_unset(t_env *lst, char **av, int ac)
 		{
 			lst = tmp->next;
 			free(tmp);
-			return ;
+			return (0);
 		}
 		while (tmp && ft_strcmp(tmp->key, av[i]))
 		{
@@ -35,8 +35,9 @@ void	ft_unset(t_env *lst, char **av, int ac)
 			tmp = tmp->next;
 		}
 		if (tmp == NULL)
-			return ;
+			return (0);
 		lst->next = tmp->next;
 		free(tmp);
 	}
+	return (0);
 }

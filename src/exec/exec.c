@@ -6,43 +6,67 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 15:20:07 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 15:12:03 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	init_fpointer(void)
+t_built	*init_fpointer(void)
 {
-	data->builtins[0] = &ft_echo;
-	data->builtins[1] = &ft_unset;
-	data->builtins[2] = &ft_env;
-	data->builtins[3] = &ft_pwd;
-	data->builtins[4] = &ft_cd;
-	data->builtins[5] = &ft_exit;
+	static t_built	data[NB_BUILTS];
+	
+	data[0].builtins = &ft_echo;
+	data[0].cmd = "echo";
+	data[1].builtins = &ft_unset;
+	data[1].cmd = "unset";
+	data[2].builtins = &ft_env;
+	data[2].cmd = "env";
+	data[3].builtins = &ft_pwd;
+	data[3].cmd = "pwd";
+	data[4].builtins = &ft_cd;
+	data[4].cmd = "cd";
+	data[5].builtins = &ft_exit;
+	data[5].cmd = "exit";
+	data[6].builtins = &ft_export;
+	data[6].cmd = "export";
+	return (data);
 }
 
-int	is_builtin(char *str)
+static int check_path()
+
+static int	tab_len(char **av)
 {
-	if (!ft_strcmp(str, "echo"))
-		return (0);
-	else if (!ft_strcmp(str, "unset"))
+	int i = 0;
+	while (av[i])
+		i++;
+	return (i);
+}
+
+static int	is_builtin(char **av, t_mini *shell)
+{
+	int	i;
+	t_built *data;
+
+	i = -1;
+	data = init_fpointer();
+	while (++i < NB_BUILTS)
+	{
+		if (!ft_strcmp(data[i].cmd, av[0]))
+			return (data[i].builtins(shell->env, av, tab_len(av)));
+	}
+	return (1);
+}
+
+int	ft_execve(char *path, char **av, char **env, t_mini *shell)
+{
+	(void)path;
+	(void)env;
+	if (!path || !*av || !*env)
 		return (1);
-	else if (!ft_strcmp(str, "env"))
-		return (2);
-	else if (!ft_strcmp(str, "pwd"))
-		return (3);
-	else if (!ft_strcmp(str, "cd"))
-		return (4);
-	else if (!ft_strcmp(str, "exit"))
-		return (5);
-	else if  (!ft_strcmp(str, "export"))
-		return (6);
-	else
-		return (7);
-}
 
-int	ft_execve(char *path, char **av, char **env)
-{
-	check_path();
+	if (!is_builtin(av, shell))
+		return (0);
+	else
+		check_path(path, av[0]);
 }
