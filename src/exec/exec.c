@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 23:23:01 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/11 23:27:22 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,9 @@ int	exec_path(char *npath, char **av, char **env)
 
 	pid = fork();
 	if (pid < 0)
-		printf("failed\n");
+		printf("fork error occurred\n");
 	else if (pid == 0)
-	{
 		execve(npath, av, env);
-	}
 	else
 	{
 		if (waitpid(pid, &status, 0) > 0)
