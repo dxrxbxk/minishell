@@ -75,6 +75,7 @@ override FILES			:=	$(addsuffix .c, \
 							lst_to_tab \
 							exec \
 							ft_mega_join \
+							exec_builtins \
 							ft_itoa)
 
 SRCDIR					:= src
@@ -110,7 +111,7 @@ endef
 
 .PHONY:					all clean fclean re ascii
 
-all:					ascii $(NAME)
+all:					ascii2 $(NAME)
 
 $(NAME):				$(OBJ)
 						@$(LINK)
@@ -146,7 +147,15 @@ leak:
 compile:				
 						@$(COMPILE)
 
-ascii:
+ascii2:			
+						@echo \
+						$(COLOR) \
+						"                                 \n" \
+						"█▀▄▀█ █ █▄░█ █ █▀ █░█ █▀▀ █░░ █░░\n" \
+						"█░▀░█ █ █░▀█ █ ▄█ █▀█ ██▄ █▄▄ █▄▄\n" \
+						$(RESET);
+
+ascii:                  
 						@echo \
 						$(COLOR) \
 						"███    ██████████   ████████ \n" \

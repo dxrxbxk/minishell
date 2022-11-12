@@ -6,31 +6,19 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 23:27:22 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:52:08 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_built	*init_fpointer(void)
+char	*check_rel_path(char *cmd)
 {
-	static t_built	data[NB_BUILTS];
-	
-	data[0].builtins = &ft_echo;
-	data[0].cmd = "echo";
-	data[1].builtins = &ft_unset;
-	data[1].cmd = "unset";
-	data[2].builtins = &ft_env;
-	data[2].cmd = "env";
-	data[3].builtins = &ft_pwd;
-	data[3].cmd = "pwd";
-	data[4].builtins = &ft_cd;
-	data[4].cmd = "cd";
-	data[5].builtins = &ft_exit;
-	data[5].cmd = "exit";
-	data[6].builtins = &ft_export;
-	data[6].cmd = "export";
-	return (data);
+	if (!access(cmd, F_OK | X_OK))
+		return (ft_strdup(cmd));
+	else
+		perror(cmd);
+	return (NULL);
 }
 
 char	*check_cmd(char *path, char *cmd)
@@ -51,6 +39,9 @@ char	*check_path(char **path, char *cmd)
 	i = -1;
 	if (!path || !*path)
 		return (NULL);
+	printf("cmd %s\n", cmd);
+	if (ft_strchr(cmd, '.'))
+		return (check_rel_path(cmd));
 	while (path[++i])
 	{
 		if (ft_strchr(path[i], '/'))
@@ -61,33 +52,8 @@ char	*check_path(char **path, char *cmd)
 		}
 	}
 	if (path[i] == NULL)
-		ft_error(cmd, ": command not found", "\n");
+		perror(cmd);
 	return (NULL);
-}
-
-static int	tab_len(char **av)
-{
-	int i;
-
-	i = 0;
-	while (av[i])
-		i++;
-	return (i);
-}
-
-static int	is_builtin(char **av, t_mini *shell)
-{
-	int	i;
-	t_built *data;
-
-	i = -1;
-	data = init_fpointer();
-	while (++i < NB_BUILTS)
-	{
-		if (!ft_strcmp(data[i].cmd, av[0]))
-			return (data[i].builtins(shell->env, av, tab_len(av)));
-	}
-	return (1);
 }
 
 int	exec_path(char *npath, char **av, char **env)
@@ -95,6 +61,9 @@ int	exec_path(char *npath, char **av, char **env)
 	pid_t pid;
 	int status;
 
+//	printf("npath %s\n", npath);
+//	print_tab(av);
+//	print_tab(env);
 	pid = fork();
 	if (pid < 0)
 		printf("fork error occurred\n");
@@ -128,8 +97,6 @@ int init_exec(char **av, t_mini *shell)
 	char *npath;
 	char **env;
 
-	(void)npath;
-	(void)env;
 	env = lst_to_tab(shell->env);
 	if (!*av || !av)
 		return (1);

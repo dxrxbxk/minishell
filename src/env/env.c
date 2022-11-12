@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 23:32:20 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:05:32 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,10 @@ int	get_env(t_mini *data, char **env)
 	while (env[i])
 	{
 		*elm = malloc(sizeof(t_env));
-		if (ft_findi(env[i], '=') != -1)
-			(*elm)->key = ft_strndup(env[i], ft_findi(env[i], '='));
+		(*elm)->key = ft_strndup(env[i], ft_findi(env[i], '='));
 		if (!(*elm)->key)
 			return (-1);
-		if (ft_findi(env[i], '=') != -1)
-			(*elm)->value = ft_strdup(ft_strchr(env[i], '=') + 1);
+		(*elm)->value = ft_strdup(ft_strchr(env[i], '=') + 1);
 		if (!(*elm)->value)
 			return (-1);
 		elm = &((*elm)->next);

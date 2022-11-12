@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 23:09:13 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:17:48 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <sys/wait.h>
 # include <struct.h>
 
-int init_exec(char **av, t_mini *shell);
+char	*check_path(char **path, char *cmd);
+int		is_builtin(char **av, t_mini *shell);
+int		init_exec(char **av, t_mini *shell);
 t_built	*init_fpointer(void);
 
 #endif
