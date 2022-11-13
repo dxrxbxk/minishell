@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree.c                                             :+:      :+:    :+:   */
+/*   ast_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:42:28 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/13 02:03:41 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:33:50 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-/*
-int	ft_create_tree(t_ast **root, t_token **token)
-{
-	if (*root && (*root)->token->type == ROOT)
-		*root = (*root)->right;
-	while (*token)
-	{
-		if ((*token)->type == LEFT_P)
-		{
-			ft_create_node_right(root, OP_SEQ);
-			*token = (*token)->next;
-			ft_create_tree(&(*root)->right, token);
-		}
-		else if (ft_token_is_word((*token)->type) || ft_token_is_redir((*token)->type))
-		{
-			ft_create_node_right(root, OP_SEQ);
-			ft_
-		}
-	}
-}
-
-int	ft_tree_2(t_ast **ast, t_token **token)
-{
-
-}
-*/
 
 int	ft_add_full_cmd(t_ast *ast, t_token **token)
 {
@@ -144,16 +118,12 @@ int	ft_create_tree(t_ast *ast, t_token **token)
 	return (0);
 }
 
-int	ft_init_tree(t_ast **root, t_token *token)
+int	ast_init(t_ast **root, t_token *token)
 {
-	t_ast	*cpy;
-
 	if (ft_create_node_right(root, OP_SEQ) == -1)
 		return (-1);
-	cpy = *root;
-	return (ft_create_tree(cpy, &token));
+	return (ft_create_tree(*root, &token));
 }
-
 // '('
 // CMD or PIPE SEQ
 // ')'

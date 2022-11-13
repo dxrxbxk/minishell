@@ -61,9 +61,10 @@ override FILES			:=	$(addsuffix .c, \
 							ft_dquotes_dollar_expand \
 							ft_tokencat \
 							ft_dollar_expand \
-							tree	\
+							ast_init	\
 							ast_utils	\
 							lexer \
+							parsing	\
 							token \
 							utils \
 							env \

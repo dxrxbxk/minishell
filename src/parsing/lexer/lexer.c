@@ -6,11 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/02 20:27:01 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:42:25 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 //lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 static int	ft_token_size(char *str, int *i)
@@ -80,11 +80,11 @@ static t_token	*ft_extract_token(char *input, int *i)
 	t_type	type;
 
 	size = ft_token_size(input, i);
-	content = ft_strndup(input + *i, size); //protect if strndup fails
+	content = ft_strndup(input + *i, size);
+	if (!content)
+		return (NULL);
 	type = ft_token_type(content);
-//	printf("token = %s size = %d \n", content, size);
 	*i += size;
-//	printf("type %d\n", type);
 	return (ft_token_new(content, type));
 }
 
@@ -98,9 +98,8 @@ int	lexer(t_token **token, char *input)
 	{
 		new = ft_extract_token(input, &i);
 		if (!new)
-			return (0);
+			return (-1);
 		ft_tokenadd_back(token, new);
 	}
-//	print_list(*token);
-	return (1);
+	return (0);
 }

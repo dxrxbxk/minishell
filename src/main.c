@@ -6,37 +6,78 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 22:46:42 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 21:50:52 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+void print_tree(t_ast *root, int space)
+{
+    if (root == NULL)
+        return;
+    space += 10;
+    print_tree(root->right, space);
+    printf("\n");
+    for (int i = 10; i < space; i++)
+	{
+        printf(" ");
+	}
+	char	*msg;
+	if (root->token->type == OP_SEQ)
+		msg = "OP";
+	if (root->token->type == CMD)
+		msg = "CMD";
+	if (root->token->type == AND)
+		msg = "&&";
+	if (root->token->type == PIPE)
+		msg = "|";
+	if (root->token->type == PIPE_SEQ)
+		msg = "P_SEQ";
+	if (root->token->type == D_PIPE)
+		msg = "||";
+	if (root->token->type == GREAT)
+		msg = ">";
+	if (root->token->type == D_GREAT)
+		msg = ">>";
+	if (root->token->type == LESS)
+		msg = "<";
+	if (root->token->type == D_LESS)
+		msg = "<<";
+	if (root->token->type == WORD)
+		msg = root->token->str;
+	if (msg && *msg)
+	    printf("%.5s", msg);
+	else if (msg && !*msg)
+	    printf("\"\\0\"");
+	else
+		printf("%s", msg);
+    printf("\n");
+    print_tree(root->left, space);
+} 
+
 int	get_line(t_mini *data)
 {
-	char *str;
-	char **env;
+	char *input;
 	t_token *tok;
+	t_ast	*root;
 
 	tok = NULL;
-	env = NULL;
+	root = NULL;
 	while (1)
 	{
 		handle_signals();
-		str = readline("minishell :");
-		if (str == NULL) // EOF / CTRL + D
+		input = readline("minishell :");
+		if (input == NULL) // EOF / CTRL + D
 			exit(free_data(data));
-		if (str[0] == '\n') //idk
-			printf("salut\n");
-		lexer(&tok, str);
-		if (parser(tok))
-			expand(&tok, data->env);
-		print_list(tok);
+		root = NULL;
 		tok = NULL;
-		env = lst_to_tab(data->env);
-		(void)env;
-		init_exec(ft_split(str, ' '), data);
-		add_history(str); 
+		if (parsing(input, &tok, &root, data->env) != 0)
+			continue ;
+		root = NULL;
+		tok = NULL;
+//		init_exec(ft_split(str, ' '), data);
+		add_history(input); 
 	}
 	return (0);
 }

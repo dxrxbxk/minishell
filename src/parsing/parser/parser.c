@@ -6,11 +6,11 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/10/31 05:20:01 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:07:55 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <parsing.h>
 
 int	ft_token_is_word(t_type type)
 {

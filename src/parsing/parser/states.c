@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 01:32:27 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:42:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_checkerror(int state, t_token *lst, long separators[3])
 		ft_parserror("newline");
 	else
 		ft_parserror(lst->str);
-	return (1);
+	return (-1);
 }
 
 int	ft_state_5(t_token *lst, long separators[3])
@@ -43,7 +43,7 @@ int	ft_state_5(t_token *lst, long separators[3])
 		return (separators[BRACKETS]--, ft_state_5(lst->next, separators));
 	if (lst && (lst->type == AND || lst->type == D_PIPE))
 		return (ft_state_4(lst->next, separators));
-	return (!ft_checkerror(5, lst, separators));
+	return (ft_checkerror(5, lst, separators));
 }
 
 int	ft_state_4(t_token *lst, long separators[3])
@@ -57,7 +57,7 @@ int	ft_state_4(t_token *lst, long separators[3])
 		return (ft_state_1(lst->next, separators));
 	if (lst && ft_token_is_redir(lst->type))
 		return (ft_state_2(lst->next, separators));
-	return (!ft_checkerror(4, lst, separators));
+	return (ft_checkerror(4, lst, separators));
 }
 
 int	ft_state_3(t_token *lst, long separators[3])
@@ -69,7 +69,7 @@ int	ft_state_3(t_token *lst, long separators[3])
 		return (ft_state_1(lst, separators));
 	if (lst && ft_token_is_word(lst->type))
 		return (ft_state_1(lst->next, separators));
-	return (!ft_checkerror(3, lst, separators));
+	return (ft_checkerror(3, lst, separators));
 }
 
 int	ft_state_2(t_token *lst, long separators[3])
@@ -79,7 +79,7 @@ int	ft_state_2(t_token *lst, long separators[3])
 		return (ft_state_1(lst, separators));
 	if (lst && ft_token_is_word(lst->type))
 		return (ft_state_1(lst->next, separators));
-	return (!ft_checkerror(2, lst, separators));
+	return (ft_checkerror(2, lst, separators));
 }
 
 int	ft_state_1(t_token *lst, long separators[3])
@@ -99,7 +99,7 @@ int	ft_state_1(t_token *lst, long separators[3])
 		return (ft_state_4(lst->next, separators));
 	if (lst && lst->type == RIGHT_P)
 		return (separators[BRACKETS]--, ft_state_5(lst->next, separators));
-	return (!ft_checkerror(1, lst, separators));
+	return (ft_checkerror(1, lst, separators));
 }
 
 int	ft_state_0(t_token *lst, long separators[3])
@@ -113,5 +113,5 @@ int	ft_state_0(t_token *lst, long separators[3])
 		return (ft_state_1(lst->next, separators));
 	if (lst && ft_token_is_redir(lst->type))
 		return (ft_state_2(lst->next, separators));
-	return (!ft_checkerror(0, lst, separators));
+	return (ft_checkerror(0, lst, separators));
 }
