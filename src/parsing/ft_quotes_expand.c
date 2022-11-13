@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 02:20:25 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 04:32:46 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/12 22:11:59 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ static void	ft_inside_quotes_cat(t_token *lst, t_type quote_type)
 
 	lst->type = WORD;
 	free(lst->str);
-	lst->str = ft_strdup("");
+//	lst->str = ft_strdup("");
+	lst->str = NULL;
 	current = lst->next;
 	if (!current)//must be impossible if the parser did correctly his work
 		return ;
 	while (current && current->type != quote_type)
 	{
 		ft_merge_tokens(lst, current);
-		current = current->next;
+		current = lst->next;
 	}
 	if (current && current->type == quote_type)
 		ft_remove_token(lst, current);

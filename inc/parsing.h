@@ -6,12 +6,19 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:32:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/03 16:39:02 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 00:12:33 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+int	ft_init_tree(t_ast **root, t_token *token);
+int	ft_astadd_last_left(t_ast **root, t_ast *elem);
+int	ft_astadd_last_right(t_ast **root, t_ast *elem);
+int	ft_create_node_left(t_ast **root, t_type type);
+int	ft_create_node_right(t_ast **root, t_type type);
+t_ast	*ft_astnew(t_token *token);
 
 // expand.c
 void ft_token_delone(t_token *token);

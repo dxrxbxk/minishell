@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 04:27:29 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/12 23:11:51 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_token_delone(t_token *token)
 {
-	free(token->str);
+	if (token->str)
+		free(token->str);
 	free(token);
 }
 
@@ -28,8 +29,14 @@ void	ft_merge_tokens(t_token *a, t_token *b)
 {
 	char	*content;
 
-	content = ft_strjoin(a->str, b->str);
-	free(a->str);
+	if (!a->str)
+		content = ft_strdup(b->str);
+	else if (!b->str)
+		content = a->str;
+	else
+		content = ft_strjoin(a->str, b->str);
+	if (a->str && content != a->str)
+		free(a->str);
 	a->str = content;
 	ft_remove_token(a, b);
 }

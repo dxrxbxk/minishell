@@ -61,6 +61,8 @@ override FILES			:=	$(addsuffix .c, \
 							ft_dquotes_dollar_expand \
 							ft_tokencat \
 							ft_dollar_expand \
+							tree	\
+							ast_utils	\
 							lexer \
 							token \
 							utils \
@@ -92,6 +94,8 @@ override DEP			:= $(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ))
 ### U T I L I T Y ##############################################################
 
 COLOR					:= "\033[1;32m"
+PURPLE_1				:= "\e[38;2;113;31;149m"
+PURPLE_2				:= "\e[38;2;101;25;134m"
 RESET					:= "\033[m"
 NEWLINE					:= echo "\n\n"
 LINK					:= echo $(COLOR)L1NK$(RESET)
@@ -148,12 +152,10 @@ compile:
 						@$(COMPILE)
 
 ascii2:			
-						@echo \
-						$(COLOR) \
-						"                                 \n" \
-						"█▀▄▀█ █ █▄░█ █ █▀ █░█ █▀▀ █░░ █░░\n" \
-						"█░▀░█ █ █░▀█ █ ▄█ █▀█ ██▄ █▄▄ █▄▄\n" \
-						$(RESET);
+			@echo				"                                 \n"	\
+					$(PURPLE_1)	"█▀▄▀█ █ █▄░█ █ █▀ █░█ █▀▀ █░░ █░░\n"	\
+					$(PURPLE_2)	"█░▀░█ █ █░▀█ █ ▄█ █▀█ ██▄ █▄▄ █▄▄\n"	\
+					$(RESET);
 
 ascii:                  
 						@echo \

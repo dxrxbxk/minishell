@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/03 01:36:38 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:40:50 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_extract_env_value(t_env *env, char *key)
 			return (ft_strdup(env->value));
 		env = env->next;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }
 
 size_t	ft_getkey_size_usual_expand(char *token)
