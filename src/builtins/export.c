@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 20:59:23 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:32:54 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	fill_env_cpy(t_env *cpy, char *av)
 	{
 		value = NULL;
 		new = ft_env_new(key, value);
+		if (!new)
+			return ;
 		ft_env_addback(&cpy, new);
 	}
 }

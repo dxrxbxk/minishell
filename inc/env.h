@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 16:22:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 20:03:05 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	print_env_export(t_env *print);
 t_env	*lst_copy(t_env *lst);
 void	sort_list(t_env *lst);
 
+void	ft_env_delone(t_env *elem);
+void	free_env(t_env *lst);
+void	free_path(char **tab);
 
 
 

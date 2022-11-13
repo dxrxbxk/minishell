@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 14:03:40 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:37:31 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_unset(t_env *lst, char **av, int ac)
 		if (tmp && !ft_strcmp(tmp->key, av[i]))
 		{
 			lst = tmp->next;
-			free(tmp);
+			ft_env_delone(tmp);
 			return (0);
 		}
 		while (tmp && ft_strcmp(tmp->key, av[i]))
@@ -37,7 +37,7 @@ int	ft_unset(t_env *lst, char **av, int ac)
 		if (tmp == NULL)
 			return (0);
 		lst->next = tmp->next;
-		free(tmp);
+		ft_env_delone(tmp);
 	}
 	return (0);
 }
