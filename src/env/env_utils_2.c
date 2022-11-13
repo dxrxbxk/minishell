@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 20:14:57 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 22:39:38 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	free_path(char **tab)
+void	free_tab(char **tab)
 {
 	char	**tmp;
 	int		i;

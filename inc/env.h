@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 20:03:05 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 22:43:52 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	sort_list(t_env *lst);
 
 void	ft_env_delone(t_env *elem);
 void	free_env(t_env *lst);
-void	free_path(char **tab);
-
-
+void	free_tab(char **tab);
 
 int	ft_count_words2(char const *s, char c); // delete this
 
