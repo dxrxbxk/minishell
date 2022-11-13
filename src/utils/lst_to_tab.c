@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:45:00 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 21:11:42 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:45:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ char	**lst_to_tab(t_env *lst)
 	while (curr)
 	{
 		if (curr->value)
+		{
 			tab[i] = ft_mega_join(curr->key, "=", curr->value);
+			i++;
+		}
 		curr = curr->next;
-		i++;
 	}
 	tab[i] = NULL;
 	return (tab);

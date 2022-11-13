@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 21:15:40 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:31:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,11 @@ void	print_env_export(t_env *print)
 	{
 		if (tmp->value)
 			printf("export %s=\"%s\"\n", tmp->key, tmp->value);
-		else
+		else if (tmp->key)
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}
-	while (curr)
-	{
-		free(curr);
-		curr = curr->next;
-	}
+	free_env(curr);
 }
 
 void	print_env(t_env *print)
@@ -108,7 +104,7 @@ void	ft_replace_env(t_env *lst, char *cmp, char *value)
 		{
 			free(lst->value);
 			lst->value = NULL;
-			lst->value = ft_strdup(value);
+			lst->value = value;
 		}
 		lst = lst->next;
 	}

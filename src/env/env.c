@@ -6,27 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/12 16:05:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 20:07:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	free_data(t_mini *data)
-{
-	t_env **env;
-	t_env	*tmp;
-
-	env = &data->env;
-	//freedatapathplz
-	while (*env)
-	{
-		tmp = (*env)->next;
-		free(*env);
-		*env = tmp;
-	}
-	return (0);
-}
 
 static char	*ret_pwd(void)
 {
@@ -81,18 +65,19 @@ int	get_path(t_mini *data, char **env)
 	int	i;
 
 	i = 0;
+	data->sPATH = NULL;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH", 4) == 0)
 		{
-			data->PATH = ft_strdup(env[i] + 5);
+			data->PATH = ft_strdup(ft_strchr(env[i], '=') + 1);
 			if (!data->PATH)
 				return (-1);
 			data->sPATH = ft_split(data->PATH, ':');
 			if (!data->sPATH)
 				return (-1);
 			print_tab(data->sPATH);
-//			free(data->PATH);
+			free(data->PATH);
 		}
 		i++;
 	}
@@ -102,6 +87,7 @@ int	get_path(t_mini *data, char **env)
 int	get_shlvl(t_mini *data)
 {
 	char *value;
+	char *tmp;
 	int	ret;
 
 	value = ft_strdup(get_env_str(data->env, "SHLVL"));
@@ -113,7 +99,9 @@ int	get_shlvl(t_mini *data)
 		ft_error("warning: shell level (1000) too high, resetting to 1\n", "", "");
 		ret = 1;
 	}
+	tmp = value;
 	value = ft_itoa(ret);
+	free(tmp);
 	ft_replace_env(data->env, "SHLVL", value);
 	return (0);
 }
