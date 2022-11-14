@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 20:07:53 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:16:50 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	get_shlvl(t_mini *data)
 	char *tmp;
 	int	ret;
 
-	value = ft_strdup(get_env_str(data->env, "SHLVL"));
+	value = ft_strdup(get_key_value(data->env, "SHLVL"));
 	if (!value)
 		return (-1);
 	ret = ft_atoi(value) + 1;

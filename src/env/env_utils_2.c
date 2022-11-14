@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 22:39:38 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 15:33:35 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	sort_list(t_env *lst)
 			if (ft_strcmp(lst->key, cmp->key) > 0)
 			{
 				ft_swap_str(&lst->key, &cmp->key);
-				ft_swap_str(&lst->value, &cmp->value);
+				if (lst->value && cmp->value)
+					ft_swap_str(&lst->value, &cmp->value);
 			}
 			cmp = cmp->next;
 		}

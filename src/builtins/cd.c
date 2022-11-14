@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/09 14:41:00 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:16:25 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_cd(t_env *lst, char **av, int ac)
 	{
 		replace_pwd("OLDPWD", lst);
 		if (ac == 1)
-			chdir(get_env_str(lst, "HOME")); //set exit status @ 1?
+			chdir(get_key_value(lst, "HOME")); //set exit status @ 1?
 		if (ac == 2)
 		{
 			if (!chdir(av[i]))
