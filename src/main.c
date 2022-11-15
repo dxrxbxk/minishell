@@ -6,22 +6,24 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 21:50:52 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:43:12 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+extern int g_status;
+
 void print_tree(t_ast *root, int space)
 {
-    if (root == NULL)
-        return;
-    space += 10;
-    print_tree(root->right, space);
-    printf("\n");
-    for (int i = 10; i < space; i++)
+	if (root == NULL)
+		return;
+	space += 10;
+	print_tree(root->right, space);
+	printf("\n");
+	for (int i = 10; i < space; i++)
 	{
-        printf(" ");
+		printf(" ");
 	}
 	char	*msg;
 	if (root->token->type == OP_SEQ)
@@ -47,13 +49,13 @@ void print_tree(t_ast *root, int space)
 	if (root->token->type == WORD)
 		msg = root->token->str;
 	if (msg && *msg)
-	    printf("%.5s", msg);
+		printf("%.5s", msg);
 	else if (msg && !*msg)
-	    printf("\"\\0\"");
+		printf("\"\\0\"");
 	else
 		printf("%s", msg);
-    printf("\n");
-    print_tree(root->left, space);
+	printf("\n");
+	print_tree(root->left, space);
 } 
 
 int	get_line(t_mini *data)
@@ -69,14 +71,14 @@ int	get_line(t_mini *data)
 		handle_signals();
 		input = readline("minishell :");
 		if (input == NULL) // EOF / CTRL + D
-			exit(free_data(data));
+			return (0);
 		root = NULL;
 		tok = NULL;
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
 		root = NULL;
 		tok = NULL;
-//		init_exec(ft_split(str, ' '), data);
+		init_exec(ft_split(input, ' '), data);
 		add_history(input); 
 	}
 	return (0);

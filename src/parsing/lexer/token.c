@@ -6,11 +6,24 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 21:18:08 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/13 22:36:02 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_token(t_token *lst)
+{
+	t_token	*tmp;
+
+	tmp = NULL;
+	while (lst)
+	{
+		tmp = lst->next;
+		ft_token_delone(lst);
+		lst = tmp;
+	}
+}
 
 void	print_list(t_token *print)
 {

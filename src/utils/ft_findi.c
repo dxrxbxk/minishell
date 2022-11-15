@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:44:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 19:58:34 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 15:10:57 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ft_findi(char *str, char find)
 		i++;
 	if (str[i] == find)
 		return (i);
-	return (-1);
+	return (i);
 }

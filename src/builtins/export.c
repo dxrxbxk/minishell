@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 18:32:54 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:10:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,18 @@ static void	fill_env(t_env *lst, char *av, int join)
 		key = ft_strndup(av, ft_findi(av, '+'));
 	else
 		key = ft_strndup(av, ft_findi(av, '='));
-	value = ft_strdup(ft_strchr(av, '=') + 1);
-	if (get_env_str(lst, key) != NULL && join == 0)
-		ft_replace_env(lst, key, value);
-	else if (get_env_str(lst, key) != NULL && join == 1)
+	if (ft_strchr(av, '='))
+		value = ft_strndup(ft_strchr(av, '=') + 1, ft_strlen(ft_strchr(av, '=') + 1));
+	else
+		value = NULL;
+	if (get_env_key(lst, key) && join == 1)
 		ft_join_env(lst, key, value);
+	else if (get_env_key(lst, key) && join == 0 && ft_strchr(av, '='))
+		ft_replace_env(lst, key, value);
 	else
 	{
 		new = ft_env_new(key, value);
 		ft_env_addback(&lst, new);
-	}
-}
-
-static void	fill_env_cpy(t_env *cpy, char *av)
-{
-	char *key;
-	char *value;
-	t_env *new;
-
-	key = ft_strndup(av, ft_strlen(av));
-	if (!get_env_str(cpy, key))
-	{
-		value = NULL;
-		new = ft_env_new(key, value);
-		if (!new)
-			return ;
-		ft_env_addback(&cpy, new);
 	}
 }
 
@@ -83,10 +69,8 @@ int		ft_export(t_env *lst, char **av, int ac)
 		print_env_export(lst);
 	while (++i < ac)
 	{
-		if (export_key(av[i], &join) > 0)
+		if (export_key(av[i], &join) >= 0)
 			fill_env(lst, av[i], join);
-		else if (export_key(av[i], &join) == 0)
-			fill_env_cpy(lst, av[i]);
 		else
 			ft_error("export: `", av[i], "': not a valid identifier\n");
 	}

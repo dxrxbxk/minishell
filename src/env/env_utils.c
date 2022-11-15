@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 19:31:40 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:00:37 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ t_env	*ft_env_new(void *key, void *value)
 void	print_env_export(t_env *print)
 {
 	t_env *tmp;
-	t_env *curr;
 
 	tmp = lst_copy(print);
 	sort_list(tmp);
-	curr = tmp;
 	while (tmp)
 	{
 		if (tmp->value)
@@ -56,7 +54,7 @@ void	print_env_export(t_env *print)
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}
-	free_env(curr);
+	free_env(tmp);
 }
 
 void	print_env(t_env *print)
@@ -64,17 +62,39 @@ void	print_env(t_env *print)
 	while (print)
 	{
 		if (print->value != NULL)
-			printf("%s=%s \n", print->key, print->value);
+			printf("%s=%s\n", print->key, print->value);
 		print = print->next;
 	}
 }
 
-char	*get_env_str(t_env *lst, char *get)
+char	*get_key_value(t_env *lst, char *get)
 {
 	while (lst)
 	{
 		if (!ft_strcmp(lst->key, get))
 			return (lst->value);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+char	*get_env_key(t_env *lst, char *get)
+{
+	while (lst)
+	{
+		if (!ft_strcmp(lst->key, get))
+			return (lst->key);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+char *get_key_and_value(t_env *lst, char *get)
+{
+	while (lst)
+	{
+		if (get_env_key(lst, get))
+			return (get_key_value(lst, get));
 		lst = lst->next;
 	}
 	return (NULL);

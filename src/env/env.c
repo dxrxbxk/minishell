@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 20:07:53 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:20:47 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ char	**create_env(void)
 	char *cwd;
 
 	cwd = ret_pwd();
+	if (!cwd)
+		return (NULL);
 	env = malloc(sizeof(char *) * 3);
 	if (!env)
 		return (NULL);
 	env[0] = ft_strjoin("PWD=", cwd);
 	env[1] = ft_strjoin("SHLVL=", "0");
 	env[2] = NULL;
+	free(cwd);
 	return (env);
 }
 
@@ -90,7 +93,7 @@ int	get_shlvl(t_mini *data)
 	char *tmp;
 	int	ret;
 
-	value = ft_strdup(get_env_str(data->env, "SHLVL"));
+	value = ft_strdup(get_key_value(data->env, "SHLVL"));
 	if (!value)
 		return (-1);
 	ret = ft_atoi(value) + 1;

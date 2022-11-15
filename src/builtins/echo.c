@@ -6,19 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 15:01:00 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 17:36:57 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static	void ft_putstr(char *str)
-{
-	while (*str)
-		write(1, str++, 1);
-}
-
-static int		ft_cmpchar(char *str, char c)
+static int	ft_cmpchar(char *str, char c)
 {
 	int	i;
 
@@ -33,20 +27,20 @@ static int		ft_cmpchar(char *str, char c)
 	return (0);
 }
 
-static int		ft_echo_print(char **av, int ac, int i, int n)
+static int	ft_echo_print(char **av, int ac, int i, int n)
 {
 	while (i < ac)
 	{
-		ft_putstr(av[i]);
+		ft_putstr_fd(av[i], 1);
 		if (i++ + 1 < ac)
-			ft_putstr(" ");
+			ft_putstr_fd(" ", 1);
 	}
 	if (n)
-		ft_putstr("\n");
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
 
-int		ft_echo(t_env *lst, char **av, int ac)
+int			ft_echo(t_env *lst, char **av, int ac)
 {
 	int	i;
 
