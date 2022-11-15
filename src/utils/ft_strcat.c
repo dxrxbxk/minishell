@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:32:11 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/04 17:32:40 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:47:05 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_strcat(char *dst, char const *src)
 
 	i = 0;
 	j = 0;
+	if (!dst || !src)
+		return ;
 	while (dst[i])
 		i++;
 	while (src[j])
