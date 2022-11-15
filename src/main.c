@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 20:08:23 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:37:18 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	get_line(t_mini *data)
 		tok = NULL;
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
-		print_tree(root, 0);
+	//	print_tree(root, 0);
 		printf("\n\n");
 		execution(root, root, data);
 		root = NULL;
