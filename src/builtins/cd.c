@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 17:16:28 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/15 21:12:52 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	ft_cd(t_env *lst, char **av, int ac)
 	{
 		replace_pwd("OLDPWD", lst);
 		if (ac == 1)
-			chdir(get_key_value(lst, "HOME"));
+			if (chdir(get_key_value(lst, "HOME")))
+				ft_error("cd: HOME not set\n", NULL, NULL);
 		if (ac == 2)
 		{
 			if (!chdir(av[i]))
@@ -43,6 +44,6 @@ int	ft_cd(t_env *lst, char **av, int ac)
 		}
 	}
 	else
-		write(2, "cd: too many arguments\n", 23);
+		ft_error("cd : too many arguments\n", NULL, NULL);
 	return (0);
 }
