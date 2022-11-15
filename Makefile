@@ -66,6 +66,9 @@ override FILES			:=	$(addsuffix .c, \
 							lexer \
 							parsing	\
 							token \
+							execution	\
+							manage_child	\
+							child_utils	\
 							utils \
 							env \
 							env_utils \

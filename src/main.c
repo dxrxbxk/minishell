@@ -6,26 +6,28 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 13:43:12 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/14 20:08:23 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-extern int g_status;
+int	g_status = 0;
 
 void print_tree(t_ast *root, int space)
 {
-	if (root == NULL)
-		return;
-	space += 10;
-	print_tree(root->right, space);
-	printf("\n");
-	for (int i = 10; i < space; i++)
-	{
-		printf(" ");
-	}
 	char	*msg;
+
+	msg = NULL;
+    if (root == NULL)
+        return;
+    space += 10;
+    print_tree(root->right, space);
+    printf("\n");
+    for (int i = 10; i < space; i++)
+	{
+        printf(" ");
+	}
 	if (root->token->type == OP_SEQ)
 		msg = "OP";
 	if (root->token->type == CMD)
@@ -48,15 +50,29 @@ void print_tree(t_ast *root, int space)
 		msg = "<<";
 	if (root->token->type == WORD)
 		msg = root->token->str;
-	if (msg && *msg)
-		printf("%.5s", msg);
+	if (msg && *msg && *msg != '\n')
+	    printf("%.5s", msg);
+	else if (msg && *msg == '\n')
+	    printf("\\n");
 	else if (msg && !*msg)
-		printf("\"\\0\"");
+	    printf("\"\\0\"");
 	else
 		printf("%s", msg);
-	printf("\n");
-	print_tree(root->left, space);
+    printf("\n");
+    print_tree(root->left, space);
 } 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/14 19:22:38 by momadani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 int	get_line(t_mini *data)
 {
@@ -64,6 +80,7 @@ int	get_line(t_mini *data)
 	t_token *tok;
 	t_ast	*root;
 
+	input = NULL;
 	tok = NULL;
 	root = NULL;
 	while (1)
@@ -71,15 +88,18 @@ int	get_line(t_mini *data)
 		handle_signals();
 		input = readline("minishell :");
 		if (input == NULL) // EOF / CTRL + D
-			return (0);
+			exit(0);
+		add_history(input); 
 		root = NULL;
 		tok = NULL;
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
+		print_tree(root, 0);
+		printf("\n\n");
+		execution(root, root, data);
 		root = NULL;
 		tok = NULL;
-		init_exec(ft_split(input, ' '), data);
-		add_history(input); 
+//		init_exec(ft_split(str, ' '), data);
 	}
 	return (0);
 }

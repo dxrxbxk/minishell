@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 22:57:59 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:30:40 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <termios.h>
 # include <signal.h>
 # include <unistd.h>
+# include <fcntl.h>
+#include <sys/types.h>
 
 # define BRACKETS 0
 # define SQUOTES 1
@@ -33,9 +35,11 @@ typdedef struct s_builtins
 	int		(*builtins)(struct s_cmd *)
 }
 */
+
+extern int	g_status;
+
 void	ft_error(char *msg, char *var, char *msg2);
 void	print_tab(char **tab);
-extern	int	g_status;
 
 #include <struct.h>
 #include <env.h>
@@ -45,6 +49,5 @@ extern	int	g_status;
 #include <builtins.h>
 #include <signals.h>
 #include <exec.h>
-#include <status.h>
 
 #endif
