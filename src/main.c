@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/15 21:37:18 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:47:49 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void print_tree(t_ast *root, int space)
 /* ************************************************************************** */
 
 
-int	get_line(t_mini *data)
+int	prompt(t_mini *data)
 {
 	char *input;
 	t_token *tok;
@@ -86,20 +86,19 @@ int	get_line(t_mini *data)
 	while (1)
 	{
 		handle_signals();
-		input = readline("minishell :");
+		input = get_input();
 		if (input == NULL) // EOF / CTRL + D
 			exit(0);
-		add_history(input); 
 		root = NULL;
 		tok = NULL;
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
 	//	print_tree(root, 0);
 		printf("\n\n");
-		execution(root, root, data);
+//		execution(root, root, data);
 		root = NULL;
 		tok = NULL;
-//		init_exec(ft_split(str, ' '), data);
+		init_exec(ft_split(input, ' '), data);
 	}
 	return (0);
 }
@@ -116,7 +115,7 @@ int	main(int ac, char **av, char **env)
 	get_shlvl(&data);
 	if (ac == 1)
 	{
-		if (get_line(&data) == -1)
+		if (prompt(&data) == -1)
 			return (0);
 	}
 }

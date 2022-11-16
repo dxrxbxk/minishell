@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:32:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 14:00:08 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:04:52 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSING_H
 
 # include <minishell.h>
+
+char *get_input(void);
 
 int	parsing(char *input, t_token **first, t_ast **root, t_env *env);
 

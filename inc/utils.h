@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 23:08:16 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 12:46:07 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <string.h>
 
 
+char	*get_next_line(int fd);
 char	*ft_mega_join(char *s1, char *s2, char *s3);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

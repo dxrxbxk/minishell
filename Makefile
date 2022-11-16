@@ -82,6 +82,8 @@ override FILES			:=	$(addsuffix .c, \
 							exec \
 							ft_mega_join \
 							exec_builtins \
+							get_next_line \
+							get_input \
 							ft_itoa)
 
 SRCDIR					:= src
