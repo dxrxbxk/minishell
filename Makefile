@@ -12,7 +12,7 @@ SHELL					:= $(shell which zsh)
 
 CC						:= cc #$(shell which gcc)
 STD						:= -std=c99
-CFLAGS					:= -Wall -Wextra -Werror -g3
+CFLAGS					:= -Wall -Wextra -Werror -g3 -D_GNU_SOURCE
 LDFLAGS					?= -MMD -MF
 
 override MKDIR			:= mkdir -pv

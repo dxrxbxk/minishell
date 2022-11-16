@@ -6,22 +6,30 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:49:17 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 16:13:40 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 22:02:28 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include <minishell.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdint.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/sysmacros.h>
 
-static int	tab_len(char **av)
+int	is_directory(char *path)
 {
-	int i;
+	struct stat sb;
 
-	i = 0;
-	while (av[i])
-		i++;
-	return (i);
+	if (lstat(path, &sb) == -1)
+		perror("lstat");
+	if (sb.st_mode & S_IFDIR)
+		ft_error(path, ": Is a directory\n", NULL, 1);
+	return (0);
 }
-
 
 t_built	*init_fpointer(void)
 {
@@ -58,18 +66,40 @@ int	is_builtin(char **av)
 	}
 	return (1);
 }
-
-int	exec_builtin(char **av, t_mini *shell)
+/*
+int	is_redir(t_redir *redir)
 {
-	int	i;
+	return (redir->type = OUTFILE || redir->type = INFILE ||
+			redir->type = APPEND || redir->type = HEREDOC);
+}
+*/
+int	get_exec_builtin(char **av, t_mini *shell)
+{
 	t_built *data;
+	int	ret;
+	int	i;
 
 	i = -1;
+	ret = 1;
 	data = init_fpointer();
 	while (++i < NB_BUILTS)
 	{
 		if (!ft_strcmp(data[i].cmd, av[0]))
-			return (data[i].builtins(shell->env, av, tab_len(av)));
+			ret = data[i].builtins(shell->env, av, tab_len(av));
 	}
-	return (1);
+	return (ret);
 }
+/*
+int	exec_builtin(char **av, t_mini *shell)
+{
+	int	ret;
+	int	fds[2];
+
+	ret = 1;
+	if (is_redir(redir))
+	{
+
+	}
+
+}
+*/

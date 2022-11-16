@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 16:13:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 21:47:56 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		launch_child(t_ast *root, t_ast *ast, t_mini *data);
 void	ft_child_add_back(t_child **child, t_child *elem);
 t_child	*ft_child_new(void);
 
+int		is_directory(char *path);
 int		exec_builtin(char **av, t_mini *shell);
 char	*check_path(char **path, char *cmd);
 int		is_builtin(char **av);

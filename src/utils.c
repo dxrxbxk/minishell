@@ -6,11 +6,21 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:28:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/10 10:21:36 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:20:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	tab_len(char **av)
+{
+	int i;
+
+	i = 0;
+	while (av[i])
+		i++;
+	return (i);
+}
 
 void	print_tab(char **tab)
 {

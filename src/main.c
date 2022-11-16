@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 13:47:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:06:32 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	prompt(t_mini *data)
 	input = NULL;
 	tok = NULL;
 	root = NULL;
+	rl_outstream = stderr;
 	while (1)
 	{
 		handle_signals();
@@ -94,7 +95,6 @@ int	prompt(t_mini *data)
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
 	//	print_tree(root, 0);
-		printf("\n\n");
 //		execution(root, root, data);
 		root = NULL;
 		tok = NULL;

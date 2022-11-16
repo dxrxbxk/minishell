@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 16:00:45 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 20:06:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	get_path(t_mini *data, char **env)
 			data->sPATH = ft_split(data->PATH, ':');
 			if (!data->sPATH)
 				return (-1);
-			print_tab(data->sPATH);
 			free(data->PATH);
 		}
 		i++;

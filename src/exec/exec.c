@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 16:14:44 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 21:53:08 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ int	exec_path(char *npath, char **av, char **env)
 	if (pid < 0)
 		printf("fork error occurred\n");
 	else if (pid == 0)
+	{
 		execve(npath, av, env);
+		is_directory(npath);
+	}
 	else
 	{
 		if (waitpid(pid, &status, 0) > 0)
@@ -92,6 +95,7 @@ int	exec_path(char *npath, char **av, char **env)
 	return (0);
 }
 
+int	get_exec_builtin(char **av, t_mini *shell);
 int init_exec(char **av, t_mini *shell)
 {
 	char *npath;
@@ -101,7 +105,7 @@ int init_exec(char **av, t_mini *shell)
 	if (!*av || !av)
 		return (1);
 	if (!is_builtin(av))
-		return (exec_builtin(av, shell));
+		return (get_exec_builtin(av, shell));
 	else
 	{
 		npath = check_path(shell->sPATH, av[0]);
