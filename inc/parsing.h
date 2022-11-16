@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:32:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 13:04:52 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 23:48:16 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ char *get_input(void);
 
 int	parsing(char *input, t_token **first, t_ast **root, t_env *env);
 
-int	ast_init(t_ast **root, t_token *token);
-int	ft_astadd_last_left(t_ast **root, t_ast *elem);
-int	ft_astadd_last_right(t_ast **root, t_ast *elem);
-int	ft_create_node_left(t_ast **root, t_type type);
-int	ft_create_node_right(t_ast **root, t_type type);
+int		ast_init(t_ast **root, t_token *token);
+int		ft_astadd_last_left(t_ast **root, t_ast *elem);
+int		ft_astadd_last_right(t_ast **root, t_ast *elem);
+int		ft_create_node_left(t_ast **root, t_type type);
+int		ft_create_node_right(t_ast **root, t_type type);
 t_ast	*ft_astnew(t_token *token);
+size_t	ft_lbranch_len(t_ast *ast);
+size_t	ft_rbranch_len_skip_null(t_ast *ast);
 
 // expand.c
 void ft_token_delone(t_token *token);

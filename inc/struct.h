@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 11:56:57 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/17 00:03:16 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef	enum e_redir_type
 	APPEND,
 	PIPE_IN,
 	PIPE_OUT,
+	END,
 }				t_redir_type;
 
 typedef struct s_ast
@@ -79,6 +80,7 @@ typedef struct s_redir
 {
 	t_redir_type	type;
 	char			*path;
+	int				fd;
 }				t_redir;
 
 typedef struct s_child
@@ -89,6 +91,7 @@ typedef struct s_child
 	t_redir				*redir;
 	int					status;
 	pid_t				pid;
+	struct s_child		*prev;
 	struct s_child		*next;
 }				t_child;
 
@@ -96,6 +99,7 @@ typedef struct s_mini
 {
 	char	*PATH;
 	char	**sPATH;
+	t_ast	*root;
 	t_env	*env;
 	t_built	*built;
 }				t_mini;

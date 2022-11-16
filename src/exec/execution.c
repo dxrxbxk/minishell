@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 22:41:05 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/15 22:39:56 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/17 00:21:00 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	launch_children(t_ast *root, t_ast *ast, t_mini *data)
 int	execution(t_ast *root, t_ast *ast, t_mini *data)
 {
 	//add heredoc
-	(void)data;
 	if (!ast)
 		return (0);
 	if (ast->token->type == OP_SEQ)

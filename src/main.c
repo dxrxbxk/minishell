@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 13:47:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 22:35:48 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	prompt(t_mini *data)
 	while (1)
 	{
 		handle_signals();
+		free(input);
 		input = get_input();
 		if (input == NULL) // EOF / CTRL + D
 			exit(0);
@@ -95,10 +96,10 @@ int	prompt(t_mini *data)
 			continue ;
 	//	print_tree(root, 0);
 		printf("\n\n");
-//		execution(root, root, data);
+		execution(root, root, data);
 		root = NULL;
 		tok = NULL;
-		init_exec(ft_split(input, ' '), data);
+	//	init_exec(ft_split(input, ' '), data);
 	}
 	return (0);
 }

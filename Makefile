@@ -63,11 +63,13 @@ override FILES			:=	$(addsuffix .c, \
 							ft_dollar_expand \
 							ast_init	\
 							ast_utils	\
+							ast_utils_2	\
 							lexer \
 							parsing	\
 							token \
 							execution	\
 							manage_child	\
+							redirections	\
 							child_utils	\
 							utils \
 							env \

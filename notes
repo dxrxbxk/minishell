@@ -3,5 +3,3 @@ plusieurs heredoc = plusieurs tmp
 ctrl c du heredoc = close fd 0 (dup avant)
 rl_stream = stderr (mriaud)
 isatty
-kill the shell
-ctrl z the shell

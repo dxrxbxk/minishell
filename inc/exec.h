@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 16:13:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/17 00:03:18 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@
 # include <sys/wait.h>
 # include <struct.h>
 
+void	ft_exit_free(t_mini *data, t_child *child, int retval);
+
 int		execution(t_ast *root, t_ast *ast, t_mini *data);
 int		launch_child(t_ast *root, t_ast *ast, t_mini *data);
 void	ft_child_add_back(t_child **child, t_child *elem);
 t_child	*ft_child_new(void);
+
+int		ft_apply_redirections(t_redir *redir, t_child *child, t_mini *data);
+int		ft_get_redirections(t_child *child, t_ast *ast, t_mini *data);
 
 int		exec_builtin(char **av, t_mini *shell);
 char	*check_path(char **path, char *cmd);

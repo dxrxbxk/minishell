@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 22:51:32 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/15 18:48:52 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:39:07 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_child_add_back(t_child **child, t_child *elem)
 		while (current->next)
 			current = current->next;
 		current->next = elem;
+		elem->prev = current;
 	}
 }
 
@@ -41,5 +42,6 @@ t_child	*ft_child_new(void)
 	new->status = 0;
 	new->pid = 0;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
