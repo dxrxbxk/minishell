@@ -6,21 +6,13 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/13 21:42:41 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:59:07 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_parserror(char *msg)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd("syntax error near unexpected token ", STDERR_FILENO);
-	ft_putchar_fd('`', STDERR_FILENO);
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_putchar_fd('\'', STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
+#define SYNTAX_ERROR "syntax error near unexpected token `" 
+#define END_QUOTE "\'\n"
 
 int	ft_checkerror(int state, t_token *lst, long separators[3])
 {
@@ -28,11 +20,11 @@ int	ft_checkerror(int state, t_token *lst, long separators[3])
 		&& !lst && !separators[0] && !separators[1] && !separators[2])
 		return (0);
 	if (state == 5 && separators[0] < 0)
-		ft_parserror(")");
+		ft_error(SYNTAX_ERROR, ")", END_QUOTE, 2);
 	else if (!lst)
-		ft_parserror("newline");
+		ft_error(SYNTAX_ERROR, "newline", END_QUOTE, 2);
 	else
-		ft_parserror(lst->str);
+		ft_error(SYNTAX_ERROR, lst->str, END_QUOTE, 2);
 	return (-1);
 }
 

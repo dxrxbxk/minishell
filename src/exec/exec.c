@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/12 16:52:08 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 16:14:44 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int init_exec(char **av, t_mini *shell)
 	env = lst_to_tab(shell->env);
 	if (!*av || !av)
 		return (1);
-	if (!is_builtin(av, shell))
-		return (0);
+	if (!is_builtin(av))
+		return (exec_builtin(av, shell));
 	else
 	{
 		npath = check_path(shell->sPATH, av[0]);

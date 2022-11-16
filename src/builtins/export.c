@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 17:10:43 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:44:10 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		ft_export(t_env *lst, char **av, int ac)
 		if (export_key(av[i], &join) >= 0)
 			fill_env(lst, av[i], join);
 		else
-			ft_error("export: `", av[i], "': not a valid identifier\n");
+			ft_error("export: `", av[i], "': not a valid identifier\n", 1);
 	}
 	return (0);
 }

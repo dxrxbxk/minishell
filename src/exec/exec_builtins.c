@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:49:17 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/12 15:54:06 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 16:13:40 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,22 @@ t_built	*init_fpointer(void)
 	return (data);
 }
 
-int	is_builtin(char **av, t_mini *shell)
+int	is_builtin(char **av)
+{
+	int	i;
+	t_built *data;
+
+	i = -1;
+	data = init_fpointer();
+	while (++i < NB_BUILTS)
+	{
+		if (!ft_strcmp(data[i].cmd, av[0]))
+			return (0);
+	}
+	return (1);
+}
+
+int	exec_builtin(char **av, t_mini *shell)
 {
 	int	i;
 	t_built *data;

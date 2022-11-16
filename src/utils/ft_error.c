@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:33:59 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 15:07:53 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:39:20 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	ft_error(char *msg, char *var, char *msg2, int ret)
 		return (1);
 	ft_putstr_fd(print, 2);
 	free(print);
-	return (-1);
+	return (ret);
 }

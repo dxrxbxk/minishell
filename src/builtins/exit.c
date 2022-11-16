@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 18:09:55 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:43:30 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_isnum(char *str)
 	i = 0;
 	if (!*str)
 	{
-		ft_error("exit: ", str, " numeric argument required\n");
+		ft_error("exit: ", str, " numeric argument required\n", 1);
 		return (1);
 	}
 	if (str[i] == '+' || str[i] == '-')
@@ -31,7 +31,7 @@ static int	ft_isnum(char *str)
 	if (str[i] == '\0')
 		return (0);
 	else
-		ft_error("exit: ", str, " numeric argument required\n");
+		ft_error("exit: ", str, " numeric argument required\n", 1);
 	return (1);
 }
 
@@ -39,12 +39,12 @@ static long	result_check(long result, int sign, int over, char *nptr)
 {
 	if ((result > LONG_MAX && sign == 1) || over == 1)
 	{
-		ft_error("exit: ", nptr, " numeric argument required\n");
+		ft_error("exit: ", nptr, " numeric argument required\n", 1);
 		return (2);
 	}
 	if ((long unsigned)result > LONG_MIN && sign == -1)
 	{
-		ft_error("exit: ", nptr, " numeric argument required\n");
+		ft_error("exit: ", nptr, " numeric argument required\n", 1);
 		return (2);
 	}
 	return (result * sign);
@@ -83,7 +83,7 @@ int	ft_exit(t_env *lst, char **av, int ac)
 	(void)lst;
 	ft_putstr_fd("exit\n", 2);
 	if (ac > 2)
-		ft_error("exit:", "", " too many arguments\n");
+		ft_error("exit:", NULL, " too many arguments\n", 1);
 	else if (ac == 2 && ft_isnum(av[1]))
 		status = 2;
 	else if (ac == 2 && !ft_isnum(av[1]))

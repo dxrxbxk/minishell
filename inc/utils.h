@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 15:09:12 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:38:55 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <struct.h>
 #include <string.h>
-
 
 int		ft_error(char *msg, char *var, char *msg2, int ret);
 char	*get_next_line(int fd);
