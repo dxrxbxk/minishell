@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/15 20:51:23 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:08:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typdedef struct s_builtins
 
 extern int	g_status;
 
-int		ft_error(char *msg, char *var, char *msg2);
 void	print_tab(char **tab);
 
 #include <struct.h>

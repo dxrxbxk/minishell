@@ -6,17 +6,16 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:33:59 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/15 20:52:19 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:07:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_error(char *msg, char *var, char *msg2)
+int	ft_error(char *msg, char *var, char *msg2, int ret)
 {
 	char *print;
 
-	g_status = 1;
 	print = ft_mega_join(msg, var, msg2);
 	if (!print)
 		return (1);
