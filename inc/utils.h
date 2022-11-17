@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 15:38:55 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/17 21:13:15 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_mega_join(char *s1, char *s2, char *s3);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 
-char	**lst_to_tab(t_env *lst);
+char	**ft_lst_to_tab(t_env *lst);
 // ft_atoi.c
 int ft_atoi(const char *nptr);
 

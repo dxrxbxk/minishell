@@ -6,47 +6,41 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 00:01:22 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/17 00:20:54 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:02:25 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	ft_strrealloc(char **src, char *cmd, char *prefix)
+static int	ft_strrealloc_pathname(t_child *child, t_mini *data,
+									char *cmd, char *prefix)
 {
 	char	*dest;
 
-	dest = ft_strjoin(prefix, cmd);
-	if (*src != cmd)
-		free(*src);
+	dest = ft_mega_join(prefix, "/", cmd);
 	if (!dest)
-		ft_error(0, MEMORY);
-	*src = dest;
+		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+	free(child->pathname);
+	child->pathname = dest;
 	return (1);
 }
 
-static int	ft_try_path(char **env_path, char **pathname, char *cmd)
+static int	ft_try_path(t_child *child, t_mini *data, char **spath)
 {
-	if (!*env_path)
+	if (!spath || !*spath)
 		return (0);
-	ft_strrealloc(pathname, cmd, *env_path);
-	if (!access(*pathname, F_OK | X_OK))
+	ft_strrealloc_pathname(child, data, child->argv[0], *spath);
+	if (!access(child->pathname, F_OK | X_OK))
 		return (1);
-	return (ft_try_path((env_path + 1), pathname, cmd));
+	return (ft_try_path(child, data, spath + 1));
 }
 
-static int	ft_abs_rel_path(t_mini *data, t_child *child)
+static int	ft_check_absolute_relative_path(t_mini *data, t_child *child)
 {
-	char	*tmp;
-
-//	if (!access(child->pathname, F_OK | X_OK))
-//		return (1);
-//	tmp = ft_strjoin("./", child->pathname);
-//	free(child->pathname)
-//	child->pathname = tmp;
-	if (!access(*pathname, F_OK | X_OK))
+	if (!access(child->pathname, F_OK | X_OK))
 		return (1);
-	ft_error(errno, cmd);
+	ft_error(child->pathname, ": ", strerror(errno), 1);
+	ft_exit_free(data, child, 127);
 	return (0);
 }
 
@@ -57,13 +51,11 @@ int	ft_find_cmd_path(t_child *child, t_mini *data)
 	cmd = child->argv[0];
 	child->pathname = ft_strdup(cmd);
 	if (!child->pathname)
+		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+	if (ft_strchr(cmd, '/') || !data->sPATH || !*data->sPATH)
+		ft_check_absolute_relative_path(data, child);
+	else if (!*child->pathname || !ft_try_path(child, data, data->sPATH))
 		ft_exit_free(data, child,
-			ft_error("Memory allocation error\n", NULL, NULL, 1));
-	if (ft_strchr(cmd, '/'))
-		ft_abs_rel_path(data, child);
-	else if (!env->path || !*env->path)
-		ft_error(0, PATH);
-	else if (!ft_try_path(env->path, pathname, cmd))
-		ft_error(errno, cmd);
+			ft_error(child->argv[0], ": command not found", NULL, 127));
 	return (1);
 }

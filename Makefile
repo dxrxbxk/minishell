@@ -64,6 +64,7 @@ override FILES			:=	$(addsuffix .c, \
 							ast_init	\
 							ast_utils	\
 							ast_utils_2	\
+							ft_find_cmd_path	\
 							lexer \
 							parsing	\
 							token \
@@ -80,7 +81,7 @@ override FILES			:=	$(addsuffix .c, \
 							ft_words_count \
 							ft_atoi \
 							env_utils_2 \
-							lst_to_tab \
+							ft_lst_to_tab \
 							exec \
 							ft_mega_join \
 							exec_builtins \

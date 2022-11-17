@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 21:52:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/17 20:36:21 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define BRACKETS 0
 # define SQUOTES 1
 # define DQUOTES 2
+
+# define MEM_ERROR "Memory allocation failed"
+
 //NOTES
 
 //we could make pointer fonction for builtins

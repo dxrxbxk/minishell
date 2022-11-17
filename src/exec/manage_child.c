@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:45:35 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/16 23:56:39 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:10:28 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
 		return (0);
 	child->argv = malloc(sizeof(char *) * (ft_rbranch_len_skip_null(ast) + 1));
 	if (!child->argv)
-		ft_exit_free(data, child, ft_error("Memory allocation error\n", NULL, NULL, 1));
+		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
 	i = 0;
 	while (ast)
 	{
@@ -55,8 +55,7 @@ int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
 		{
 			child->argv[i] = ft_strdup(ast->token->str);
 			if (!child->argv)
-			ft_exit_free(data, child,
-				ft_error("Memory allocation error\n", NULL, NULL, 1));
+				ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
 			i++;
 		}
 		ast = ast->right;
@@ -65,38 +64,29 @@ int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
 	return (0);
 }
 
+int	ft_check_is_directory(t_mini *data, t_child *child, char *path)
+{
+	struct stat sb;
+
+	if (lstat(path, &sb) == -1)
+		ft_exit_free(data, child, ft_error("lstat", NULL, NULL, 1));
+	if (sb.st_mode & S_IFDIR)
+		ft_exit_free(data, child, ft_error(path, ": Is a directory", NULL, 126));
+	return (0);
+}
+
 void	exec_child(t_child *child, t_ast *ast, t_mini *data)
 {
 	ft_get_redirections(child, ast->left, data);
 	ft_apply_redirections(child->redir, child, data);
 	ft_get_args(child, ast->right, data);
-	if (!child->argv)
+	if (!child->argv || !*child->argv)
 		ft_exit_free(data, child, 0);
-	
-}
-
-int	launch_child(t_ast *root, t_ast *ast, t_mini *data)
-{
-	t_child	*child;
-
-	(void)root;
-	(void)ast;
-	(void)data;
-	child = ft_child_new();	
-	if (!child)
-		return (-1);
-	//if builtin do not fork
-	// -> builtin function
-//	if (is_builtin)
-//		return (exec_builtin())
-	child->pid = fork();
-	if (child->pid == -1)
-		return (ft_error("fork: ", strerror(errno), "\n", -1));
-	if (child->pid == 0)
-		exec_child(child, ast, data);
-	waitpid(-1, &child->status, 0);
-//	wait_child(child);
-	//(interpret exit status from child->status)
-//	ft_free_children(child);
-	return (0);
+	ft_find_cmd_path(child, data);
+	ft_check_is_directory(data, child, child->pathname);
+	child->envp = ft_lst_to_tab(data->env);
+	execve(child->pathname, child->argv, child->envp);
+	ft_error("execve: ", strerror(errno), NULL, 1);
+	//memory realease
+	exit(1);
 }
