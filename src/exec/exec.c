@@ -6,7 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:39 by diroyer           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/16 20:03:32 by momadani         ###   ########.fr       */
+=======
+/*   Updated: 2022/11/16 21:53:08 by diroyer          ###   ########.fr       */
+>>>>>>> 3b4ea4c8d9860e9f2274f24481fd107805261a56
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +74,11 @@ int	exec_path(char *npath, char **av, char **env)
 	else if (pid == 0)
 	{
 		execve(npath, av, env);
+<<<<<<< HEAD
 		perror("execve");
+=======
+		is_directory(npath);
+>>>>>>> 3b4ea4c8d9860e9f2274f24481fd107805261a56
 	}
 	else
 	{
@@ -95,6 +103,7 @@ int	exec_path(char *npath, char **av, char **env)
 	return (0);
 }
 
+int	get_exec_builtin(char **av, t_mini *shell);
 int init_exec(char **av, t_mini *shell)
 {
 	char *npath;
@@ -104,7 +113,7 @@ int init_exec(char **av, t_mini *shell)
 	if (!*av || !av)
 		return (1);
 	if (!is_builtin(av))
-		return (exec_builtin(av, shell));
+		return (get_exec_builtin(av, shell));
 	else
 	{
 		npath = check_path(shell->sPATH, av[0]);

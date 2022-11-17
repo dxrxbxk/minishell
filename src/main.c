@@ -6,7 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/16 22:35:48 by momadani         ###   ########.fr       */
+=======
+/*   Updated: 2022/11/16 20:06:32 by diroyer          ###   ########.fr       */
+>>>>>>> 3b4ea4c8d9860e9f2274f24481fd107805261a56
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +87,7 @@ int	prompt(t_mini *data)
 	input = NULL;
 	tok = NULL;
 	root = NULL;
+	rl_outstream = stderr;
 	while (1)
 	{
 		handle_signals();
@@ -95,8 +100,12 @@ int	prompt(t_mini *data)
 		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
 	//	print_tree(root, 0);
+<<<<<<< HEAD
 		printf("\n\n");
 		execution(root, root, data);
+=======
+//		execution(root, root, data);
+>>>>>>> 3b4ea4c8d9860e9f2274f24481fd107805261a56
 		root = NULL;
 		tok = NULL;
 	//	init_exec(ft_split(input, ' '), data);
