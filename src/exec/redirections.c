@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:49:51 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/17 21:50:44 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 02:19:53 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,35 +79,89 @@ int	ft_apply_redirections(t_redir *redir, t_child *child, t_mini *data)
 	return (0);
 }
 
+t_redir_type	ft_which_redir(t_type type)
+{
+	if (type == LESS)
+		return (INFILE);
+	else if (type == D_LESS)
+		return (HEREDOC);
+	else if (type == GREAT)
+		return (OUTFILE);
+	else if (type == D_GREAT)
+		return (APPEND);
+	return (END);	
+}
+
+void	ft_fill_redir_struct(t_redir *redir,
+			t_redir_type type, char *path, int fd)
+{
+	redir->type = type;
+	redir->path = path;
+	redir->fd = fd;
+}
 int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
 {
-	size_t	i;
+	t_redir_type	type;
+	char			*path;
+	int				fd;
+	size_t			i;
 
 	if (!ast)
 		return (0);
-	child->redir = malloc(sizeof(t_redir) * (ft_lbranch_len(ast) / 2) + 1);
+	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
 	if (!child->redir)
 		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
 	i = 0;
 	while (ast && ast->left)
 	{
-		if (ast->token->type == LESS)
-			child->redir[i].type = INFILE;
-		else if (ast->token->type == D_LESS)
-			child->redir[i].type = HEREDOC;
-		else if (ast->token->type == GREAT)
-			child->redir[i].type = OUTFILE;
-		else if (ast->token->type == D_GREAT)
-			child->redir[i].type = APPEND;
-		if (ast->left->token->str)
-			child->redir[i].path = ft_strdup(ast->left->token->str);
-		if (!child->redir[i].path && ast->left->token->str)
+		type = ft_which_redir(ast->token->type);
+		path = ft_strdup(ast->left->token->str);
+		if (!path && ast->left->token->str != NULL)
+			ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+		fd = -1;
+		ft_fill_redir_struct(&child->redir[i], type, path, fd);
+		ast = ast->left->left;
+		i++;
+	}
+	ft_fill_redir_struct(&child->redir[i], END, NULL, -1);
+	return (0);
+}
+//prev version
+/*
+int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
+{
+//	t_redir_type	type;
+//	char			*path;
+//	int				fd;
+	size_t			i;
+
+	if (!ast)
+		return (0);
+	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
+	if (!child->redir)
+		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+	i = 0;
+	while (ast && ast->left)
+	{
+//		if (ast->token->type == LESS)
+//			child->redir[i].type = INFILE;
+//		else if (ast->token->type == D_LESS)
+//			child->redir[i].type = HEREDOC;
+//		else if (ast->token->type == GREAT)
+//			child->redir[i].type = OUTFILE;
+//		else if (ast->token->type == D_GREAT)
+//			child->redir[i].type = APPEND;
+		child->redir[i].type = ft_which_redir(ast->token->type);
+		child->redir[i].path = ft_strdup(ast->left->token->str);
+		if (!child->redir[i].path && ast->left->token->str != NULL)
 			ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
 		child->redir[i].fd = -1;
 		ast = ast->left->left;
 		i++;
 	}
+//	ft_fill_redir_struct(&child->redir[i], END, NULL, -1);
 	child->redir[i].type = END;
 	child->redir[i].path = NULL;
+	child->redir[i].fd = -1;
 	return (0);
-}
+}*/

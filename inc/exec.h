@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 23:22:07 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 05:16:27 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,19 @@ void	exec_child(t_child *child, t_ast *ast, t_mini *data);
 void	ft_child_add_back(t_child **child, t_child *elem);
 t_child	*ft_child_new(void);
 
-int		ft_apply_redirections(t_redir *redir, t_child *child, t_mini *data);
-int		ft_get_redirections(t_child *child, t_ast *ast, t_mini *data);
+int				ft_check_is_directory(t_mini *data, t_child *child, char *path);
+int				ft_get_args(t_child *child, t_ast *ast, t_mini *data);
+
+int				ft_get_pipein_redir_rank(t_redir *redir);
+int				ft_get_pipeout_redir_rank(t_redir *redir);
+int				ft_get_redirections_pipe_seq(t_child *child, t_ast *ast);
+
+void			exec_pipe_child(t_child *child, t_ast *ast, t_mini *data);
+
+void			ft_fill_redir_struct(t_redir *redir, t_redir_type type, char *path, int fd);
+t_redir_type	ft_which_redir(t_type type);
+int				ft_apply_redirections(t_redir *redir, t_child *child, t_mini *data);
+int				ft_get_redirections(t_child *child, t_ast *ast, t_mini *data);
 
 int		ft_find_cmd_path(t_child *child, t_mini *data);
 

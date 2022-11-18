@@ -70,6 +70,7 @@ override FILES			:=	$(addsuffix .c, \
 							token \
 							execution	\
 							manage_child	\
+							exec_pipe_child	\
 							redirections	\
 							child_utils	\
 							utils \
