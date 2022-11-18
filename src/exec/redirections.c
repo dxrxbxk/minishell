@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:49:51 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 02:19:53 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:16:52 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_open(char *path, t_redir_type type)
 	mode_t	mode;
 	
 	mode = 0;
+	flags = 0;
 	if (type == INFILE || type == HEREDOC)
 		flags = O_RDONLY;
 	else if (type == OUTFILE)
