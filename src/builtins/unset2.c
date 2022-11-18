@@ -6,23 +6,11 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 17:26:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:50:37 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-t_env	*get_lst_pointer(t_env *lst, char *cmp)
-{
-	while (lst)
-	{
-		if (!ft_strcmp(lst->key, cmp))
-			return (lst);
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
 
 static void	ft_swap_values(t_env *a, t_env *b)
 {
@@ -43,32 +31,44 @@ static void ft_pad(t_env *lst)
 	}
 }
 
-static void	del_and_link(t_env *lst, char *rem)
+static void	del_and_link(t_env *lst, t_env *del)
 {
-	t_env *del;
-
-	del = NULL;
-	if (!ft_strcmp(lst->key, rem))
+	printf("%s\n", del->key);
+	if (lst == del)
 		ft_pad(lst);
-	while (lst->next && ft_strcmp(lst->next->key, rem))
+	printf("%s\n", del->key);
+	while (lst && lst != del)
 		lst = lst->next;
-	if (lst->next && !ft_strcmp(lst->next->key, rem))
+	if (lst == del)
 	{
-		del = get_lst_pointer(lst, rem);
+		printf("%s %s\n", del->key, del->value);
 		lst->next = del->next;
 		ft_env_delone(del);
 	}
 }
 
+t_env	*get_lst_pointer(t_env *lst, char *cmp)
+{
+	while (lst)
+	{
+		if (!ft_strcmp(lst->key, cmp))
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
 int	ft_unset(t_env *lst, char **av, int ac)
 {
+	t_env	*tmp;
 	int	i;
 
 	i = 0;
 	while (++i < ac)
 	{
-		if (get_env_key(lst, av[i]))
-			del_and_link(lst, av[i]);
+		tmp = get_lst_pointer(lst, av[i]);
+		if (tmp)
+			del_and_link(lst, tmp, av[i]);
 	}
 	return (0);
 }

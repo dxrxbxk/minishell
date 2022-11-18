@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 15:44:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:58:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,16 @@ static void	fill_env(t_env *lst, char *av, int join)
 	else
 		key = ft_strndup(av, ft_findi(av, '='));
 	if (ft_strchr(av, '='))
-		value = ft_strndup(ft_strchr(av, '=') + 1, ft_strlen(ft_strchr(av, '=') + 1));
+		value = ft_strdup(ft_strchr(av, '=') + 1);
 	else
 		value = NULL;
 	if (get_env_key(lst, key) && join == 1)
 		ft_join_env(lst, key, value);
 	else if (get_env_key(lst, key) && join == 0 && ft_strchr(av, '='))
 		ft_replace_env(lst, key, value);
-	else
+	else if (!get_env_key(lst, key))
 	{
+		printf("yo\n");
 		new = ft_env_new(key, value);
 		ft_env_addback(&lst, new);
 	}
