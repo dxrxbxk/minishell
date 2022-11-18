@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 17:58:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/18 23:42:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	fill_env(t_env *lst, char *av, int join)
 		ft_replace_env(lst, key, value);
 	else if (!get_env_key(lst, key))
 	{
-		printf("yo\n");
 		new = ft_env_new(key, value);
 		ft_env_addback(&lst, new);
 	}

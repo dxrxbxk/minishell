@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:49:51 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 15:16:52 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:19:10 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,26 @@ int	ft_close(int fd)
 	return (0);
 }
 
-int	ft_apply_redirections(t_redir *redir, t_child *child, t_mini *data)
+int	ft_apply_redirections(t_redir *redir, t_child *child)
 {
 	if (!redir)
 		return (0);
 	while (redir->type != END)
 	{
 		if (!redir->path && redir->type != PIPE_IN && redir->type != PIPE_OUT)
-			ft_exit_free(data, child,
-				ft_error("ambiguous redirect", NULL, NULL, 1));
+			return (set_child_status(child,
+				ft_error("ambiguous redirect", NULL, NULL, 1)));
 		if (redir->type != PIPE_IN && redir->type != PIPE_OUT)
 			redir->fd = ft_open(redir->path, redir->type);
 		if (redir->fd == -1)
-			ft_exit_free(data, child,
-				ft_error(redir->path, ": ", strerror(errno), 1));
+			return (set_child_status(child,
+				ft_error(redir->path, ": ", strerror(errno), 1)));
 		if (ft_dup2(redir->fd, redir->type) == -1)
-			ft_exit_free(data, child, 
-				ft_error(redir->path, ": ", strerror(errno), 1));
+			return (set_child_status(child, 
+				ft_error(redir->path, ": ", strerror(errno), 1)));
 		if (ft_close(redir->fd) == -1)
-			ft_exit_free(data, child,
-				ft_error(redir->path, ": ", strerror(errno), 1));
+			return (set_child_status(child,
+				ft_error(redir->path, ": ", strerror(errno), 1)));
 		redir++;
 	}
 	return (0);
@@ -90,7 +90,7 @@ t_redir_type	ft_which_redir(t_type type)
 		return (OUTFILE);
 	else if (type == D_GREAT)
 		return (APPEND);
-	return (END);	
+	return (END);
 }
 
 void	ft_fill_redir_struct(t_redir *redir,
@@ -100,7 +100,8 @@ void	ft_fill_redir_struct(t_redir *redir,
 	redir->path = path;
 	redir->fd = fd;
 }
-int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
+
+int	ft_get_redirections(t_child *child, t_ast *ast)
 {
 	t_redir_type	type;
 	char			*path;
@@ -111,14 +112,14 @@ int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
 		return (0);
 	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
 	if (!child->redir)
-		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+		return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1)));
 	i = 0;
 	while (ast && ast->left)
 	{
 		type = ft_which_redir(ast->token->type);
 		path = ft_strdup(ast->left->token->str);
 		if (!path && ast->left->token->str != NULL)
-			ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+			return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1)));
 		fd = -1;
 		ft_fill_redir_struct(&child->redir[i], type, path, fd);
 		ast = ast->left->left;
@@ -140,7 +141,7 @@ int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
 		return (0);
 	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
 	if (!child->redir)
-		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+		return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1));
 	i = 0;
 	while (ast && ast->left)
 	{
@@ -155,7 +156,7 @@ int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
 		child->redir[i].type = ft_which_redir(ast->token->type);
 		child->redir[i].path = ft_strdup(ast->left->token->str);
 		if (!child->redir[i].path && ast->left->token->str != NULL)
-			ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+			return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1));
 		child->redir[i].fd = -1;
 		ast = ast->left->left;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:28:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 14:02:19 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/18 19:40:36 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int ft_env(t_env *lst, char **av, int ac);
 
 // export.c
 int ft_export(t_env *lst, char **av, int ac);
-
-// pwd.c
 
 // pwd.c
 int ft_pwd(t_env *lst, char **av, int ac);

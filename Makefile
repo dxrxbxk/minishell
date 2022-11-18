@@ -83,7 +83,6 @@ override FILES			:=	$(addsuffix .c, \
 							ft_atoi \
 							env_utils_2 \
 							ft_lst_to_tab \
-							exec \
 							ft_mega_join \
 							exec_builtins \
 							get_next_line \

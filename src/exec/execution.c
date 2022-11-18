@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 22:41:05 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 15:13:20 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:24:15 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,6 @@ int	ft_init_children(t_child **first, t_ast *ast)
 	}
 	return (0);
 }
-/*
-int	ft_get_redirections(t_child *child, t_ast *ast, t_mini *data)
-{
-	t_redir_type	type;
-	char			*path;
-	int				fd;
-	size_t			i;
-
-	if (!ast)
-		return (0);
-	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
-	if (!child->redir)
-		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
-	i = 0;
-	while (ast && ast->left)
-	{
-		type = ft_which_redir(ast->token->type);
-		path = ft_strdup(ast->left->token->str);
-		if (!path && ast->left->token->str != NULL)
-			ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
-		fd = -1;
-		ft_fill_redir_struct(&child->redir[i], type, path, fd);
-		ast = ast->left->left;
-		i++;
-	}
-	ft_fill_redir_struct(&child->redir[i], END, NULL, -1);
-	return (0);
-}*/
 
 int	ft_get_redirections_pipe_seq(t_child *child, t_ast *ast)
 {
@@ -203,9 +175,6 @@ int	launch_pipe_sequence(t_ast *ast, t_mini *data)
 			ast = ast->left;
 		child = child->next;
 	}
-	(void)ast;
-	(void)data;
-	(void)child;
 	while (waitpid(-1, &first->status, 0) != -1)
 		;
 	//wait children
@@ -214,19 +183,16 @@ int	launch_pipe_sequence(t_ast *ast, t_mini *data)
 }
 
 
-int	launch_child(t_ast *root, t_ast *ast, t_mini *data)
+int	launch_child(t_ast *ast, t_mini *data)
 {
 	t_child	*child;
 
-	(void)root;
 	child = NULL;
 	child = ft_child_new();	
 	if (!child)
-		return (-1);
-	//if builtin do not fork
-	// -> builtin function
-//	if (is_builtin)
-//		return (exec_builtin())
+		return (ft_error(MEM_ERROR, NULL, NULL, -1));
+	if (is_builtin(ast->right))
+		return (launch_builtin(child, ast, data));
 	child->pid = fork();
 	if (child->pid == -1)
 		return (ft_error("fork: ", strerror(errno), NULL, -1));
@@ -234,7 +200,6 @@ int	launch_child(t_ast *root, t_ast *ast, t_mini *data)
 		exec_child(child, ast, data);
 	waitpid(-1, &child->status, 0);
 	g_status = child->status;
-//	printf("status %d\n", child->status);
 //	wait_child(child);
 	//(interpret exit status from child->status)
 //	ft_free_children(child);
@@ -244,10 +209,11 @@ int	launch_child(t_ast *root, t_ast *ast, t_mini *data)
 int	launch_children(t_ast *root, t_ast *ast, t_mini *data)
 {
 //	print_tree(ast, 0);
+	(void)root;
 	if (ast->token->type == PIPE_SEQ)
 		return (launch_pipe_sequence(ast->left, data));
 	else if (ast->token->type == CMD)
-		return (launch_child(root, ast, data));
+		return (launch_child(ast, data));
 	return (1);
 }
 

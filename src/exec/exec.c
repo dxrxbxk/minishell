@@ -99,19 +99,19 @@ int	exec_path(char *npath, char **av, char **env)
 int	get_exec_builtin(char **av, t_mini *shell);
 int init_exec(char **av, t_mini *shell)
 {
-	char *npath;
+//	char *npath;
 	char **env;
 
 	env = ft_lst_to_tab(shell->env);
 	if (!*av || !av)
 		return (1);
-	if (!is_builtin(av))
+/*	if (!is_builtin(av))
 		return (get_exec_builtin(av, shell));
 	else
 	{
 		npath = check_path(shell->sPATH, av[0]);
 		if (npath)
 			exec_path(npath, av, env);
-	}
+	}*/
 	return (0);
 }

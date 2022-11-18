@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 04:13:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 05:29:43 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:19:12 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int	ft_close_unused_pipe(t_child *child, t_mini *data)
 void	exec_pipe_child(t_child *child, t_ast *ast, t_mini *data)
 {
 	ft_close_unused_pipe(child, data);
-	ft_apply_redirections(child->redir, child, data);
-	ft_get_args(child, ast->right, data);
+	if (ft_apply_redirections(child->redir, child) != 0)
+		ft_exit_free(data, child, child->status);
+	if (is_builtin(ast->right))
+		exit(exec_builtin(child, ast, data));
+	if (ft_get_args(child, ast->right) != 0)
+		ft_exit_free(data, child, child->status);
 	if (!child->argv || !*child->argv)
 		ft_exit_free(data, child, 0);
 	ft_find_cmd_path(child, data);

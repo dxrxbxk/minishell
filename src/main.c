@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 00:52:26 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:47:13 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	prompt(t_mini *data)
 		free(input);
 		input = get_input();
 		if (input == NULL) // EOF / CTRL + D
-			exit(0);
+			ft_exit(data->env, NULL, 0);
 		root = NULL;
 		tok = NULL;
 		if (parsing(input, &tok, &root, data->env) != 0) // free brackets from t_token *

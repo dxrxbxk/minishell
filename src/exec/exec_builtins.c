@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:49:17 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 21:40:45 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:19:14 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,54 +52,96 @@ t_built	*init_fpointer(void)
 	return (data);
 }
 
-int	is_builtin(char **av)
+int	is_builtin(t_ast *ast)
 {
-	int	i;
 	t_built *data;
+	char	*cmd;
+	int		i;
 
-	i = -1;
+	cmd = NULL;
+	while (ast && !ast->token->str)
+		ast = ast->right;
+	if (ast)
+		cmd = ast->token->str;
+	if (!ast || !cmd)
+		return (0);
 	data = init_fpointer();
+	i = -1;
 	while (++i < NB_BUILTS)
 	{
-		if (!ft_strcmp(data[i].cmd, av[0]))
-			return (0);
+		if (!ft_strcmp(data[i].cmd, cmd))
+			return (1);
 	}
-	return (1);
+	return (0);
 }
-/*
-int	is_redir(t_redir *redir)
-{
-	return (redir->type = OUTFILE || redir->type = INFILE ||
-			redir->type = APPEND || redir->type = HEREDOC);
-}
-*/
-int	get_exec_builtin(char **av, t_mini *shell)
-{
-	t_built *data;
-	int	ret;
-	int	i;
 
+int	ft_quit_free_builtin(t_child *child)
+{
+	//free current child;
+	g_status = child->status;
+	return (0);
+}
+
+int	exec_builtin(t_child *child, t_ast *ast, t_mini *shell)
+{
+	t_built	*data;
+	int		ret;
+	int		i;
+
+	if (ft_get_args(child, ast->right) != 0)
+		return (ft_quit_free_builtin(child));
 	i = -1;
 	ret = 1;
 	data = init_fpointer();
 	while (++i < NB_BUILTS)
 	{
-		if (!ft_strcmp(data[i].cmd, av[0]))
-			ret = data[i].builtins(shell->env, av, tab_len(av));
+		if (!ft_strcmp(data[i].cmd, child->argv[0]))
+			ret = data[i].builtins(shell->env, child->argv, tab_len(child->argv));
 	}
 	return (ret);
 }
-/*
-int	exec_builtin(char **av, t_mini *shell)
+
+int	ft_save_main_fds(int fds[2], t_child *child)
 {
-	int	ret;
-	int	fds[2];
-
-	ret = 1;
-	if (is_redir(redir))
-	{
-
-	}
-
+	if (!child->redir)
+		return (0);
+	fds[0] = dup(0);
+	if (fds[0] == -1)
+		return (set_child_status(child, ft_error("dup: ", strerror(errno), NULL, 1)));
+	fds[1] = dup(1);
+	if (fds[1] == -1)
+		return (set_child_status(child, ft_error("dup: ", strerror(errno), NULL, 1)));	
+	return (0);
 }
-*/
+
+int	ft_restore_main_fds(int fds[2], t_child *child)
+{
+	if (!child->redir)
+		return (0);
+	if (dup2(fds[0], 0) == -1)
+		return (set_child_status(child, ft_error("dup2: ", strerror(errno), NULL, 1)));
+	if (close(fds[0]) == -1)
+		return (set_child_status(child, ft_error("close: ", strerror(errno), NULL, 1)));
+	if (dup2(fds[1], 1) == -1)
+		return (set_child_status(child, ft_error("dup2: ", strerror(errno), NULL, 1)));
+	if (close(fds[1]) == -1)
+		return (set_child_status(child, ft_error("close: ", strerror(errno), NULL, 1)));
+	return (0);
+}
+
+int	launch_builtin(t_child *child, t_ast *ast, t_mini *data)
+{
+	int	main_fds[2];
+
+	if (ft_get_redirections(child, ast->left) != 0)
+		return (ft_quit_free_builtin(child));
+	if (ft_save_main_fds(main_fds, child) != 0)
+		return (ft_quit_free_builtin(child));
+	if (ft_apply_redirections(child->redir, child) != 0)
+		return (ft_quit_free_builtin(child));
+	g_status = exec_builtin(child, ast, data);
+	if (ft_restore_main_fds(main_fds, child) != 0)
+		return (ft_quit_free_builtin(child));
+//	release only current child
+	return (0);
+}

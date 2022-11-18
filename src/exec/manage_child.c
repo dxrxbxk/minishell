@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:45:35 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/17 23:10:28 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:19:08 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	ft_print_redirections(t_redir *redir)
 	return (0);
 }
 
+int	set_child_status(t_child *child, int exit_status)
+{
+	child->status = exit_status;
+	return (exit_status);
+}
+
 void	ft_exit_free(t_mini *data, t_child *child, int retval)
 {
 	//free mem
@@ -39,7 +45,7 @@ void	ft_exit_free(t_mini *data, t_child *child, int retval)
 	exit(retval);
 }
 
-int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
+int	ft_get_args(t_child *child, t_ast *ast)
 {
 	size_t	i;
 
@@ -47,7 +53,7 @@ int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
 		return (0);
 	child->argv = malloc(sizeof(char *) * (ft_rbranch_len_skip_null(ast) + 1));
 	if (!child->argv)
-		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+		return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1)));
 	i = 0;
 	while (ast)
 	{
@@ -55,7 +61,7 @@ int	ft_get_args(t_child *child, t_ast *ast, t_mini *data)
 		{
 			child->argv[i] = ft_strdup(ast->token->str);
 			if (!child->argv)
-				ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
+				return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1)));
 			i++;
 		}
 		ast = ast->right;
@@ -77,9 +83,12 @@ int	ft_check_is_directory(t_mini *data, t_child *child, char *path)
 
 void	exec_child(t_child *child, t_ast *ast, t_mini *data)
 {
-	ft_get_redirections(child, ast->left, data);
-	ft_apply_redirections(child->redir, child, data);
-	ft_get_args(child, ast->right, data);
+	if (ft_get_redirections(child, ast->left) != 0)
+		ft_exit_free(data, child, child->status);
+	if (ft_apply_redirections(child->redir, child) != 0)
+		ft_exit_free(data, child, child->status);
+	if (ft_get_args(child, ast->right) != 0)
+		ft_exit_free(data, child, child->status);
 	if (!child->argv || !*child->argv)
 		ft_exit_free(data, child, 0);
 	ft_find_cmd_path(child, data);
