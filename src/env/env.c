@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 20:06:24 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/19 21:14:11 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	*ret_pwd(void)
+char	*ret_pwd(void)
 {
 	char *cwd;
 

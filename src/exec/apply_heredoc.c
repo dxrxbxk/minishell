@@ -1,19 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:47 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 21:32:04 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/19 20:09:15 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 #define HERE_DOC_WARNING "warning: here-document at line "
-#define HERE_DOC_EOF " delimited by end-of-file (wanted `EOF')"
+#define HERE_DOC_EOF " delimited by end-of-file (wanted `"
+
+char	*heredoc_path(void)
+{
+	static int i = 1;
+	char *path;
+	char *nb;
+
+	nb = ft_itoa(i);
+	path = ft_mega_join("/tmp/", "minishell_tmp_", nb);
+	i++;
+	free(nb);
+	return (path);
+}
+
+static int	null_line(int *i, char *delim)
+{
+	char *arg;
+	char *arg2;
+
+	arg = ft_itoa(*i);
+	arg2 = ft_mega_join(HERE_DOC_EOF, delim, "\')");
+	ft_error(HERE_DOC_WARNING, arg, arg2, 0);
+	free(arg);
+	free(arg2);
+	return (*i = 0);
+}
 
 static int	check_len(char *s1, char *s2)
 {
@@ -25,7 +51,6 @@ static int	check_len(char *s1, char *s2)
 static int	get_and_write(int fd, char *delim)
 {
 	char *line;
-	char *arg;
 	static int i = 0;
 
 	ft_putstr_fd("> ", 0);
@@ -33,25 +58,17 @@ static int	get_and_write(int fd, char *delim)
 	if (line && ft_strcmp(line, "\n"))
 		i++;
 	if (!line)
-	{
-		arg = ft_itoa(i);
-		ft_error(HERE_DOC_WARNING, arg, HERE_DOC_EOF, 0);
-		free(arg);
-		return (i = 0);
-	}
+		return (null_line(&i, delim));
 	else if (!ft_strncmp(delim, line, ft_strlen(delim)) 
 			&& !check_len(delim, line))
-	{
-		free(line);
 		return (i = 0);
-	}
 	else
 		write(fd, line, ft_strlen(line));
 	free(line);
 	return (1);
 }
 
-int		apply_heredoc(char *path, char *delim)
+int	apply_heredoc(char *path, char *delim)
 {
 	int	fd;
 
