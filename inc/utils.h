@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:36:48 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:28:41 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:02:27 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <struct.h>
 # include <string.h>
 
-void	free_tab(char *tab);
+void	free_tab(char ***tab);
 char	*ft_strlastchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_error(char *msg, char *var, char *msg2, int ret);

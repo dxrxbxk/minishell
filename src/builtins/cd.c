@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:01:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 21:17:54 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	swap_pwd(char *wd, t_env *lst)
 		else
 		{
 			if (!chdir(wd))
-				replace_pwd("OLDPWD", lst);
+				replace_pwd("PWD", lst);
 			else
 				return (cd_error(wd));
 			i = 0;

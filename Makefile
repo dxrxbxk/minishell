@@ -86,6 +86,8 @@ override FILES			:=	$(addsuffix .c, \
 							redirections_utils	\
 							set_heredoc_files	\
 							apply_heredoc	\
+							ft_free_children	\
+							free_tab			\
 							utils \
 							env \
 							env_utils \

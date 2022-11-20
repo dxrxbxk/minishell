@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:08:12 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:39:10 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:21:24 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	launch_child(t_ast *ast, t_mini *data)
 		return (launch_builtin(child, ast, data));
 	child->pid = fork();
 	if (child->pid == -1)
-		return (/*ft_free_children(child), */ft_error("fork: ",
+		return (ft_free_children(child), ft_error("fork: ",
 				strerror(errno), NULL, -1));
 	if (child->pid == 0)
 		exec_child(child, ast, data);
 	ft_wait_children(child);
 	end_status = ft_interpret_child_status(child);
-//	ft_free_children(child);
+	ft_free_children(child);
 	if (end_status == 130)
 		return (-1);
 	return (0);

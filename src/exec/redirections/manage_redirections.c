@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:18:33 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:04:38 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:46:17 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_apply_redirections(t_redir *redir, t_child *child)
 		if (ft_dup2(redir->fd, redir->type) == -1)
 			return (set_child_status(child,
 					ft_error(redir->path, ": ", strerror(errno), 1)));
-		if (ft_close(redir->fd) == -1)
+		if (ft_close(&redir->fd) == -1)
 			return (set_child_status(child,
 					ft_error(redir->path, ": ", strerror(errno), 1)));
 		redir++;

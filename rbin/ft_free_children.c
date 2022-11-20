@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:02:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 21:05:45 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:11:08 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,21 @@ t_child	*ft_get_first_child(t_child *child)
 
 void	free_redir_struct(t_redir *redir)
 {
+	t_redir *tmp;
 
 	if (!redir)
 		return ;
+	tmp = redir;
 	while (redir->type != END)
 	{
-		if (redir->path)
-			free(redir->path);
+		free(redir->path);
 		ft_close(&redir->fd);
+		tmp = redir;
 		redir++;
+		free(tmp);
 	}
+	if (redir->type == END)
+		free(redir);
 }
 
 void	ft_delchild(t_child *child)

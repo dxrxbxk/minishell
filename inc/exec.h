@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 16:42:40 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:43:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		set_heredoc_files(t_ast *ast);
 
 int             ft_open(char *path, t_redir_type type);
 int             ft_dup2(int fd, t_redir_type type);
-int             ft_close(int fd);
+int             ft_close(int *fd);
 t_redir_type	ft_which_redir(t_type type);
 void	ft_fill_redir_struct(t_redir *redir,
 			t_redir_type type, char *path, int fd);

@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:33:24 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:52:03 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:27:40 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_quit_free_builtin(t_child *child)
 {
-	//free current child;
+	ft_free_children(child);
 	g_status = child->status;
 	return (0);
 }
@@ -76,6 +76,6 @@ int	launch_builtin(t_child *child, t_ast *ast, t_mini *data)
 	g_status = exec_builtin(child, ast, data);
 	if (ft_restore_main_fds(main_fds, child) != 0)
 		return (ft_quit_free_builtin(child));
-//	release only current child
+	ft_free_children(child);
 	return (0);
 }

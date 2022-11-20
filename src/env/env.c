@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:22:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 21:58:55 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	**create_env(void)
 		return (NULL);
 	env[0] = ft_strjoin("PWD=", cwd);
 	env[1] = ft_strjoin("SHLVL=", "0");
-	env[2] = ft_strjoin("_=", "_=/usr/bin/env");
 	env[2] = NULL;
 	free(cwd);
 	return (env);

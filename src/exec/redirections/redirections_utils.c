@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:49:51 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:07:21 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:47:09 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ int	ft_dup2(int fd, t_redir_type type)
 	return (retval);
 }
 
-int	ft_close(int fd)
+int	ft_close(int *fd)
 {
-	if (close(fd) == -1)
-		return (-1);
-	return (0);
+	int	ret;
+
+	if (*fd == -1)
+		return (1);
+	ret = close(*fd);
+	*fd = -1;
+	return (ret);
 }
 
 t_redir_type	ft_which_redir(t_type type)

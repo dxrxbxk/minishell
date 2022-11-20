@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:45:35 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:49:14 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:27:55 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void	exec_child(t_child *child, t_ast *ast, t_mini *data)
 	child->envp = ft_lst_to_tab(data->env);
 	execve(child->pathname, child->argv, child->envp);
 	ft_error("execve: ", strerror(errno), NULL, 1);
-	//memory realease
-	exit(1);
+	ft_exit_free(data, child, 1);
 }

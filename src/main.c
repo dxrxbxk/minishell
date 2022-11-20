@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 04:13:02 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:53:46 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	prompt(t_mini *data)
 	input = NULL;
 	tok = NULL;
 	root = NULL;
-	rl_outstream = stderr;
+//	rl_outstream = stderr;
 	while (1)
 	{
 		handle_signals();

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 18:02:19 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:26:36 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:43:44 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	free_tab(char ***tab)
 	int	i;
 
 	i = -1;
-	if (!*tab == NULL)
+	if (*tab == NULL)
 		return ;
-	while (*tab[++i])
-		free(*tab[i]);
+	while ((*tab)[++i])
+		free((*tab)[i]);
 	free(*tab);
 	*tab = NULL;
 }
