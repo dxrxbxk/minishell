@@ -6,11 +6,31 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:02:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 20:20:42 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:39:26 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	ft_env_delone(t_env *elem)
+{
+	free(elem->key);
+	free(elem->value);
+	free(elem);
+}
+
+void	free_env(t_env *lst)
+{
+	t_env	*tmp;
+
+	tmp = NULL;
+	while (lst)
+	{
+		tmp = lst->next;
+		ft_env_delone(lst);
+		lst = tmp;
+	}
+}
 
 t_child	*ft_get_first_child(t_child *child)
 {

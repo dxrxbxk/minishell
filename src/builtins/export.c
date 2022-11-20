@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/19 20:23:16 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:06:27 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	export_key(char *str, int *join)
 
 static void	fill_env(t_env *lst, char *av, int join)
 {
-	char *key;
-	char *value;
-	t_env *new;
+	char	*key;
+	char	*value;
+	t_env	*new;
 
 	if (join)
 		key = ft_strndup(av, ft_findi(av, '+'));
@@ -58,7 +58,7 @@ static void	fill_env(t_env *lst, char *av, int join)
 	}
 }
 
-int		ft_export(t_env *lst, char **av, int ac)
+int	ft_export(t_env *lst, char **av, int ac)
 {
 	int		i;
 	int		join;

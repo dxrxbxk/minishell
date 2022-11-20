@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:22:10 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:42:06 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**create_env(void)
 		return (NULL);
 	env[0] = ft_strjoin("PWD=", cwd);
 	env[1] = ft_strjoin("SHLVL=", "0");
-	env[2] = ft_strjoin("_=", "_=/usr/bin/env");
+	env[2] = ft_strjoin("_", "/usr/bin/env");
 	env[2] = NULL;
 	free(cwd);
 	return (env);
@@ -49,8 +49,6 @@ int	get_env(t_mini *data, char **env)
 
 	elm = &data->env;
 	i = 0;
-	if (!env)
-		return (-1);
 	while (env[i])
 	{
 		*elm = malloc(sizeof(t_env));
@@ -69,24 +67,21 @@ int	get_env(t_mini *data, char **env)
 
 int	get_path(t_mini *data, char **env)
 {
-	int		i;
-	char	*path;
+	int	i;
 
 	i = 0;
 	data->sPATH = NULL;
-	if (!env)
-		return (-1);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH", 4) == 0)
 		{
-			path = ft_strdup(ft_strchr(env[i], '=') + 1);
-			if (!path)
+			data->PATH = ft_strdup(ft_strchr(env[i], '=') + 1);
+			if (!data->PATH)
 				return (-1);
-			data->sPATH = ft_split(path, ':');
+			data->sPATH = ft_split(data->PATH, ':');
 			if (!data->sPATH)
 				return (-1);
-			free(path);
+			free(data->PATH);
 		}
 		i++;
 	}
@@ -110,8 +105,6 @@ int	get_shlvl(t_mini *data)
 	}
 	tmp = value;
 	value = ft_itoa(ret);
-	if (!value)
-		return (-1);
 	free(tmp);
 	ft_replace_env(data->env, "SHLVL", value);
 	return (0);

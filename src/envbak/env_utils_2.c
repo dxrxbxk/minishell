@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:32:12 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:39:44 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,6 @@ void	print_env_export(t_env *print)
 		tmp = tmp->next;
 	}
 	free_env(tmp);
-}
-
-void	ft_env_delone(t_env *elem)
-{
-	free(elem->key);
-	free(elem->value);
-	free(elem);
-}
-
-void	free_env(t_env *lst)
-{
-	t_env	*tmp;
-
-	tmp = NULL;
-	while (lst)
-	{
-		tmp = lst->next;
-		ft_env_delone(lst);
-		lst = tmp;
-	}
 }
 
 t_env	*lst_copy(t_env *lst)

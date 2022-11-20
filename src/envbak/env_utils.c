@@ -6,21 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:31:54 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:42:51 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	print_env(t_env *print)
-{
-	while (print)
-	{
-		if (print->value != NULL)
-			printf("%s=%s\n", print->key, print->value);
-		print = print->next;
-	}
-}
 
 char	*get_key_value(t_env *lst, char *get)
 {
@@ -39,6 +29,17 @@ char	*get_env_key(t_env *lst, char *get)
 	{
 		if (!ft_strcmp(lst->key, get))
 			return (lst->key);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+char	*get_key_and_value(t_env *lst, char *get)
+{
+	while (lst)
+	{
+		if (get_env_key(lst, get))
+			return (get_key_value(lst, get));
 		lst = lst->next;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/19 21:44:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:07:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_pwd(t_env *lst, char **av, int ac)
 	else
 		cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return (ft_error("pwd: ", strerror(errno) , NULL, 1));
+		return (ft_error("pwd: ", strerror(errno), NULL, 1));
 	else
 		printf("%s\n", cwd);
 	free(cwd);

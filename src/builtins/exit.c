@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/19 20:38:03 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:59:27 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_isnum(char *str)
 	if (str[i] == '\0')
 		return (0);
 	else
-		return(ft_error("exit: ", str, " numeric argument required", 1));
+		return (ft_error("exit: ", str, " numeric argument required", 1));
 	return (1);
 }
 
@@ -66,7 +66,7 @@ static long	ft_atoi2(const char *nptr)
 	}
 	return (result_check(result, sign, over, (char *)nptr));
 }
-//free
+
 int	ft_exit(t_env *lst, char **av, int ac)
 {
 	long	status;

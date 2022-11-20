@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 17:58:46 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:01:21 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int cd_error(char *av)
+static int	cd_error(char *av)
 {
 	char	*error;
 
@@ -34,6 +34,32 @@ static void	replace_pwd(char *replace, t_env *lst)
 	ft_replace_env(lst, replace, cwd);
 }
 
+static int	swap_pwd(char *wd, t_env *lst)
+{
+	static int	i = 0;
+
+	if (ft_strcmp(get_key_value(lst, "PWD"), get_key_value(lst, "OLDPWD")))
+	{
+		if (i == 0)
+		{
+			if (!chdir(wd))
+				replace_pwd("PWD", lst);
+			else
+				return (cd_error(wd));
+			i = 1;
+		}
+		else
+		{
+			if (!chdir(wd))
+				replace_pwd("OLDPWD", lst);
+			else
+				return (cd_error(wd));
+			i = 0;
+		}
+	}
+	return (0);
+}
+
 int	ft_cd(t_env *lst, char **av, int ac)
 {
 	int		i;
@@ -50,6 +76,8 @@ int	ft_cd(t_env *lst, char **av, int ac)
 			ft_replace_env(lst, "PWD", ft_strdup(get_key_value(lst, "HOME")));
 		if (ac == 2)
 		{
+			if (!ft_strcmp(av[i], "-"))
+				return (swap_pwd(av[i], lst));
 			if (!chdir(av[i]))
 				replace_pwd("PWD", lst);
 			else
