@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:47 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 02:55:03 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:10:37 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 char	*heredoc_path(void)
 {
-	static int i = 1;
-	char *path;
-	char *nb;
+	static int	i = 1;
+	char		*path;
+	char		*nb;
 
 	nb = ft_itoa(i);
 	path = ft_mega_join("/tmp/", "minishell_tmp_", nb);
@@ -30,11 +30,12 @@ char	*heredoc_path(void)
 
 static int	null_line(int *i, char *delim)
 {
-	char *arg;
-	char *arg2;
+	char	*arg;
+	char	*arg2;
 
 	arg = ft_itoa(*i);
 	arg2 = ft_mega_join(HERE_DOC_EOF, delim, "\')");
+	ft_putstr_fd("\n", STDERR_FILENO);
 	ft_error(HERE_DOC_WARNING, arg, arg2, -1);
 	free(arg);
 	free(arg2);
@@ -50,8 +51,8 @@ static int	check_len(char *s1, char *s2)
 
 static int	get_and_write(int fd, char *delim)
 {
-	char *line;
-	static int i = 0;
+	char		*line;
+	static int	i = 0;
 
 	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
@@ -59,8 +60,8 @@ static int	get_and_write(int fd, char *delim)
 		i++;
 	if (!line)
 		return (null_line(&i, delim));
-	else if (!ft_strncmp(delim, line, ft_strlen(delim)) 
-			&& !check_len(delim, line))
+	else if (!ft_strncmp(delim, line, ft_strlen(delim))
+		&& !check_len(delim, line))
 		return (free(line), i = 0);
 	else
 		write(fd, line, ft_strlen(line));

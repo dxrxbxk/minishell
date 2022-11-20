@@ -6,30 +6,11 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:45:35 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:25:49 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:49:14 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	ft_print_redirections(t_redir *redir)
-{
-	char	*msg;
-	while (redir->type != END)
-	{
-		if (redir->type == INFILE)
-			msg = "<";
-		if (redir->type == HEREDOC)
-			msg = "<<";
-		if (redir->type == OUTFILE)
-			msg = ">";
-		if (redir->type == APPEND)
-			msg = ">>";
-		printf("\ntype : %s path : %s\n", msg, redir->path);
-		redir++;
-	}
-	return (0);
-}
 
 void	exec_child(t_child *child, t_ast *ast, t_mini *data)
 {

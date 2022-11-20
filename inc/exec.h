@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 05:29:04 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:42:40 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,9 @@ char	*check_path(char **path, char *cmd);
 int		is_builtin(t_ast *ast);
 int		init_exec(char **av, t_mini *shell);
 t_built	*init_fpointer(void);
+
+int	ft_save_main_fds(int fds[2], t_child *child);
+int	ft_restore_main_fds(int fds[2], t_child *child);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 04:13:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:01:14 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:01:33 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	ft_close_unused_pipe(t_child *child, t_mini *data)
 	if (child->next)
 		next_pipein_rank = ft_get_pipein_redir_rank(child->next->redir);
 	if (child->prev && close(child->prev->redir[prev_pipeout_rank].fd) == -1) // make it more explicit can add ft_close that ignore if fd == -1
-		ft_exit_free(data, child, ft_error("close: ", strerror(errno), NULL, 1));
+		ft_exit_free(data, child, ft_error("close: ",
+				strerror(errno), NULL, 1));
 	if (child->next && close(child->next->redir[next_pipein_rank].fd) == -1) // make it more explicit
-		ft_exit_free(data, child, ft_error("close: ", strerror(errno), NULL, 1));
+		ft_exit_free(data, child, ft_error("close: ",
+				strerror(errno), NULL, 1));
 	return (0);
 }
 
@@ -34,6 +36,7 @@ void	exec_pipe_child(t_child *child, t_ast *ast, t_mini *data)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	//(save child in static ?)
 	ft_close_unused_pipe(child, data);
 	if (ft_apply_redirections(child->redir, child) != 0)
 		ft_exit_free(data, child, child->status);

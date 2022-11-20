@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 05:18:33 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:44:37 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:04:38 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int	ft_apply_redirections(t_redir *redir, t_child *child)
 	{
 		if (!redir->path && redir->type != PIPE_IN && redir->type != PIPE_OUT)
 			return (set_child_status(child,
-				ft_error("ambiguous redirect", NULL, NULL, 1)));
+					ft_error("ambiguous redirect", NULL, NULL, 1)));
 		if (redir->type != PIPE_IN && redir->type != PIPE_OUT)
 			redir->fd = ft_open(redir->path, redir->type);
 		if (redir->fd == -1)
 			return (set_child_status(child,
-				ft_error(redir->path, ": ", strerror(errno), 1)));
+					ft_error(redir->path, ": ", strerror(errno), 1)));
 		if (ft_dup2(redir->fd, redir->type) == -1)
-			return (set_child_status(child, 
-				ft_error(redir->path, ": ", strerror(errno), 1)));
+			return (set_child_status(child,
+					ft_error(redir->path, ": ", strerror(errno), 1)));
 		if (ft_close(redir->fd) == -1)
 			return (set_child_status(child,
-				ft_error(redir->path, ": ", strerror(errno), 1)));
+					ft_error(redir->path, ": ", strerror(errno), 1)));
 		redir++;
 	}
 	return (0);
@@ -62,7 +62,7 @@ int	ft_apply_redirections(t_redir *redir, t_child *child)
 
 int	ft_get_cmd_redirections(t_child *child, t_ast *ast)
 {
-    if (!ast)
+	if (!ast)
 		return (0);
 	child->redir = malloc(sizeof(t_redir) * ((ft_lbranch_len(ast) / 2) + 1));
 	if (!child->redir)

@@ -68,6 +68,8 @@ override FILES			:=	$(addsuffix .c, \
 							parsing	\
 							token \
 							exec_builtins \
+							builtins_redirections	\
+							manage_builtins			\
 							child_utils	\
 							manage_child	\
 							exec_child	\

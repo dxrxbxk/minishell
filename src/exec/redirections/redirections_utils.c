@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:49:51 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:16:00 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:07:21 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_open(char *path, t_redir_type type)
 	int		fd;
 	int		flags;
 	mode_t	mode;
-	
+
 	mode = 0;
 	flags = 0;
 	if (type == INFILE || type == HEREDOC)
@@ -54,7 +54,6 @@ int	ft_close(int fd)
 		return (-1);
 	return (0);
 }
-
 
 t_redir_type	ft_which_redir(t_type type)
 {

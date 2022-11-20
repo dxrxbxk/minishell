@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:11:11 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:05:33 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:58:16 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	launch_pipe_children(t_child *child, t_ast *ast, t_mini *data)
 int	launch_pipe_sequence(t_ast *ast, t_mini *data)
 {
 	t_child	*child;
+	int		end_status;
 
 	child = NULL;
 	if (ft_init_children(&child, ast) == -1)
@@ -63,9 +64,9 @@ int	launch_pipe_sequence(t_ast *ast, t_mini *data)
 	if (launch_pipe_children(child, ast, data) == -1)
 		return (-1);
 	ft_wait_children(child);
-	ft_interpret_child_status(child);
+	end_status = ft_interpret_child_status(child);
 	//free children
-	if (g_status == 130)
+	if (end_status == 130)
 		return (-1);
 	return (0);
 }

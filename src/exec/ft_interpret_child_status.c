@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:03:48 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 01:14:17 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:01:05 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_apply_signal_msg(int is_sigint, int status)
 
 int	ft_get_exit_status(int status)
 {
-	int exit_status;
+	int	exit_status;
 
 	exit_status = 0;
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)

@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 21:42:25 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:39:38 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_token_size(char *str, int *i)
 	int	y;
 
 	size = 0;
-	if (ft_strchr("\t |\\$'\"><&()*", str[(*i)]))
+	if (ft_strchr("\n\t |\\$'\"><&()*", str[(*i)]))
 	{
 		if (!ft_strncmp("<<", str + *i, 2) || !ft_strncmp(">>",str + *i, 2))
 			return (2);
@@ -29,7 +29,7 @@ static int	ft_token_size(char *str, int *i)
 			return (1);
 	}
 	y = *i - 1;
-	while (!ft_strchr("\t |\\$'\"><()*", str[++y]))
+	while (!ft_strchr("\n\t |\\$'\"><()*", str[++y]))
 	{
 		if (str[y + 1] == '&' && str[y + 2] == '&')
 			return (size + 1);
@@ -41,7 +41,7 @@ static int	ft_token_size(char *str, int *i)
 //pas a la norme menfou
 static t_type	ft_token_type(char *str)
 {
-	if (!ft_strcmp(" ", str) || !ft_strcmp("\t", str))
+	if (!ft_strcmp(" ", str) || !ft_strcmp("\t", str) || !ft_strcmp("\n", str))
 		return (WHITE_SPACE);
 	if (!ft_strcmp("|", str))
 		return (PIPE);

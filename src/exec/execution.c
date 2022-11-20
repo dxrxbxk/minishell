@@ -6,17 +6,14 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 22:41:05 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 02:10:12 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:49:31 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	print_tree(t_ast *root, int space);
-
 int	launch_children(t_ast *root, t_ast *ast, t_mini *data)
 {
-//	print_tree(ast, 0);
 	(void)root;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -29,7 +26,6 @@ int	launch_children(t_ast *root, t_ast *ast, t_mini *data)
 
 int	execution(t_ast *root, t_ast *ast, t_mini *data)
 {
-	//add heredoc
 	if (!ast)
 		return (0);
 	if (ast->token->type == OP_SEQ)

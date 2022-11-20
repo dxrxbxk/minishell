@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:22:44 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 03:22:45 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:48:28 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_get_args(t_child *child, t_ast *ast)
 		{
 			child->argv[i] = ft_strdup(ast->token->str);
 			if (!child->argv)
-				return (set_child_status(child, ft_error(MEM_ERROR, NULL, NULL, 1)));
+				return (set_child_status(child,
+						ft_error(MEM_ERROR, NULL, NULL, 1)));
 			i++;
 		}
 		ast = ast->right;
@@ -53,11 +54,12 @@ int	ft_get_args(t_child *child, t_ast *ast)
 
 int	ft_check_is_directory(t_mini *data, t_child *child, char *path)
 {
-	struct stat sb;
+	struct stat	sb;
 
 	if (lstat(path, &sb) == -1)
 		ft_exit_free(data, child, ft_error("lstat", NULL, NULL, 1));
 	if (sb.st_mode & S_IFDIR)
-		ft_exit_free(data, child, ft_error(path, ": Is a directory", NULL, 126));
+		ft_exit_free(data, child, ft_error(path,
+				": Is a directory", NULL, 126));
 	return (0);
 }
