@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 20:36:21 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:22:35 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,23 @@
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-#include <sys/sysmacros.h>
-
-
+# include <sys/sysmacros.h>
 # define BRACKETS 0
 # define SQUOTES 1
 # define DQUOTES 2
-
 # define MEM_ERROR "Memory allocation failed"
-
-//NOTES
-
-//we could make pointer fonction for builtins
-/*
-typdedef struct s_builtins
-{
-	char *content;
-	int		(*builtins)(struct s_cmd *)
-}
-*/
+# include <struct.h>
+# include <env.h>
+# include <lexer.h>
+# include <parsing.h>
+# include <utils.h>
+# include <builtins.h>
+# include <signals.h>
+# include <exec.h>
 
 extern int	g_status;
 
 void	print_tab(char **tab);
-int	tab_len(char **av);
-
-#include <struct.h>
-#include <env.h>
-#include <lexer.h>
-#include <parsing.h>
-#include <utils.h>
-#include <builtins.h>
-#include <signals.h>
-#include <exec.h>
+int		tab_len(char **av);
 
 #endif

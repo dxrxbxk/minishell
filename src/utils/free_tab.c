@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 16:33:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:24:03 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/20 18:02:19 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/20 19:26:36 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include <minishell.h>
 
-void	inthandler(int sig);
-void	handle_signals(void);
-void	reset_signals(void);
+void	free_tab(char ***tab)
+{
+	int	i;
 
-#endif
+	i = -1;
+	if (!*tab == NULL)
+		return ;
+	while (*tab[++i])
+		free(*tab[i]);
+	free(*tab);
+	*tab = NULL;
+}

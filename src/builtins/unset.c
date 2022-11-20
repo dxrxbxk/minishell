@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 17:26:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 18:29:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	ft_unset(t_env *lst, char **av, int ac)
 	{
 		if (get_env_key(lst, av[i]))
 			del_and_link(lst, av[i]);
+		if (!ft_strcmp("PATH", av[i]))
+			free_tab(data->sPATH);
 	}
 	return (0);
 }

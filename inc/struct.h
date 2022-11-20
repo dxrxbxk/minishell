@@ -6,16 +6,16 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 00:03:16 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:25:52 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include <fcntl.h>
+# include <fcntl.h>
 
-typedef	enum e_type
+typedef enum e_type
 {
 	WORD,
 	WHITE_SPACE,
@@ -38,7 +38,7 @@ typedef	enum e_type
 	CMD,
 }				t_type;
 
-typedef	enum e_redir_type
+typedef enum e_redir_type
 {
 	INFILE,
 	HEREDOC,
@@ -60,7 +60,7 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	struct s_token *next;
+	struct s_token	*next;
 }				t_token;
 
 typedef struct s_env
@@ -97,7 +97,6 @@ typedef struct s_child
 
 typedef struct s_mini
 {
-	char	*PATH;
 	char	**sPATH;
 	t_ast	*root;
 	t_env	*env;

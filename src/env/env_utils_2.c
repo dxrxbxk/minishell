@@ -6,26 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 18:05:17 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:23:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	free_tab(char **tab)
-{
-	char	**tmp;
-	int		i;
-
-	tmp = tab;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tmp);
-}
 
 void	ft_env_delone(t_env *elem)
 {
