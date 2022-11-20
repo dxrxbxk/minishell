@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:17:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:22:35 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 19:57:59 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include <builtins.h>
 # include <signals.h>
 # include <exec.h>
+# include <memory.h>
 
 extern int	g_status;
 

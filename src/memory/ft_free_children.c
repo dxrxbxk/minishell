@@ -6,11 +6,11 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 19:02:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 19:34:03 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:20:42 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishellh.h>
+#include <minishell.h>
 
 t_child	*ft_get_first_child(t_child *child)
 {
@@ -26,12 +26,16 @@ void	free_redir_struct(t_redir *redir)
 	if (!redir)
 		return ;
 	tmp = redir;
-	while (redir.type != END)
+	while (redir->type != END)
 	{
-		free(redir.path);
-		ft_close(&redir.fd);
+		free(redir->path);
+		ft_close(&redir->fd);
+		tmp = redir;
 		redir++;
+		free(tmp);
 	}
+	if (redir->type == END)
+		free(redir);
 }
 
 void	ft_delchild(t_child *child)
@@ -40,6 +44,9 @@ void	ft_delchild(t_child *child)
 	free_tab(&child->argv);
 	free_tab(&child->envp);
 	free_redir_struct(child->redir);
+	child->pathname = NULL;
+	child->redir = NULL;
+	free(child);
 }
 
 void	ft_free_child(t_child *child)
