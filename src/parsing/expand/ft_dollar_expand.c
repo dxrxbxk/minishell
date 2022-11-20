@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/12 21:40:50 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/19 22:18:48 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_skip_heredoc_delimiter_expand(t_token *lst, t_env *env,
 
 char	*ft_extract_env_value(t_env *env, char *key)
 {
+	if (*key == '?')
+		return (ft_itoa(g_status));
 	while (env)
 	{
 		if (!ft_strcmp(env->key, key))
@@ -54,6 +56,8 @@ size_t	ft_getkey_size_usual_expand(char *token)
 	size = 0;
 	if (token[size] == '\'' || token[size] == '"')
 		return (size);
+	if (*token == '?')
+		return (1);
 	while (token[size] && (ft_isalnum(token[size]) || token[size] == '_'))
 		size++;
 	return (size);

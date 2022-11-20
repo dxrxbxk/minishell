@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:22:34 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/12 21:58:47 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/19 22:21:53 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static char	*ft_extract_key(char **token)
 	size_t	size;
 
 	key = NULL;
-	if (**token != '_' && !ft_isalpha(**token) && **token != '\''
-		&& **token != '\"')
+	if (**token != '?' && **token != '_' && !ft_isalpha(**token)
+		&& **token != '\'' && **token != '\"')
 		return (key);
 	size = ft_getkey_size_usual_expand(*token);
 	key = ft_strndup(*token, size);

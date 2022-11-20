@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe_child.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 04:13:41 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 21:19:12 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 05:01:14 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	ft_close_unused_pipe(t_child *child, t_mini *data)
 	int		prev_pipeout_rank;
 	int		next_pipein_rank;
 
-	prev_pipeout_rank = -1;
+	prev_pipeout_rank = 0;
 	if (child->prev)
 		prev_pipeout_rank = ft_get_pipeout_redir_rank(child->prev->redir);
-	next_pipein_rank = -1;
+	next_pipein_rank = 0;
 	if (child->next)
 		next_pipein_rank = ft_get_pipein_redir_rank(child->next->redir);
 	if (child->prev && close(child->prev->redir[prev_pipeout_rank].fd) == -1) // make it more explicit can add ft_close that ignore if fd == -1
@@ -32,11 +32,13 @@ int	ft_close_unused_pipe(t_child *child, t_mini *data)
 
 void	exec_pipe_child(t_child *child, t_ast *ast, t_mini *data)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	ft_close_unused_pipe(child, data);
 	if (ft_apply_redirections(child->redir, child) != 0)
 		ft_exit_free(data, child, child->status);
 	if (is_builtin(ast->right))
-		exit(exec_builtin(child, ast, data));
+		ft_exit_free(data, child, exec_builtin(child, ast, data));
 	if (ft_get_args(child, ast->right) != 0)
 		ft_exit_free(data, child, child->status);
 	if (!child->argv || !*child->argv)

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:03:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 18:11:15 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:48:10 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@ void	inthandler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_status = 130;
 	//set exit status at 1
 	//new line with rl
 	//replace buffer rl
 	// display new line
 	// control c = mettre exit status = 130
+}
+
+void	ft_modify_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	handle_signals(void)

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:47 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/19 20:09:15 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/20 02:55:03 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	null_line(int *i, char *delim)
 
 	arg = ft_itoa(*i);
 	arg2 = ft_mega_join(HERE_DOC_EOF, delim, "\')");
-	ft_error(HERE_DOC_WARNING, arg, arg2, 0);
+	ft_error(HERE_DOC_WARNING, arg, arg2, -1);
 	free(arg);
 	free(arg2);
 	return (*i = 0);
@@ -53,7 +53,7 @@ static int	get_and_write(int fd, char *delim)
 	char *line;
 	static int i = 0;
 
-	ft_putstr_fd("> ", 0);
+	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
 	if (line && ft_strcmp(line, "\n"))
 		i++;
@@ -61,7 +61,7 @@ static int	get_and_write(int fd, char *delim)
 		return (null_line(&i, delim));
 	else if (!ft_strncmp(delim, line, ft_strlen(delim)) 
 			&& !check_len(delim, line))
-		return (i = 0);
+		return (free(line), i = 0);
 	else
 		write(fd, line, ft_strlen(line));
 	free(line);
@@ -72,7 +72,7 @@ int	apply_heredoc(char *path, char *delim)
 {
 	int	fd;
 
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC);
+	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1)
 		return (ft_error("open: ", strerror(errno), NULL, 1));
 	while (get_and_write(fd, delim))

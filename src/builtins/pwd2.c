@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 16:33:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/19 20:57:31 by momadani         ###   ########.fr       */
+/*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/19 19:25:35 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include <minishell.h>
 
-// signals.c
-void inthandler(int sig);
-void handle_signals(void);
-void reset_signals(void);
+int	ft_pwd(t_env *lst, char **av, int ac)
+{
+	char	*cwd;
 
-#endif
+	(void)av;
+	(void)lst;
+	(void)ac;
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (1); //add error msg
+//		return (ft_error("pwd: cwd: ", strerror(errno), NULL, 1)); add msg like bash
+	else
+		printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}

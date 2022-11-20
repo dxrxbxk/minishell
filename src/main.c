@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 23:47:13 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 04:13:02 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	prompt(t_mini *data)
 	rl_outstream = stderr;
 	while (1)
 	{
-					// ATTENTION : WILDCARDS are tokenize but not interpreted
 		handle_signals();
+					// ATTENTION : WILDCARDS are tokenize but not interpreted
 		free(input);
 		input = get_input();
 		if (input == NULL) // EOF / CTRL + D
@@ -98,6 +98,7 @@ int	prompt(t_mini *data)
 			continue ;
 //		print_tree(root, 0);
 	//	printf("\n\n");
+		set_heredoc_files(root);
 		execution(root, root, data);
 		root = NULL;
 		tok = NULL;

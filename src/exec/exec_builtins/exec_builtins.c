@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:49:17 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/18 21:19:14 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 05:24:28 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	launch_builtin(t_child *child, t_ast *ast, t_mini *data)
 {
 	int	main_fds[2];
 
-	if (ft_get_redirections(child, ast->left) != 0)
+	if (ft_get_cmd_redirections(child, ast->left) != 0)
 		return (ft_quit_free_builtin(child));
 	if (ft_save_main_fds(main_fds, child) != 0)
 		return (ft_quit_free_builtin(child));

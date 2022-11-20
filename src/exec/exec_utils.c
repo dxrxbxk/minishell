@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_child.c                                     :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 14:45:35 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 21:19:08 by momadani         ###   ########.fr       */
+/*   Created: 2022/11/20 03:22:44 by momadani          #+#    #+#             */
+/*   Updated: 2022/11/20 03:22:45 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	ft_print_redirections(t_redir *redir)
-{
-	char	*msg;
-	while (redir->type != END)
-	{
-		if (redir->type == INFILE)
-			msg = "<";
-		if (redir->type == HEREDOC)
-			msg = "<<";
-		if (redir->type == OUTFILE)
-			msg = ">";
-		if (redir->type == APPEND)
-			msg = ">>";
-		printf("\ntype : %s path : %s\n", msg, redir->path);
-		redir++;
-	}
-	return (0);
-}
 
 int	set_child_status(t_child *child, int exit_status)
 {
@@ -79,23 +60,4 @@ int	ft_check_is_directory(t_mini *data, t_child *child, char *path)
 	if (sb.st_mode & S_IFDIR)
 		ft_exit_free(data, child, ft_error(path, ": Is a directory", NULL, 126));
 	return (0);
-}
-
-void	exec_child(t_child *child, t_ast *ast, t_mini *data)
-{
-	if (ft_get_redirections(child, ast->left) != 0)
-		ft_exit_free(data, child, child->status);
-	if (ft_apply_redirections(child->redir, child) != 0)
-		ft_exit_free(data, child, child->status);
-	if (ft_get_args(child, ast->right) != 0)
-		ft_exit_free(data, child, child->status);
-	if (!child->argv || !*child->argv)
-		ft_exit_free(data, child, 0);
-	ft_find_cmd_path(child, data);
-	ft_check_is_directory(data, child, child->pathname);
-	child->envp = ft_lst_to_tab(data->env);
-	execve(child->pathname, child->argv, child->envp);
-	ft_error("execve: ", strerror(errno), NULL, 1);
-	//memory realease
-	exit(1);
 }

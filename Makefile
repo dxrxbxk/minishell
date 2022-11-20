@@ -64,15 +64,26 @@ override FILES			:=	$(addsuffix .c, \
 							ast_init	\
 							ast_utils	\
 							ast_utils_2	\
-							ft_find_cmd_path	\
 							lexer \
 							parsing	\
 							token \
-							execution	\
-							manage_child	\
-							exec_pipe_child	\
-							redirections	\
+							exec_builtins \
 							child_utils	\
+							manage_child	\
+							exec_child	\
+							execution	\
+							exec_utils	\
+							ft_find_cmd_path	\
+							ft_interpret_child_status	\
+							ft_wait_children	\
+							exec_pipe_child		\
+							manage_pipe_child	\
+							manage_pipe_fds		\
+							pipe_redirections	\
+							manage_redirections	\
+							redirections_utils	\
+							set_heredoc_files	\
+							apply_heredoc	\
 							utils \
 							env \
 							env_utils \
@@ -84,7 +95,6 @@ override FILES			:=	$(addsuffix .c, \
 							env_utils_2 \
 							ft_lst_to_tab \
 							ft_mega_join \
-							exec_builtins \
 							get_next_line \
 							get_input \
 							ft_itoa)
