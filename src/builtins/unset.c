@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 08:07:11 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:12:57 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static void	del_and_link(t_env *lst, char *rem, t_mini *data)
 
 int	ft_unset(t_env *lst, char **av, int ac)
 {
-	int	i;
+	int		i;
 	t_mini	**data;
 
 	i = 0;
 	data = ft_memptr_data(NULL);
 	while (++i < ac)
 	{
-		if (get_env_key(lst, av[i]))
+		if (get_env_key(lst, av[i]) && *av[i] != '\0')
 			del_and_link(lst, av[i], *data);
 		lst = (*data)->env;
 	}

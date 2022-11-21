@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 12:30:26 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:11:58 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	replace_pwd(char *replace, t_env *lst)
 
 static int	swap_old_pwd(char *wd, t_env *lst)
 {
-	char 	*old;
+	char	*old;
 
 	(void)wd;
 	if (!get_env_key(lst, "OLDPWD") && !get_env_key(lst, "OLDPWD"))

@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 14:35:02 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:49:34 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**create_env(void)
 	cwd = ret_pwd();
 	if (!cwd)
 		return (NULL);
-	env = malloc(sizeof(char *) * 4);
+	env = malloc(sizeof(char *) * 3);
 	if (!env)
 		return (NULL);
 	env[0] = ft_strjoin("PWD=", cwd);
@@ -47,12 +47,14 @@ int	get_env(t_mini *data, char **env)
 	int		i;
 
 	elm = &data->env;
-	i = 0;
+	i = -1;
 	if (!env)
 		return (-1);
-	while (i < tab_len(env) + 1)
+	while (env[++i])
 	{
 		*elm = malloc(sizeof(t_env));
+		if (!*elm)
+			return (-1);
 		(*elm)->key = ft_strndup(env[i], ft_findi(env[i], '='));
 		if (!(*elm)->key)
 			return (-1);
@@ -61,15 +63,8 @@ int	get_env(t_mini *data, char **env)
 			return (-1);
 		elm = &((*elm)->next);
 		(*elm) = NULL;
-		i++;
 	}
-	/*
-	*elm = malloc(sizeof(t_env));
-	(*elm)->key = ft_strdup("");
-	(*elm)->value = NULL;
-	elm = &((*elm)->next);
-	(*elm) = NULL;
-	*/
+	last_elem(elm);
 	return (0);
 }
 
@@ -102,7 +97,6 @@ int	get_path(t_mini *data, char **env)
 int	get_shlvl(t_mini *data)
 {
 	char	*value;
-	char	*tmp;
 	int		ret;
 
 	if (!get_key_value(data->env, "SHLVL"))
@@ -116,11 +110,10 @@ int	get_shlvl(t_mini *data)
 		ft_error(SHLVL_WARNING, NULL, NULL, 0);
 		ret = 1;
 	}
-	tmp = value;
+	free(value);
 	value = ft_itoa(ret);
 	if (!value)
 		return (-1);
-	free(tmp);
 	ft_replace_env(data->env, "SHLVL", value);
 	return (0);
 }

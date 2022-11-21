@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 14:20:14 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:11:12 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	print_env_export(t_env *print)
 	sort_list(tmp);
 	while (tmp)
 	{
-		if (tmp->value)
+		if (tmp->value && *(tmp->key) != '\0')
 			printf("export %s=\"%s\"\n", tmp->key, tmp->value);
-		else if (tmp->key && *tmp->key != '\0')
+		else if (tmp->key && *(tmp->key) != '\0')
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}

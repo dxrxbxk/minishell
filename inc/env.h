@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 03:45:12 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:49:58 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	print_env_export(t_env *print);
 char	*get_env_key(t_env *lst, char *get);
 char	*get_key_and_value(t_env *lst, char *get);
 
+int		last_elem(t_env **elm);
 t_env	*lst_copy(t_env *lst);
 void	sort_list(t_env *lst);
 void	ft_env_delone(t_env *elem);

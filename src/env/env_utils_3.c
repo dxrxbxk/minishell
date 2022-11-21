@@ -6,11 +6,27 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:19:46 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 14:32:52 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:50:00 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	last_elem(t_env **elm)
+{
+	*elm = malloc(sizeof(t_env));
+	if (!*elm)
+		return (-1);
+	(*elm)->key = ft_strndup("", 0);
+	if (!(*elm)->key)
+		return (-1);
+	(*elm)->value = ft_strdup("");
+	if (!(*elm)->value)
+		return (-1);
+	elm = &((*elm)->next);
+	(*elm) = NULL;
+	return (0);
+}
 
 void	create_env_node(t_env **first, void *key, void *value)
 {
