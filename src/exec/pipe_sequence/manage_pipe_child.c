@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:11:11 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:58:16 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 03:33:50 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	launch_pipe_sequence(t_ast *ast, t_mini *data)
 		return (-1);
 	ft_wait_children(child);
 	end_status = ft_interpret_child_status(child);
-	//free children
+	ft_free_children(child);
 	if (end_status == 130)
 		return (-1);
 	return (0);

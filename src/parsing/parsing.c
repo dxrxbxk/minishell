@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:39:02 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/14 14:03:56 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 06:34:31 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int	parsing(char *input, t_token **first, t_ast **root, t_env *env)
 {
 	if (lexer(first, input) == -1)
-		return (-1);
+		return (ft_free_token_lst(first), -1);
 	if (parser(*first) == -1)
-		return (-1);
+		return (ft_free_token_lst(first), -1);
 	if (expand(first, env) == -1)
-		return (-1);
+		return (ft_free_token_lst(first), -1);
 	if (!*first)
 		return (1);
 	if (ast_init(root, *first) == -1)
-		return (-1);
+		return (ft_remove_token_brackets(first), ft_free_ast(root), -1);
+	ft_remove_token_brackets(first);
 	return (0);
 }

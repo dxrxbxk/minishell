@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:32:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:13:15 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 08:32:42 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ char	*get_input(void);
 int		parsing(char *input, t_token **first, t_ast **root, t_env *env);
 
 int		ast_init(t_ast **root, t_token *token);
+int		ft_addcmd_node(t_ast *ast, t_token **token);
+int		ft_addpipe_sequence(t_ast *ast, t_token *token);
+int		ft_is_pipe_seq(t_token *token);
+int		ft_add_full_cmd(t_ast *ast, t_token **token);
+
 int		ft_astadd_last_left(t_ast **root, t_ast *elem);
 int		ft_astadd_last_right(t_ast **root, t_ast *elem);
 int		ft_create_node_left(t_ast **root, t_type type);
@@ -37,6 +42,8 @@ void	ft_squotes_dollar_expand(t_token *lst, t_env *env);
 void	ft_usual_dollar_expand(t_token *lst, t_env *env);
 
 int		ft_quotes_expand(t_token *lst);
+
+int		ft_wildcards_expand(t_token *lst);
 
 void	ft_parserror(char *msg);
 int		ft_checkerror(int state, t_token *lst, long separators[3]);

@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:22:34 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/19 22:16:22 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:37:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	ft_dquotes_dollar_expand(t_token *lst, t_env *env)
 		return ;
 	value = ft_extract_env_value(env, key);
 	free(key);
-//	if (!value)
-//		return ;
 	free(lst->str);
 	lst->str = value;
 }

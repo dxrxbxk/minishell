@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 03:35:33 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/02 04:35:32 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:38:01 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_tokencat(t_token **lst)
 	current = *lst;
 	while (current && current->next)
 	{
-		while (current && current->next && current->type == WORD && current->next->type == WORD)
+		while (current && current->next && current->type == WORD
+			&& current->next->type == WORD)
 			ft_merge_tokens(current, current->next);
 		while (current && current->next && current->next->type == WHITE_SPACE)
 			ft_remove_token(current, current->next);

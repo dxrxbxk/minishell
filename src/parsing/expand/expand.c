@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:42:52 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/12 23:11:51 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 06:54:39 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_merge_tokens(t_token *a, t_token *b)
 int	expand(t_token **first, t_env *env)
 {
 	ft_dollar_expand(*first, env);
+	ft_wildcards_expand(*first);
 	ft_quotes_expand(*first);
 	ft_tokencat(first);
 	return (0);

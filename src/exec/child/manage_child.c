@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:08:12 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 20:21:24 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:09:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	launch_child(t_ast *ast, t_mini *data)
 	child = ft_child_new();
 	if (!child)
 		return (ft_error(MEM_ERROR, NULL, NULL, -1));
-	//(save child in static ?)
+	ft_memptr_child(&child);
 	if (is_builtin(ast->right))
 		return (launch_builtin(child, ast, data));
 	child->pid = fork();

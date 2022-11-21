@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_cmd_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 00:01:22 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/18 21:14:02 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:40:31 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	ft_find_cmd_path(t_child *child, t_mini *data)
 	child->pathname = ft_strdup(cmd);
 	if (!child->pathname)
 		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
-	if (ft_strchr(cmd, '/') || !data->sPATH || !*data->sPATH)
+	if (ft_strchr(cmd, '.') || ft_strchr(cmd, '/')
+		|| !data->sPATH || !*data->sPATH)
 		ft_check_absolute_relative_path(data, child);
 	else if (!*child->pathname || !ft_try_path(child, data, data->sPATH))
 		ft_exit_free(data, child,

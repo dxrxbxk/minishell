@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:03:48 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:01:05 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/20 23:54:24 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_get_exit_status(int status)
 		exit_status = 131;
 	else if (WIFEXITED(status))
 		exit_status = (WEXITSTATUS(status));
+	else
+		exit_status = status;
 	return (exit_status);
 }
 

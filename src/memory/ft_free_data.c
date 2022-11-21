@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   ft_free_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 19:58:14 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 11:13:48 by momadani         ###   ########.fr       */
+/*   Created: 2022/11/21 04:29:51 by momadani          #+#    #+#             */
+/*   Updated: 2022/11/21 04:48:47 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include <minishell.h>
 
-# include <struct.h>
-
-int		ft_free_children(t_child *child);
-int		ft_free_ast(t_ast **ast);
-int		ft_free_ast_child(t_ast **ast);
-int		ft_free_data(t_mini *data);
-int		ft_free_token_lst(t_token **token);
-int		ft_remove_token_brackets(t_token **token);
-t_mini	**ft_memptr_data(t_mini **data);
-t_child	**ft_memptr_child(t_child **child);
-
-#endif
+int	ft_free_data(t_mini *data)
+{
+	free_tab(&data->sPATH);
+	free_env(data->env);
+	data->env = NULL;
+	return (0);
+}

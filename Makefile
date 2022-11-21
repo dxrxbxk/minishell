@@ -57,11 +57,14 @@ override FILES			:=	$(addsuffix .c, \
 							ft_usual_dollar_expand \
 							ft_quotes_expand \
 							states \
+							states_2 \
 							parser \
 							ft_dquotes_dollar_expand \
 							ft_tokencat \
-							ft_dollar_expand \
+							ft_dollar_expand 	\
+							ft_wildcards_expand	\
 							ast_init	\
+							ast_add_cmd_seq	\
 							ast_utils	\
 							ast_utils_2	\
 							lexer \
@@ -75,6 +78,7 @@ override FILES			:=	$(addsuffix .c, \
 							exec_child	\
 							execution	\
 							exec_utils	\
+							ft_memptr	\
 							ft_find_cmd_path	\
 							ft_interpret_child_status	\
 							ft_wait_children	\
@@ -85,8 +89,13 @@ override FILES			:=	$(addsuffix .c, \
 							manage_redirections	\
 							redirections_utils	\
 							set_heredoc_files	\
-							apply_heredoc	\
+							apply_heredoc		\
+							heredoc_child		\
 							ft_free_children	\
+							ft_free_ast			\
+							ft_free_data		\
+							ft_free_token_lst	\
+							ft_free_ast_child	\
 							free_tab			\
 							utils \
 							env \

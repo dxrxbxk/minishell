@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:47 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 18:10:37 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 09:46:17 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,14 @@ int	apply_heredoc(char *path, char *delim)
 {
 	int	fd;
 
+	if (!delim)
+		return (1);
 	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1)
 		return (ft_error("open: ", strerror(errno), NULL, 1));
 	while (get_and_write(fd, delim))
 		;
-	close(fd);
+	if (close(fd) == -1)
+		return (ft_error("close: ", strerror(errno), NULL, 1));
 	return (0);
 }

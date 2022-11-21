@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:20:31 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 05:36:11 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:41:14 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_init_pipe_child_redirections(t_child *child, t_ast *ast)
 	while (child)
 	{
 		if (ast && ast->right)
-			if (ft_get_cmd_redirections_pipeseq(child, ast->right->left) == -1) // protect ast->right->left
+			if (ft_get_cmd_redirections_pipeseq(child, ast->right->left) == -1)
 				return (-1);
 		ast = ast->left;
 		if (ast)

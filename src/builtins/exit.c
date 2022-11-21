@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:59:27 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 12:21:36 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static long	ft_atoi2(const char *nptr)
 int	ft_exit(t_env *lst, char **av, int ac)
 {
 	long	status;
+	t_mini	**data;
+	t_child	**child;
 
 	(void)lst;
 	ft_putstr_fd("exit\n", 2);
@@ -81,6 +83,14 @@ int	ft_exit(t_env *lst, char **av, int ac)
 		status = ft_atoi2(av[1]);
 	else
 		status = 0;
+	data = ft_memptr_data(NULL);
+	child = ft_memptr_child(NULL);
+	if (child && *child)
+		ft_free_children(*child);
+	if (data && *data)
+		ft_free_ast((*data)->root);
+	if (data && *data)
+		ft_free_data(*data);
 	if (ac <= 2)
 		exit((unsigned char)status);
 	return (0);

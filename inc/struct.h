@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:25:52 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 04:25:47 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_child
 typedef struct s_mini
 {
 	char	**sPATH;
-	t_ast	*root;
+	t_ast	**root;
 	t_env	*env;
 	t_built	*built;
 }				t_mini;

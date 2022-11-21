@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 11:36:21 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 10:46:47 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	prompt(t_mini *data)
 	tok = NULL;
 	root = NULL;
 	data->root = &root;
-	ft_memptr_data(&data);
 //	rl_outstream = stderr;
 	while (1)
 	{
@@ -104,7 +103,6 @@ int	prompt(t_mini *data)
 		ft_free_ast(&root);
 		root = NULL;
 		tok = NULL;
-	//	init_exec(ft_split(input, ' '), data);
 	}
 	return (0);
 }
@@ -114,7 +112,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	t_mini data;
-	if (!env || !*env)
+	if (!*env || !env)
 		env = create_env();
 	get_env(&data, env);
 	get_path(&data, env);
