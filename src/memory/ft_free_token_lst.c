@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 04:59:50 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 06:33:12 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:37:54 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_remove_token_brackets(t_token **token)
 	while (tmp && tmp->next)
 	{
 		while (tmp && tmp->next && (tmp->next->type == LEFT_P
-				 || tmp->next->type == RIGHT_P))
+				|| tmp->next->type == RIGHT_P))
 			ft_remove_token(tmp, tmp->next);
 		tmp = tmp->next;
 	}

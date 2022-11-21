@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 11:36:21 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:36:36 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,106 +14,48 @@
 
 int	g_status = 0;
 
-void print_tree(t_ast *root, int space)
+void	ft_reset_vars(char **input, t_token **token, t_ast **root, t_child **ptr)
 {
-	char	*msg;
-
-	msg = NULL;
-    if (root == NULL)
-        return;
-    space += 10;
-    print_tree(root->right, space);
-    printf("\n");
-    for (int i = 10; i < space; i++)
-	{
-        printf(" ");
-	}
-	if (root->token->type == OP_SEQ)
-		msg = "OP";
-	if (root->token->type == CMD)
-		msg = "CMD";
-	if (root->token->type == AND)
-		msg = "&&";
-	if (root->token->type == PIPE)
-		msg = "|";
-	if (root->token->type == PIPE_SEQ)
-		msg = "P_SEQ";
-	if (root->token->type == D_PIPE)
-		msg = "||";
-	if (root->token->type == GREAT)
-		msg = ">";
-	if (root->token->type == D_GREAT)
-		msg = ">>";
-	if (root->token->type == LESS)
-		msg = "<";
-	if (root->token->type == D_LESS)
-		msg = "<<";
-	if (root->token->type == WORD)
-		msg = root->token->str;
-	if (msg && *msg && *msg != '\n')
-	    printf("%.5s", msg);
-	else if (msg && *msg == '\n')
-	    printf("\\n");
-	else if (msg && !*msg)
-	    printf("\"\\0\"");
-	else
-		printf("%s", msg);
-    printf("\n");
-    print_tree(root->left, space);
-} 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/14 19:22:38 by momadani         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+	*input = NULL;
+	*token = NULL;
+	*root = NULL;
+	*ptr = NULL;
+}
 
 int	prompt(t_mini *data)
 {
-	char *input;
-	t_token *tok;
+	char	*input;
+	t_token	*tok;
 	t_ast	*root;
+	t_child	*ptr;
 
-	input = NULL;
-	tok = NULL;
-	root = NULL;
 	data->root = &root;
 	ft_memptr_data(&data);
-//	rl_outstream = stderr;
 	while (1)
 	{
+		ft_reset_vars(&input, &tok, &root, &ptr);
+		ft_memptr_child(&ptr);
 		handle_signals();
-					// ATTENTION : WILDCARDS are tokenize but not interpreted
 		input = get_input();
-		if (input == NULL) // EOF / CTRL + D
+		if (input == NULL)
 			ft_exit(data->env, NULL, 0);
-		root = NULL;
-		tok = NULL;
-		if (parsing(input, &tok, &root, data->env) != 0) // free brackets from t_token *
+		if (parsing(input, &tok, &root, data->env) != 0)
 			continue ;
 		free(input);
 		if (set_heredoc_files(root, data) == -1)
 			continue ;
 		execution(root, root, data);
 		ft_free_ast(&root);
-		root = NULL;
-		tok = NULL;
-	//	init_exec(ft_split(input, ' '), data);
 	}
 	return (0);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	t_mini	data;
+
 	(void)av;
 	(void)ac;
-	t_mini data;
 	if (!env || !*env)
 		env = create_env();
 	get_env(&data, env);
@@ -125,9 +67,3 @@ int	main(int ac, char **av, char **env)
 			return (0);
 	}
 }
-//		ft_unset(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
-//		ft_export(data->env, ft_split(str, ' '), ft_count_words2(str, ' '));
-//		printf("%s\n",get_env_str(data->env, "SHLVL"));
-//		ft_cd(data->env,ft_split(str, ' '), ft_count_words2(str, ' '));
-//		ft_echo(ft_split(str, ' '), ft_count_words2(str, ' '));
-//		unset(data->env, "ABC");

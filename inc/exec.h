@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:46:34 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 12:16:06 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:29:41 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 char			*heredoc_path(void);
 int				apply_heredoc(char *path, char *delim);
 int				manage_heredoc_child(char *file_path,
-					char *delim, t_mini *data);
+				char *delim, t_mini *data);
 int				set_heredoc_files(t_ast *ast, t_mini *data);
 int				set_heredoc(t_ast *ast);
 
