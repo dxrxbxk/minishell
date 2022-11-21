@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:05:58 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/11 18:06:41 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:30:15 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,3 @@ char	*ft_mega_join(char *s1, char *s2, char *s3)
 	ft_strcat(array, s3);
 	return (array);
 }
-
-

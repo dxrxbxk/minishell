@@ -61,10 +61,8 @@ override FILES			:=	$(addsuffix .c, \
 							parser \
 							ft_dquotes_dollar_expand \
 							ft_tokencat \
-							ft_dollar_expand 	\
-							ft_wildcards_expand	\
+							ft_dollar_expand \
 							ast_init	\
-							ast_add_cmd_seq	\
 							ast_utils	\
 							ast_utils_2	\
 							lexer \
@@ -78,7 +76,6 @@ override FILES			:=	$(addsuffix .c, \
 							exec_child	\
 							execution	\
 							exec_utils	\
-							ft_memptr	\
 							ft_find_cmd_path	\
 							ft_interpret_child_status	\
 							ft_wait_children	\
@@ -89,29 +86,23 @@ override FILES			:=	$(addsuffix .c, \
 							manage_redirections	\
 							redirections_utils	\
 							set_heredoc_files	\
-							apply_heredoc		\
-							heredoc_child		\
+							apply_heredoc	\
 							ft_free_children	\
-							ft_free_ast			\
-							ft_free_data		\
-							ft_free_token_lst	\
-							ft_free_ast_child	\
 							free_tab			\
 							utils \
 							env \
 							env_utils \
-							env_utils_2 \
-							env_utils_3 \
-							ft_free_env \
 							ft_error \
 							ft_strcpy \
 							ft_strcat \
 							ft_words_count \
 							ft_atoi \
+							env_utils_2 \
 							ft_lst_to_tab \
 							ft_mega_join \
 							get_next_line \
 							get_input \
+							ft_memptr \
 							ft_itoa)
 
 SRCDIR					:= src

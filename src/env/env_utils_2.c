@@ -6,47 +6,11 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 08:15:13 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:20:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	create_env_node(t_env **first, void *key, void *value)
-{
-	t_env *new;
-
-	new = ft_env_new(ft_strdup(key), ft_strdup(value));
-	ft_env_addback(first, new);
-}
-
-void	ft_env_addback(t_env **first, t_env *new)
-{
-	t_env	*current;
-
-	current = *first;
-	if (!*first)
-		*first = new;
-	else
-	{
-		while (current->next)
-			current = current->next;
-		current->next = new;
-	}
-}
-
-t_env	*ft_env_new(void *key, void *value)
-{
-	t_env	*new;
-
-	new = malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->key = key;
-	new->value = value;
-	new->next = NULL;
-	return (new);
-}
 
 void	print_env_export(t_env *print)
 {
@@ -63,26 +27,6 @@ void	print_env_export(t_env *print)
 		tmp = tmp->next;
 	}
 	free_env(tmp);
-}
-
-void	ft_env_delone(t_env *elem)
-{
-	free(elem->key);
-	free(elem->value);
-	free(elem);
-}
-
-void	free_env(t_env *lst)
-{
-	t_env	*tmp;
-
-	tmp = NULL;
-	while (lst)
-	{
-		tmp = lst->next;
-		ft_env_delone(lst);
-		lst = tmp;
-	}
 }
 
 t_env	*lst_copy(t_env *lst)

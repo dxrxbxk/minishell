@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 17:33:59 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 23:08:56 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:30:53 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_error(char *msg, char *var, char *msg2, int ret)
 {
-	char *print;
-	char *tmp;
+	char	*print;
+	char	*tmp;
 
 	tmp = ft_mega_join(msg, var, msg2);
 	if (!tmp)

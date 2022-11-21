@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 17:32:11 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 14:29:07 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/21 14:12:49 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/21 14:13:38 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <minishell.h>
 
-void	ft_strcat(char *dst, char const *src)
+void	ft_env_delone(t_env *elem)
 {
-	size_t	i;
-	size_t	j;
+	free(elem->key);
+	free(elem->value);
+	free(elem);
+}
 
-	i = 0;
-	j = 0;
-	if (!dst || !src)
-		return ;
-	while (dst[i])
-		i++;
-	while (src[j])
+void	free_env(t_env *lst)
+{
+	t_env	*tmp;
+
+	tmp = NULL;
+	while (lst)
 	{
-		dst[i + j] = src[j];
-		j++;
+		tmp = lst->next;
+		ft_env_delone(lst);
+		lst = tmp;
 	}
-	dst[i + j] = 0;
 }

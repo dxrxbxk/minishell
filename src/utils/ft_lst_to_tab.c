@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:45:00 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/17 21:14:27 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:28:33 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int lst_size(t_env *lst)
+static int	lst_size(t_env *lst)
 {
 	int	i;
 

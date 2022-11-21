@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 02:12:09 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 12:30:26 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_cd(t_env *lst, char **av, int ac)
 {
 	if (ac == 2 && !ft_strcmp(av[1], "-"))
 		return (swap_old_pwd(av[1], lst));
-	else if (ac == 1)
+	else if (ac == 1 || (ac == 2 && !ft_strcmp(av[1], "--")))
 	{
 		replace_pwd("OLDPWD", lst);
 		if (!get_key_value(lst, "HOME") && chdir(get_key_value(lst, "HOME")))
