@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 00:40:14 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 02:12:09 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,27 @@ static int	cd_error(char *av)
 static void	replace_pwd(char *replace, t_env *lst)
 {
 	char	*cwd;
+	t_env	*new;
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return ;
-	ft_replace_env(lst, replace, cwd);
+	if (!get_key_value(lst, replace))
+	{
+		new = ft_env_new(replace, cwd);
+		ft_env_addback(&lst, new);
+	}
+	else
+		ft_replace_env(lst, replace, cwd);
 }
 
 static int	swap_old_pwd(char *wd, t_env *lst)
 {
 	char 	*old;
 
+	(void)wd;
+	if (!get_env_key(lst, "OLDPWD") && !get_env_key(lst, "OLDPWD"))
+		return (ft_error("cd: OLDPWD not set", NULL, NULL, 1));
 	if (ft_strcmp(get_key_value(lst, "PWD"), get_key_value(lst, "OLDPWD")))
 	{
 		old = ft_strdup(get_key_value(lst, "PWD"));
@@ -48,7 +58,7 @@ static int	swap_old_pwd(char *wd, t_env *lst)
 			printf("%s\n", get_key_value(lst, "PWD"));
 		}
 		else
-			return (cd_error(wd));
+			return (ft_error("cd: OLDPWD not set", NULL, NULL, 1));
 	}
 	else
 		printf("%s\n", get_key_value(lst, "PWD"));

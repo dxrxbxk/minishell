@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 21:53:46 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 01:29:20 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	t_mini data;
-	if (!*env || !env)
+	if (!env || !*env)
 		env = create_env();
 	get_env(&data, env);
 	get_path(&data, env);
