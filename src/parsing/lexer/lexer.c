@@ -6,24 +6,25 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:36:50 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 17:39:38 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 06:28:10 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-//lexer takes a string and returns a filled token structure (token pos, type, and the content attached to it
 static int	ft_token_size(char *str, int *i)
 {
-	int size;
+	int	size;
 	int	y;
 
 	size = 0;
 	if (ft_strchr("\n\t |\\$'\"><&()*", str[(*i)]))
 	{
-		if (!ft_strncmp("<<", str + *i, 2) || !ft_strncmp(">>",str + *i, 2))
+		if (!ft_strncmp("<<", str + *i, 2)
+			|| !ft_strncmp(">>", str + *i, 2))
 			return (2);
-		if (!ft_strncmp("&&", str + *i, 2) || !ft_strncmp("||", str + *i, 2))
+		if (!ft_strncmp("&&", str + *i, 2)
+			|| !ft_strncmp("||", str + *i, 2))
 			return (2);
 		if (ft_strncmp("&", str + *i, 1))
 			return (1);
@@ -38,21 +39,8 @@ static int	ft_token_size(char *str, int *i)
 	return (size);
 }
 
-//pas a la norme menfou
-static t_type	ft_token_type(char *str)
+static t_type	ft_token_type2(char *str)
 {
-	if (!ft_strcmp(" ", str) || !ft_strcmp("\t", str) || !ft_strcmp("\n", str))
-		return (WHITE_SPACE);
-	if (!ft_strcmp("|", str))
-		return (PIPE);
-	if (!ft_strcmp("*", str))
-		return (WILDCARDS);
-	if (!ft_strcmp("$", str))
-		return (DOLLAR);
-	if (!ft_strcmp("'", str))
-		return (QUOTE);
-	if (!ft_strcmp("\"", str))
-	   return (D_QUOTE);
 	if (!ft_strcmp(">", str))
 		return (GREAT);
 	if (!ft_strcmp("<", str))
@@ -72,11 +60,28 @@ static t_type	ft_token_type(char *str)
 	return (WORD);
 }
 
-// parse token = filling the token structure
+static t_type	ft_token_type(char *str)
+{
+	if (!ft_strcmp(" ", str) || !ft_strcmp("\t", str))
+		return (WHITE_SPACE);
+	if (!ft_strcmp("|", str))
+		return (PIPE);
+	if (!ft_strcmp("*", str))
+		return (WILDCARDS);
+	if (!ft_strcmp("$", str))
+		return (DOLLAR);
+	if (!ft_strcmp("'", str))
+		return (QUOTE);
+	if (!ft_strcmp("\"", str))
+		return (D_QUOTE);
+	else
+		return (ft_token_type2(str));
+}
+
 static t_token	*ft_extract_token(char *input, int *i)
 {
 	char	*content;
-	int 	size;
+	int		size;
 	t_type	type;
 
 	size = ft_token_size(input, i);
@@ -92,7 +97,7 @@ int	lexer(t_token **token, char *input)
 {
 	t_token	*new;
 	int		i;
- 
+
 	i = 0;
 	while (input[i])
 	{

@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:34:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/16 13:40:57 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 06:10:03 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char *get_input(void)
+char	*get_input(void)
 {
 	char	*input;
 
@@ -27,7 +27,7 @@ char *get_input(void)
 		if (!isatty(2))
 			input = readline("");
 		else
-			input = readline("bash-1.0$ ");
+			input = readline("minish-1.0$ ");
 		if (input)
 			add_history(input);
 	}

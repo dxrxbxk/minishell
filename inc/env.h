@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:30:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 19:23:30 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 03:45:12 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <struct.h>
 
+void	create_env_node(t_env **first, void *key, void *value);
 int		get_shlvl(t_mini *data);
 char	**create_env(void);
 int		free_data(t_mini *data);

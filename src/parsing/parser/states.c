@@ -6,37 +6,13 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/16 15:59:07 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 05:07:08 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define SYNTAX_ERROR "syntax error near unexpected token `" 
-#define END_QUOTE "\'\n"
-
-int	ft_checkerror(int state, t_token *lst, long separators[3])
-{
-	if ((state == 0 || state == 1 || state == 5)
-		&& !lst && !separators[0] && !separators[1] && !separators[2])
-		return (0);
-	if (state == 5 && separators[0] < 0)
-		ft_error(SYNTAX_ERROR, ")", END_QUOTE, 2);
-	else if (!lst)
-		ft_error(SYNTAX_ERROR, "newline", END_QUOTE, 2);
-	else
-		ft_error(SYNTAX_ERROR, lst->str, END_QUOTE, 2);
-	return (-1);
-}
-
-int	ft_state_5(t_token *lst, long separators[3])
-{
-	ft_move_wspace(&lst, WHITE_SPACE);
-	if (lst && lst->type == RIGHT_P)
-		return (separators[BRACKETS]--, ft_state_5(lst->next, separators));
-	if (lst && (lst->type == AND || lst->type == D_PIPE))
-		return (ft_state_4(lst->next, separators));
-	return (ft_checkerror(5, lst, separators));
-}
+#define END_QUOTE "\'"
 
 int	ft_state_4(t_token *lst, long separators[3])
 {
@@ -77,7 +53,7 @@ int	ft_state_2(t_token *lst, long separators[3])
 int	ft_state_1(t_token *lst, long separators[3])
 {
 	if (lst && (lst->type == QUOTE || lst->type == D_QUOTE))
-		ft_move_next(&lst, lst->type, &separators[lst->type - 5]); //potential problem
+		ft_move_next(&lst, lst->type, &separators[lst->type - 5]);
 	ft_move_wspace(&lst, WHITE_SPACE);
 	if (lst && (lst->type == QUOTE || lst->type == D_QUOTE))
 		return (ft_state_1(lst, separators));

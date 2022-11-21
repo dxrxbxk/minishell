@@ -6,11 +6,19 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 21:11:31 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:15:13 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	create_env_node(t_env **first, void *key, void *value)
+{
+	t_env *new;
+
+	new = ft_env_new(ft_strdup(key), ft_strdup(value));
+	ft_env_addback(first, new);
+}
 
 void	ft_env_addback(t_env **first, t_env *new)
 {
@@ -50,7 +58,7 @@ void	print_env_export(t_env *print)
 	{
 		if (tmp->value)
 			printf("export %s=\"%s\"\n", tmp->key, tmp->value);
-		else if (tmp->key)
+		else if (tmp->key && *tmp->key != '\0')
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}

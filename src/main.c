@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 01:29:20 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 06:21:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	prompt(t_mini *data)
 	input = NULL;
 	tok = NULL;
 	root = NULL;
+	data->root = root;
+	ft_memptr_data(&data);
 //	rl_outstream = stderr;
 	while (1)
 	{

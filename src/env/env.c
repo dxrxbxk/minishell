@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 21:58:55 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:15:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int	get_env(t_mini *data, char **env)
 		(*elm) = NULL;
 		i++;
 	}
+	*elm = malloc(sizeof(t_env));
+	(*elm)->key = ft_strdup("");
+	(*elm)->value = NULL;
+	elm = &((*elm)->next);
+	(*elm) = NULL;
 	return (0);
 }
 
@@ -98,6 +103,8 @@ int	get_shlvl(t_mini *data)
 	char	*tmp;
 	int		ret;
 
+	if (!get_key_value(data->env, "SHLVL"))
+		create_env_node(&data->env, "SHLVL", "0");	
 	value = ft_strdup(get_key_value(data->env, "SHLVL"));
 	if (!value)
 		return (-1);

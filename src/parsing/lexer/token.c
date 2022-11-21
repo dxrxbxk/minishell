@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:10:15 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/13 22:36:02 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/21 05:01:31 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_list(t_token *print)
 
 void	ft_tokenadd_back(t_token **first, t_token *new)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = *first;
 	if (!*first)
@@ -62,7 +62,7 @@ void	ft_tokenadd_inside(t_token *current, t_token *new)
 
 t_token	*ft_token_new(void *content, t_type type)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
