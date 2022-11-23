@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 22:33:57 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 06:04:27 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_exit(t_env **lst, char **av, int ac)
 	long	status;
 	t_mini	**data;
 	t_child	**child;
-	
+
 	ft_putstr_fd("exit\n", 2);
 	if (ac > 2)
 		return (ft_error("exit:", NULL, " too many arguments", 1));
@@ -90,8 +90,6 @@ int	ft_exit(t_env **lst, char **av, int ac)
 		ft_free_ast((*data)->root);
 	if (data && *data)
 		ft_free_data(*data);
-	if (lst && *lst)
-		free_env(lst);
 	if (ac <= 2)
 		exit((unsigned char)status);
 	return (0);

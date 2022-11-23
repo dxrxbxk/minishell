@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 21:18:37 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 06:05:04 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	free_key_value(char *key, char *value)
 	free(key);
 	free(value);
 }
+
 static void	fill_env(t_env **lst, char *av, int join)
 {
 	char	*key;

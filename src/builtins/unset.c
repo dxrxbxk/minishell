@@ -6,11 +6,12 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 01:21:49 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 02:28:21 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 06:05:24 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
 static void	del_and_link(t_env **lst, char *key)
 {
 	t_env	*tmp;
@@ -33,7 +34,6 @@ static void	del_and_link(t_env **lst, char *key)
 		return ;
 	prev->next = tmp->next;
 	ft_env_delone(tmp);
-
 }
 
 int	ft_unset(t_env **lst, char **av, int ac)

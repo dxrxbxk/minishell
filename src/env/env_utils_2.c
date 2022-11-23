@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 05:05:31 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 06:04:44 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_env_export(t_env *print)
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}
-//	free_env(&tmp);
+	free_env(&tmp);
 }
 
 t_env	*lst_copy(t_env *lst)
