@@ -17,11 +17,9 @@ int	ft_findi(char *str, char find)
 	int	i;
 
 	i = 0;
-	if (!str || !find)
+	if (!str)
 		return (-1);
 	while (str[i] && str[i] != find)
 		i++;
-	if (str[i] == find)
-		return (i);
 	return (i);
 }

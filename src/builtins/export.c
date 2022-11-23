@@ -33,6 +33,11 @@ static int	export_key(char *str, int *join)
 	return (-1);
 }
 
+static void	free_key_value(char *key, char *value)
+{
+	free(key);
+	free(value);
+}
 static void	fill_env(t_env **lst, char *av, int join)
 {
 	char	*key;
@@ -56,6 +61,8 @@ static void	fill_env(t_env **lst, char *av, int join)
 		new = ft_env_new(key, value);
 		ft_env_addback(lst, new);
 	}
+	else
+		free_key_value(key, value);
 }
 
 int	ft_export(t_env **lst, char **av, int ac)

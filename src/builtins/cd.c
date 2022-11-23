@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:34:03 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 22:55:25 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 05:31:10 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	replace_pwd(char *replace, t_env **lst)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return ;
-	if (!get_key_value(*lst, replace))
+	if (!get_key_value(*lst, cwd))
 	{
-		new = ft_env_new(replace, cwd);
+		new = ft_env_new(ft_strdup(replace), cwd);
 		ft_env_addback(lst, new);
 	}
 	else
-		ft_replace_env(*lst, replace, cwd);
+		ft_replace_env(*lst, ft_strdup(replace), cwd);
 }
 
 int	ft_cd(t_env **lst, char **av, int ac)
