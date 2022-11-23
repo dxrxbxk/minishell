@@ -37,6 +37,6 @@ int		last_elem(t_env **elm);
 t_env	*lst_copy(t_env *lst);
 void	sort_list(t_env *lst);
 void	ft_env_delone(t_env *elem);
-void	free_env(t_env **lst);
+void	free_env(t_env *lst);
 
 #endif

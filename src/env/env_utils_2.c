@@ -26,7 +26,7 @@ void	print_env_export(t_env *print)
 			printf("export %s\n", tmp->key);
 		tmp = tmp->next;
 	}
-	free_env(&tmp);
+	free_env(tmp);
 }
 
 t_env	*lst_copy(t_env *lst)

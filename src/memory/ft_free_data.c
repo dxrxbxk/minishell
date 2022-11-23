@@ -15,7 +15,7 @@
 int	ft_free_data(t_mini *data)
 {
 	free_tab(&data->spath);
-	free_env(env);
+	free_env(data->env);
 	free(data->path);
 	return (0);
 }
