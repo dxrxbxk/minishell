@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:53:22 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 04:01:47 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:24:47 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	prompt(t_mini *data)
 		ft_reset_vars(&input, &tok, &root, &ptr);
 		ft_memptr_child(&ptr);
 		handle_signals();
-		input = get_input();
+		input = get_input(g_status);
 		if (input == NULL)
 			ft_exit(&data->env, NULL, 0);
 		if (parsing(input, &tok, &root, data->env) != 0)

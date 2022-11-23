@@ -111,6 +111,7 @@ override FILES			:=	$(addsuffix .c, \
 							ft_atoi \
 							ft_lst_to_tab \
 							ft_mega_join \
+							ft_strrchr \
 							get_next_line \
 							get_input \
 							ft_itoa)

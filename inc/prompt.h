@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_input.c                                        :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 13:34:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 06:10:03 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/23 19:05:30 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/23 20:06:16 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef PROMPT_H
+# define PROMPT_H
 
-char	*get_input(void)
-{
-	char	*input;
+# define SHELL "\033[1m\033[30;44m minishell \033[0m"
+# define GREEN_ARROW "\033[1m\033[32m ❱ \033[0m"
+# define RED_ARROW "\033[1m\033[31m ❱ \033[0m"
+# define PWD_COLOR "\033[1m\033[30;47m "
+# define RESET "\033[0m"
 
-	if (!isatty(0))
-	{
-		input = get_next_line(0);
-		if (input && input[ft_strlen(input) - 1] == '\n')
-			input[ft_strlen(input) - 1] = '\0';
-	}
-	else
-	{
-		if (!isatty(2))
-			input = readline("");
-		else
-			input = readline("minish-1.0$ ");
-		if (input)
-			add_history(input);
-	}
-	return (input);
-}
+#endif
