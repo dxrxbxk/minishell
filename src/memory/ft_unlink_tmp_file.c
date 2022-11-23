@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_redirections.c                               :+:      :+:    :+:   */
+/*   ft_unlink_tmp_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 18:48:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:48:12 by momadani         ###   ########.fr       */
+/*   Created: 2022/11/21 16:15:08 by momadani          #+#    #+#             */
+/*   Updated: 2022/11/21 16:15:43 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_print_redirections(t_redir *redir)
+#include <minishell.h>
+
+int	ft_unlink_tmp_file(t_ast *ast)
 {
-	char	*msg;
-	while (redir->type != END)
+	while (ast && ast->left)
 	{
-		if (redir->type == INFILE)
-			msg = "<";
-		if (redir->type == HEREDOC)
-			msg = "<<";
-		if (redir->type == OUTFILE)
-			msg = ">";
-		if (redir->type == APPEND)
-			msg = ">>";
-		printf("\ntype : %s path : %s\n", msg, redir->path);
-		redir++;
+		if (ast->token->type == D_LESS)
+		{
+			if (unlink(ast->left->token->str) == -1)
+				ft_error("unlink: ", strerror(errno), NULL, -1);
+			break ;
+		}
+		ast = ast->left;
 	}
-	return (0);
+	return (ast != NULL);
 }

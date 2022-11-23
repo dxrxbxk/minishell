@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:51:06 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 11:55:49 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:03:30 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	handle_sigint_heredoc(int signal)
 {
-	t_mini **data;
+	t_mini	**data;
 
 	(void)signal;
 	data = ft_memptr_data(NULL);
 	ft_free_ast_child((*data)->root);
 	ft_free_data(*data);
-	exit(130); 
+	exit(130);
 }
 
 void	exec_heredoc_child(char *file_path, char *delim, t_mini *data)

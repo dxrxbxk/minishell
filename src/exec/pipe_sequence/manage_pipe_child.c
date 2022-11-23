@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:11:11 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 03:33:50 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:08:20 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_init_children(t_child **first, t_ast *ast)
 
 int	launch_pipe_children(t_child *child, t_ast *ast, t_mini *data)
 {
-	while (child) //&& ast
+	while (child)
 	{
 		if (ft_create_pipe(child) == -1)
 			return (-1);

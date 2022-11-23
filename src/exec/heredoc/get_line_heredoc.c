@@ -5,28 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 18:49:19 by diroyer           #+#    #+#             */
-/*   Updated: 2022/04/08 15:50:42 by diroyer          ###   ########.fr       */
+/*   Created: 2022/11/16 12:42:21 by diroyer           #+#    #+#             */
+/*   Updated: 2022/11/16 12:51:01 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "get_next_line.h"
-#include <unistd.h>
+#include <minishell.h>
+#define BUFFER_SIZE 1
 
-static char	*ft_strchrg(char *s, char c)
+static char	*ft_substr(char *s, unsigned int start, size_t len)
 {
+	char	*array;
+	size_t	slen;
+	size_t	i;
+
 	if (!s)
 		return (NULL);
-	while (*s)
+	slen = ft_strlen(s);
+	if (start >= slen)
+		len = 0;
+	else if (start + len > slen)
+		len = slen - start;
+	array = malloc(len + 1);
+	if (!array)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		if (*s == c)
-			return (s);
-		s++;
+		array[i] = s[start + i];
+		i++;
 	}
-	if (c == '\0')
-		return (s);
-	return (NULL);
+	array[i] = '\0';
+	return (array);
 }
 
 static void	read_line(char **s, int fd)
@@ -40,9 +50,9 @@ static void	read_line(char **s, int fd)
 	{
 		buf[ret] = '\0';
 		tmp = *s;
-		*s = ft_strjoing(*s, buf);
+		*s = ft_strjoin(*s, buf);
 		free(tmp);
-		if (ft_strchrg(buf, '\n'))
+		if (ft_strchr(buf, '\n'))
 			break ;
 		ret = read(fd, buf, BUFFER_SIZE);
 	}
@@ -59,28 +69,28 @@ static char	*get_line(char **s)
 		i++;
 	if ((*s)[i] == '\n')
 		i++;
-	line = ft_substrg(*s, 0, i);
+	line = ft_substr(*s, 0, i);
 	tmp = *s;
-	*s = ft_substrg(tmp, i, ft_strleng(tmp) - i);
+	*s = ft_substr(tmp, i, ft_strlen(tmp) - i);
 	free(tmp);
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*s = NULL;
+	static char	*s[1024];
 
-	if (fd < 0)
+	if (fd < 0 || read(fd, NULL, 0) < 0 || fd > 1024)
 		return (NULL);
-	if (!ft_strchrg(s, '\n'))
-		read_line(&s, fd);
-	if (!s)
+	if (!ft_strchr(s[fd], '\n'))
+		read_line(s + fd, fd);
+	if (!s[fd])
 		return (NULL);
-	if (!s[0])
+	if (!s[fd][0])
 	{
-		free(s);
-		s = NULL;
+		free(s[fd]);
+		s[fd] = NULL;
 		return (NULL);
 	}
-	return (get_line(&s));
+	return (get_line(s + fd));
 }

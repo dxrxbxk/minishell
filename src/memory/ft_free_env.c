@@ -19,15 +19,15 @@ void	ft_env_delone(t_env *elem)
 	free(elem);
 }
 
-void	free_env(t_env *lst)
+void	free_env(t_env **lst)
 {
 	t_env	*tmp;
 
 	tmp = NULL;
-	while (lst)
+	while (*lst)
 	{
-		tmp = lst->next;
-		ft_env_delone(lst);
-		lst = tmp;
+		tmp = (*lst)->next;
+		ft_env_delone(*lst);
+		*lst = tmp;
 	}
 }

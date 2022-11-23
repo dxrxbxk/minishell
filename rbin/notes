@@ -1,5 +1,0 @@
-builtins avec redir = fork
-plusieurs heredoc = plusieurs tmp
-ctrl c du heredoc = close fd 0 (dup avant)
-rl_stream = stderr (mriaud)
-isatty

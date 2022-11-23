@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 15:53:09 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 02:47:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_join_env(t_env *lst, char *cmp, char *value)
 		{
 			tmp = lst->value;
 			lst->value = ft_strjoin(lst->value, value);
+			if (value)
+				free(value);
 			free(tmp);
 		}
 		lst = lst->next;

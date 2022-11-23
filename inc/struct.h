@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:46:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 04:25:47 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:30:04 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_env
 typedef struct s_built
 {
 	char	*cmd;
-	int		(*builtins)(t_env *, char **, int);
+	int		(*builtins)(t_env **, char **, int);
 }				t_built;
 
 typedef struct s_redir
@@ -97,7 +97,8 @@ typedef struct s_child
 
 typedef struct s_mini
 {
-	char	**sPATH;
+	char	*path;
+	char	**spath;
 	t_ast	**root;
 	t_env	*env;
 	t_built	*built;

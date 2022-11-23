@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 22:41:05 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 11:55:45 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/23 02:09:20 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static int	is_heredoc(t_ast *ast)
 {
-	int	is_heredoc;
-
-	is_heredoc = 0;
 	while (ast && ast->token->type != D_LESS)
 		ast = ast->left;
 	return (ast != NULL);
@@ -26,12 +23,9 @@ static int	set_cmd_heredoc(t_ast *ast, t_mini *data)
 {
 	char	*file_path;
 	char	*delim;
-	int		ret;
 
-	file_path = NULL;
 	if (!ast || !is_heredoc(ast->left))
 		return (0);
-	ret = 0;
 	file_path = heredoc_path();
 	while (ast)
 	{

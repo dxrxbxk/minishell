@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:22:44 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 04:53:33 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:34:04 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	ft_exit_free(t_mini *data, t_child *child, int retval)
 	ft_free_children(child);
 	ft_free_ast_child(data->root);
 	ft_free_data(data);
-	(void)data;
-	(void)child;
 	exit(retval);
 }
 

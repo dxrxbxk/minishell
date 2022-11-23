@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 23:55:37 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 09:02:35 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:15:33 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ int	ft_free_ast_node(t_ast **ast)
 	free(*ast);
 	*ast = NULL;
 	return (0);
-}
-
-int	ft_unlink_tmp_file(t_ast *ast)
-{
-	while (ast && ast->left)
-	{
-		if (ast->token->type == D_LESS)
-		{
-			if (unlink(ast->left->token->str) == -1)
-				ft_error("unlink: ", strerror(errno), NULL, -1);
-			break ;
-		}
-		ast = ast->left;
-	}
-	return (ast != NULL);
 }
 
 int	ft_free_cmd_args_branch(t_ast **ast)

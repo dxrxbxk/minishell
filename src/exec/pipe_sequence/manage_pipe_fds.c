@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 03:16:33 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/20 18:58:56 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:08:55 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	ft_close_pipe(t_child *child)
 		pipeout_fd = child->prev->redir[pipeout_rank].fd;
 	if (child->redir[pipein_rank].type == PIPE_IN)
 		pipein_fd = child->redir[pipein_rank].fd;
-	if (close(pipeout_fd) == -1) //add ft close that ignore if fd == -1
+	if (close(pipeout_fd) == -1)
 		return (ft_error("close: ", strerror(errno), NULL, -1));
-	if (close(pipein_fd) == -1) //add ft close that ignore if fd == -1
+	if (close(pipein_fd) == -1)
 		return (ft_error("close: ", strerror(errno), NULL, -1));
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:07:13 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 15:49:34 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/23 02:28:58 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,28 @@ int	get_env(t_mini *data, char **env)
 		elm = &((*elm)->next);
 		(*elm) = NULL;
 	}
-	last_elem(elm);
 	return (0);
 }
 
 int	get_path(t_mini *data, char **env)
 {
 	int		i;
-	char	*path;
 
 	i = 0;
-	data->sPATH = NULL;
+	data->spath = NULL;
+	data->path = NULL;
 	if (!env)
 		return (-1);
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH", 4) == 0)
 		{
-			path = ft_strdup(ft_strchr(env[i], '=') + 1);
-			if (!path)
+			data->path = ft_strdup(ft_strchr(env[i], '=') + 1);
+			if (!data->path)
 				return (-1);
-			data->sPATH = ft_split(path, ':');
-			if (!data->sPATH)
+			data->spath = ft_split(data->path, ':');
+			if (!data->spath)
 				return (-1);
-			free(path);
 		}
 		i++;
 	}
@@ -100,7 +98,7 @@ int	get_shlvl(t_mini *data)
 	int		ret;
 
 	if (!get_key_value(data->env, "SHLVL"))
-		create_env_node(&data->env, "SHLVL", "0");	
+		create_env_node(&data->env, "SHLVL", "0");
 	value = ft_strdup(get_key_value(data->env, "SHLVL"));
 	if (!value)
 		return (-1);

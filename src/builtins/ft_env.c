@@ -12,10 +12,10 @@
 
 #include <minishell.h>
 
-int	ft_env(t_env *lst, char **av, int ac)
+int	ft_env(t_env **lst, char **av, int ac)
 {
 	(void)av;
 	(void)ac;
-	print_env(lst);
+	print_env(*lst);
 	return (0);
 }

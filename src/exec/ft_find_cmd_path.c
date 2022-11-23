@@ -6,7 +6,7 @@
 /*   By: momadani <momadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 00:01:22 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/21 08:40:31 by momadani         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:25:13 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	ft_find_cmd_path(t_child *child, t_mini *data)
 	if (!child->pathname)
 		ft_exit_free(data, child, ft_error(MEM_ERROR, NULL, NULL, 1));
 	if (ft_strchr(cmd, '.') || ft_strchr(cmd, '/')
-		|| !data->sPATH || !*data->sPATH)
+		|| !data->spath || !*data->spath)
 		ft_check_absolute_relative_path(data, child);
-	else if (!*child->pathname || !ft_try_path(child, data, data->sPATH))
+	else if (!*child->pathname || !ft_try_path(child, data, data->spath))
 		ft_exit_free(data, child,
 			ft_error(child->argv[0], ": command not found", NULL, 127));
 	return (0);

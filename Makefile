@@ -93,6 +93,7 @@ override FILES			:=	$(addsuffix .c, \
 							heredoc_child		\
 							ft_free_children	\
 							ft_free_ast			\
+							ft_unlink_tmp_file	\
 							ft_free_data		\
 							ft_free_token_lst	\
 							ft_free_ast_child	\
@@ -149,7 +150,7 @@ endef
 
 .PHONY:					all clean fclean re ascii
 
-all:					ascii2 $(NAME)
+all:					$(NAME) ascii2
 
 $(NAME):				$(OBJ)
 						@$(LINK)

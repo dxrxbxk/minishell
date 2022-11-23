@@ -40,7 +40,7 @@ static int	ft_echo_print(char **av, int ac, int i, int n)
 	return (0);
 }
 
-int	ft_echo(t_env *lst, char **av, int ac)
+int	ft_echo(t_env **lst, char **av, int ac)
 {
 	int	i;
 

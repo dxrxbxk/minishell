@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int	ft_pwd(t_env *lst, char **av, int ac)
+int	ft_pwd(t_env **lst, char **av, int ac)
 {
 	char	*cwd;
 	char	*cpy;
@@ -20,14 +20,14 @@ int	ft_pwd(t_env *lst, char **av, int ac)
 
 	(void)av;
 	(void)ac;
-	if (get_key_value(lst, "PWD"))
-		cwd = ft_strdup(get_key_value(lst, "PWD"));
+	if (get_key_value(*lst, "PWD"))
+		cwd = ft_strdup(get_key_value(*lst, "PWD"));
 	else
 	{
 		cwd = getcwd(NULL, 0);
 		cpy = ft_strdup(cwd);
 		new = ft_env_new("PWD", cpy);
-		ft_env_addback(&lst, new);
+		ft_env_addback(lst, new);
 	}
 	if (!cwd)
 		return (ft_error("pwd: ", strerror(errno), NULL, 1));
