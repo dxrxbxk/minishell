@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:34:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 20:07:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/11/24 00:02:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ret_pwd_color(void)
 	if (!cwd)
 		return (NULL);
 	tmp = cwd;
-	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/'), " \033[0m : ");
+	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/'), " \033[0m");
 	free(tmp);
 	return (cwd);
 }
@@ -38,7 +38,7 @@ static char	*get_prompt(int ret)
 	else
 		arrow = RED_ARROW;
 	pwd = ret_pwd_color();
-	prompt = ft_mega_join(arrow, SHELL, pwd);
+	prompt = ft_mega_join(SHELL, pwd, arrow);
 	free(pwd);
 	return (prompt);
 }
