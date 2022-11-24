@@ -37,6 +37,8 @@
 # include <signals.h>
 # include <exec.h>
 # include <memory.h>
+# include <sys/ioctl.h>
+
 
 extern int	g_status;
 

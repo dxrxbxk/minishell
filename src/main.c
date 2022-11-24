@@ -34,10 +34,10 @@ int	prompt(t_mini *data)
 	ft_memptr_data(&data);
 	while (1)
 	{
+		handle_signals();
 		data = get_env_path(data->env, data);
 		ft_reset_vars(&input, &tok, &root, &ptr);
 		ft_memptr_child(&ptr);
-		handle_signals();
 		input = get_input(g_status);
 		if (input == NULL)
 			ft_exit(&data->env, NULL, 0);
