@@ -32,7 +32,7 @@ static void	replace_pwd(char *replace, t_env **lst)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return ;
-	if (!get_key_value(*lst, cwd))
+	if (!get_key_value(*lst, replace))
 	{
 		new = ft_env_new(ft_strdup(replace), cwd);
 		ft_env_addback(lst, new);
