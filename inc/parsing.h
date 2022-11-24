@@ -15,7 +15,6 @@
 
 # include <minishell.h>
 
-char	*get_input(int ret);
 int		parsing(char *input, t_token **first, t_ast **root, t_env *env);
 
 int		ast_init(t_ast **root, t_token *token);

@@ -13,10 +13,15 @@
 #ifndef PROMPT_H
 # define PROMPT_H
 
-# define SHELL "\033[1m\033[30;44m minishell \033[0m"
-# define GREEN_ARROW "\033[1m\033[32m ❱ \033[0m"
-# define RED_ARROW "\033[1m\033[31m ❱ \033[0m"
-# define PWD_COLOR "\033[1m\033[30;47m "
-# define RESET "\033[0m"
+# ifndef THEME_1
+#  define THEME_1
+#  define SHELL "\033[1m\033[44;30m "
+#  define GREEN_ARROW "\033[1m\033[32m❱ \033[0m"
+#  define RED_ARROW "\033[1m\033[31m❱ \033[0m"
+#  define PWD_COLOR "\033[1m\033[30m "
+#  define RESET "\033[0m"
+# endif
+
+char	*get_input(int ret, t_env *lst);
 
 #endif

@@ -39,7 +39,6 @@
 # include <memory.h>
 # include <sys/ioctl.h>
 
-
 extern int	g_status;
 
 void	print_tab(char **tab);

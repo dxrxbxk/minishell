@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <prompt.h>
 
 int	g_status = 0;
 
@@ -38,7 +39,7 @@ int	prompt(t_mini *data)
 		data = get_env_path(data->env, data);
 		ft_reset_vars(&input, &tok, &root, &ptr);
 		ft_memptr_child(&ptr);
-		input = get_input(g_status);
+		input = get_input(g_status, data->env);
 		if (input == NULL)
 			ft_exit(&data->env, NULL, 0);
 		if (parsing(input, &tok, &root, data->env) != 0)

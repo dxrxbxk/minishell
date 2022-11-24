@@ -12,8 +12,22 @@
 
 #include <minishell.h>
 #include <prompt.h>
+#include <termios.h>
 
-char	*ret_pwd_color(void)
+static char	*get_user_id(t_env *lst)
+{
+	char	*user;
+	char	*user_color;
+
+	if (!get_env_key(lst, "USER"))
+		user = "not found";
+	else
+		user = get_key_value(lst, "USER");
+	user_color = ft_mega_join(SHELL, user, " \033[0m");
+	return (user_color);
+}
+
+static char	*ret_pwd_color(void)
 {
 	char	*cwd;
 	char	*tmp;
@@ -22,28 +36,31 @@ char	*ret_pwd_color(void)
 	if (!cwd)
 		return (NULL);
 	tmp = cwd;
-	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/'), " \033[0m");
+	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/') + 1, " \033[0m");
 	free(tmp);
 	return (cwd);
 }
 
-static char	*get_prompt(int ret)
+static char	*get_prompt(int ret, t_env *lst)
 {
 	char	*prompt;
 	char	*pwd;
 	char	*arrow;
+	char	*user;
 
 	if (ret == 0)
 		arrow = GREEN_ARROW;
 	else
 		arrow = RED_ARROW;
 	pwd = ret_pwd_color();
-	prompt = ft_mega_join(SHELL, pwd, arrow);
+	user = get_user_id(lst);
+	prompt = ft_mega_join(arrow, user, pwd);
 	free(pwd);
+	free(user);
 	return (prompt);
 }
 
-char	*get_input(int ret)
+char	*get_input(int ret, t_env *env)
 {
 	char	*input;
 	char	*prompt;
@@ -60,7 +77,7 @@ char	*get_input(int ret)
 			input = readline("");
 		else
 		{
-			prompt = get_prompt(ret);
+			prompt = get_prompt(ret, env);
 			input = readline(prompt);
 			free(prompt);
 		}
