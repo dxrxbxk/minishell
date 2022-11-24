@@ -20,13 +20,7 @@ int	ft_pwd(t_env **lst, char **av, int ac)
 	(void)av;
 	(void)ac;
 	if (get_key_value(*lst, "PWD"))
-	{
-		cwd = ft_strdup(get_key_value(*lst, "PWD"));
-		if (!cwd)
-			return (ft_error("pwd: ", strerror(errno), NULL, 1));
-		printf("%s\n", cwd);
-		free(cwd);
-	}
+		printf("%s\n", get_key_value(*lst, "PWD"));
 	else
 	{
 		cwd = getcwd(NULL, 0);
@@ -36,7 +30,7 @@ int	ft_pwd(t_env **lst, char **av, int ac)
 		if (!new)
 			return (1);
 		ft_env_addback(lst, new);
-		printf("%s\n", cwd);
+		printf("%s\n", get_key_value(*lst, "PWD"));
 	}
 	return (0);
 }

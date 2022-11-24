@@ -38,7 +38,7 @@ static void	replace_pwd(char *replace, t_env **lst)
 		ft_env_addback(lst, new);
 	}
 	else
-		ft_replace_env(*lst, ft_strdup(replace), cwd);
+		ft_replace_env(*lst, replace, cwd);
 }
 
 int	ft_cd(t_env **lst, char **av, int ac)
