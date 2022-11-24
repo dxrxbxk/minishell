@@ -52,11 +52,11 @@ void	ft_join_env(t_env *lst, char *cmp, char *value)
 	{
 		if (!ft_strcmp(lst->key, cmp))
 		{
+			free(cmp);
 			tmp = lst->value;
 			lst->value = ft_strjoin(lst->value, value);
-			if (value)
-				free(value);
 			free(tmp);
+			free(value);
 		}
 		lst = lst->next;
 	}

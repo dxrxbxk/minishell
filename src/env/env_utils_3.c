@@ -28,6 +28,8 @@ void	create_env_node(t_env **first, void *key, void *value)
 	t_env	*new;
 
 	new = ft_env_new(ft_strdup(key), ft_strdup(value));
+	if (!new)
+		return ;
 	ft_env_addback(first, new);
 }
 

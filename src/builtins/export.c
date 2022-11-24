@@ -43,7 +43,6 @@ static void	fill_env(t_env **lst, char *av, int join)
 {
 	char	*key;
 	char	*value;
-	t_env	*new;
 
 	if (!join)
 		key = ft_strndup(av, ft_findi(av, '='));
@@ -56,12 +55,12 @@ static void	fill_env(t_env **lst, char *av, int join)
 	if (get_env_key(*lst, key) && join == 1)
 		ft_join_env(*lst, key, value);
 	else if (get_env_key(*lst, key) && join == 0 && ft_strchr(av, '='))
-		ft_replace_env(*lst, key, value);
-	else if (!get_env_key(*lst, key))
 	{
-		new = ft_env_new(key, value);
-		ft_env_addback(lst, new);
+		ft_replace_env(*lst, key, value);
+		free(key);
 	}
+	else if (!get_env_key(*lst, key))
+		create_env_node(lst, key, value);
 	else
 		free_key_value(key, value);
 }
