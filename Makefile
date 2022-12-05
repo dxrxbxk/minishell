@@ -4,26 +4,65 @@
 ################################################################################
 
 .DELETE_ON_ERROR:
-.DEFAULT_GOAL			:= all
-SHELL					:= $(shell which zsh)
-.SHELLFLAGS				:= -eu -o pipefail -c
+.DEFAULT_GOAL			:=	all
+SHELL					:=	$(shell which zsh)
+.SHELLFLAGS				:=	-eu -o pipefail -c
 
-### C O M P I L E R   F L A G S ################################################
+### A S C I I   A R T ##########################################################
 
-CC						:= cc #$(shell which gcc)
-STD						:= -std=c99
-CFLAGS					:= -Wall -Wextra -Werror -g3 -D_GNU_SOURCE
-LDFLAGS					?= -MMD -MF
+ART_NAME_1				=	█▀▄▀█ █ █▄░█ █ █▀ █░█ █▀▀ █░░ █░░\n
+ART_NAME_2				=	█░▀░█ █ █░▀█ █ ▄█ █▀█ ██▄ █▄▄ █▄▄\n
 
-override MKDIR			:= mkdir -pv
-override RM				:= rm -rvf
+ART_BONUS_1				=   █▄▄ █▀█ █▄░█ █░█ █▀\n
+ART_BONUS_2				=   █▄█ █▄█ █░▀█ █▄█ ▄█\n
+
+ART_CLN1				=   █▀▀ █░░ █▀▀ ▄▀█ █▄░█\n
+ART_CLN2				=   █▄▄ █▄▄ ██▄ █▀█ █░▀█\n
+
+### D I S P L A Y   F U N C T I O N ############################################
+
+Progress	=	ProgressBar() {												\
+	name=$$1 ;																\
+	if [ $$name = $(lastword $(FILES)) ] ; then name="[DONE]" ; fi ;		\
+	progress=`echo "($(COUNT)*100)/$(words $(FILES))" | bc`;				\
+	done=`echo "($$progress*3)/10" | bc` ;									\
+	left=`echo "30-$$done" | bc` ;											\
+	fill=`printf "%*s" $$done | sed 's/ /█/g'` ;							\
+	empty=`printf "%*s" $$left | sed 's/ /█/g'` ;							\
+	if [ $(COUNT) -ne 1 ] ; then echo -n '$(LINE_CLN)' ; fi ;				\
+	printf " $(CC_WHITE)Compiling source files	: \n\n" ;					\
+	printf " $(CC_GREEN)$$fill$(CC_RED)$$empty$(RESET) $(CC_WHITE)$$progress%%";\
+	printf " $(CC_GREEN)%s$(RESET)" $$name ; 								\
+	$(eval COUNT = $(shell echo $$(($(COUNT) + 1)))) }
+
+define PRINT_ASCII_ART
+	printf "\n $(1)$(2)$(RESET) $(3)$(4)$(RESET)\n"
+endef
+
+### C O L O R S ################################################################
+
+COUNT					=	1
+CC_GREEN				=	\e[38;5;46;1m
+CC_RED					=	\e[31;1m
+CC_WHITE				=	\e[38;5;15;1m
+YELLOW					=	\e[38;5;3m
+PURPLE1					=	\e[38;2;113;31;149m
+PURPLE2					=	\e[38;2;101;25;134m
+GREEN1					=	\e[38;5;46m
+GREEN2					=	\e[38;2;0;235;0m8
+RED1					=	\e[38;5;196m
+RED2					=	\e[38;5;160m
+RESET					=	\e[0m
+LINE_CLN				=	\r\e[0K\e[2A
 
 ### D I R E C T O R Y ' S ######################################################
 
-NAME					:= minishell
+NAME					:=	minishell
+NAME_BONUS				:=	minishell_bonus
 
 override FILES			:=	$(addsuffix .c, \
 							main \
+							parsing	\
 							ft_env \
 							ft_strndup \
 							ft_putendl_fd \
@@ -68,7 +107,6 @@ override FILES			:=	$(addsuffix .c, \
 							ast_utils	\
 							ast_utils_2	\
 							lexer \
-							parsing	\
 							token \
 							exec_builtins \
 							builtins_redirections	\
@@ -116,89 +154,78 @@ override FILES			:=	$(addsuffix .c, \
 							get_input \
 							ft_itoa)
 
-SRCDIR					:= src
-INCDIR					:= inc
-OBJDIR					:= _obj
-DEPDIR					:= _dep
+SRCDIR					:=	src
+INCDIR					:=	inc
+OBJDIR					:=	_obj
+DEPDIR					:=	_dep
+
+### C O M P I L E R   F L A G S ################################################
+
+CC						:=	cc #$(shell which gcc)
+STD						:=	-std=c99
+CFLAGS					:=	-Wall -Wextra -Werror -g3 -D_GNU_SOURCE
+IFLAGS					:=	-I$(INCDIR)
+LFLAGS					:=	-lreadline
+LDFLAGS					?=	-MMD -MF
+
+override MKDIR			:=	mkdir -pv
+override RM				:=	rm -rvf
 
 ### P A T T E R N   R U L E S ##################################################
 
-override SUB			:= $(shell find $(SRCDIR) -type d)
-override OBJ			:= $(FILES:%.c=$(OBJDIR)/%.o)
-override DEP			:= $(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ))
+override SUB			:=	$(shell find $(SRCDIR) -type d)
+override OBJ			:=	$(FILES:%.c=$(OBJDIR)/%.o)
+override DEP			:=	$(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ))
 
 ### U T I L I T Y ##############################################################
-
-COLOR					:= "\033[1;32m"
-PURPLE_1				:= "\e[38;2;113;31;149m"
-PURPLE_2				:= "\e[38;2;101;25;134m"
-RESET					:= "\033[m"
-NEWLINE					:= echo "\n\n"
-LINK					:= echo $(COLOR)L1NK$(RESET)
-LIBRARY					:= echo $(COLOR)L1BRARY$(RESET)
-COMPILE					:= echo $(COLOR)C0MPILATI0N$(RESET)
 
 ### C O M P I L A T I O N   F U N C T I O N ####################################
 
 define COMPILE_RULE
-$(OBJDIR)/%.o:			$(1)/%.c Makefile | $(OBJDIR) $(DEPDIR)
-	$$(CC) $$(STD) -I$$(INCDIR) $$(CFLAGS) \
-	-c $$< -o $$@ \
-	-MMD -MF $$(DEPDIR)/$$(*F).d;
+$(OBJDIR)/%.o:		$(1)/%.c | $(OBJDIR) $(DEPDIR)
+	@$$(CC) $$(STD) $$(IFLAGS) $$(CFLAGS)	\
+	-c $$< -o $$@							\
+	-MMD -MF $$(DEPDIR)/$$(*F).d
+	@$$(Progress) ; ProgressBar $$(shell basename $$<)
 endef
 
 ### R E C I P E S ##############################################################
 
-.PHONY:					all clean fclean re ascii
+.PHONY:	all clean fclean re ascii
 
-all:					$(NAME) ascii2
+all: $(NAME)
 
-$(NAME):				$(OBJ)
-						@$(LINK)
-						$(CC) $^ -lreadline -o $@
+bonus: $(NAME_BONUS)
+
+$(NAME): $(OBJ)
+	@$(CC) $^ $(LFLAGS) -o $@
+	@printf "\n\n $(CC_WHITE)Creating binary	: $(CC_GREEN)%s$(RESET)\n" $(NAME)
+	@$(call PRINT_ASCII_ART,$(PURPLE1),$(ART_NAME_1),$(PURPLE2),$(ART_NAME_2))
 
 -include $(DEP)
-$(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE, $(DIR))))
-
-debug:					
-					@echo $(FILES) \
-					@echo $(NEWLINE) \
-					@echo $(SUB) \
-					@echo $(NEWLINE) \
-					@echo $(OBJ) \
-					@echo $(NEWLINE) \
-					@echo $(INCDIR)
+$(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE,$(DIR))))
 
 $(OBJDIR) $(DEPDIR):
-						@$(MKDIR) $@
+	@$(if $(findstring $@,$(OBJDIR)),$(eval MSG=object))
+	@$(if $(findstring $@,$(DEPDIR)),$(eval MSG=dependency))
+	@printf " $(CC_WHITE)Creating %s directory	: $(RESET)$(YELLOW)" $(MSG)
+	@$(MKDIR) $@
+	@printf "$(RESET)"
 
-clean:					;
-						@$(RM) $(OBJDIR) $(DEPDIR)
+clean:	;
+	@printf " $(CC_WHITE)Deleting object files	: $(CC_RED)\e[31;9m*.o *.d\n"	
+	@$(RM) $(OBJDIR) $(DEPDIR) rl_leaks.txt
+	@printf "$(RESET)"
 
-fclean:					clean
-						@$(RM) $(NAME)
+bclean:
+	@printf " $(CC_WHITE)Deleting binary files	: $(CC_RED)\e[31;9m$(NAME) $(NAME_BONUS)\n"
+	@$(RM) $(NAME)
+	@printf "$(RESET)"
 
-re:						fclean all
+fclean:	clean bclean
+	@$(call PRINT_ASCII_ART, $(RED1), $(ART_CLN1), $(RED2), $(ART_CLN2))
 
-leak:
-						@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > rl_leaks.txt
+leaks:
+	@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > rl_leaks.txt
 
-
-compile:				
-						@$(COMPILE)
-
-ascii2:			
-			@echo				"                                 \n"	\
-					$(PURPLE_1)	"█▀▄▀█ █ █▄░█ █ █▀ █░█ █▀▀ █░░ █░░\n"	\
-					$(PURPLE_2)	"█░▀░█ █ █░▀█ █ ▄█ █▀█ ██▄ █▄▄ █▄▄\n"	\
-					$(RESET);
-
-ascii:                  
-						@echo \
-						$(COLOR) \
-						"███    ██████████   ████████ \n" \
-						"████  █████   ███  ████		\n" \
-						"██ ████ ████████████ █████		\n" \
-						"██  ██  ███   ███  ████		\n" \
-						"██      ███   ███   ████████	\n" \
-						$(RESET);
+re:		fclean all
