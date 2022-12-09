@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:32:09 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 19:23:49 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/12/08 23:44:37 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define PARSING_H
 
 # include <minishell.h>
+
+# define SYNTAX_ERROR "syntax error near unexpected token `" 
+# define END_QUOTE "\'"
+# define BRACKETS 0
+# define QUOTES 1
 
 int		parsing(char *input, t_token **first, t_ast **root, t_env *env);
 
@@ -45,13 +50,13 @@ int		ft_quotes_expand(t_token *lst);
 int		ft_wildcards_expand(t_token *lst);
 
 void	ft_parserror(char *msg);
-int		ft_checkerror(int state, t_token *lst, long separators[3]);
-int		ft_state_5(t_token *lst, long separators[3]);
-int		ft_state_4(t_token *lst, long separators[3]);
-int		ft_state_3(t_token *lst, long separators[3]);
-int		ft_state_2(t_token *lst, long separators[3]);
-int		ft_state_1(t_token *lst, long separators[3]);
-int		ft_state_0(t_token *lst, long separators[3]);
+int		ft_checkerror(int state, t_token *lst, long separators[2]);
+int		ft_state_5(t_token *lst, long separators[2]);
+int		ft_state_4(t_token *lst, long separators[2]);
+int		ft_state_3(t_token *lst, long separators[2]);
+int		ft_state_2(t_token *lst, long separators[2]);
+int		ft_state_1(t_token *lst, long separators[2]);
+int		ft_state_0(t_token *lst, long separators[2]);
 
 int		ft_token_is_word(t_type type);
 int		ft_token_is_redir(t_type type);

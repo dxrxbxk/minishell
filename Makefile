@@ -20,6 +20,8 @@ ART_CLN1				=   █▀▀ █░░ █▀▀ ▄▀█ █▄░█\n
 ART_CLN2				=   █▄▄ █▄▄ ██▄ █▀█ █░▀█\n
 
 ### D I S P L A Y   F U N C T I O N ############################################
+#	if [ $(COUNT) -ne 1 ] ; then echo -n '$(ZZ_LINE_CLN)' ; fi ;				\
+#	printf " $(CC_WHITE)Compiling source files	: \n\n" ;					\
 
 Progress	=	ProgressBar() {												\
 	name=$$1 ;																\
@@ -29,10 +31,10 @@ Progress	=	ProgressBar() {												\
 	left=`echo "30-$$done" | bc` ;											\
 	fill=`printf "%*s" $$done | sed 's/ /█/g'` ;							\
 	empty=`printf "%*s" $$left | sed 's/ /█/g'` ;							\
-	if [ $(COUNT) -ne 1 ] ; then echo -n '$(LINE_CLN)' ; fi ;				\
-	printf " $(CC_WHITE)Compiling source files	: \n\n" ;					\
-	printf " $(CC_GREEN)$$fill$(CC_RED)$$empty$(RESET) $(CC_WHITE)$$progress%%";\
-	printf " $(CC_GREEN)%s$(RESET)" $$name ; 								\
+	if [ $(COUNT) = 1 ] ; then line=" $(CC_WHITE)Compiling source files	: \n\n" ; fi ;\
+	line+="\r\e[0K $(CC_GREEN)$$fill$(CC_RED)$$empty$(RESET) $(CC_WHITE)$$progress%	\
+	 $(CC_GREEN)$$name$(RESET)" ;											\
+	echo -n $$line															\
 	$(eval COUNT = $(shell echo $$(($(COUNT) + 1)))) }
 
 define PRINT_ASCII_ART
@@ -49,7 +51,7 @@ YELLOW					=	\e[38;5;3m
 PURPLE1					=	\e[38;2;113;31;149m
 PURPLE2					=	\e[38;2;101;25;134m
 GREEN1					=	\e[38;5;46m
-GREEN2					=	\e[38;2;0;235;0m8
+GREEN2					=	\e[38;2;0;235;0m
 RED1					=	\e[38;5;196m
 RED2					=	\e[38;5;160m
 RESET					=	\e[0m
@@ -60,99 +62,99 @@ LINE_CLN				=	\r\e[0K\e[2A
 NAME					:=	minishell
 NAME_BONUS				:=	minishell_bonus
 
-override FILES			:=	$(addsuffix .c, \
-							main \
-							parsing	\
-							ft_env \
-							ft_strndup \
-							ft_putendl_fd \
-							ft_swap_str \
-							ft_isalpha \
-							ft_isalnum \
-							ft_strcmp \
-							ft_isdigit \
-							ft_findi \
-							ft_strncmp \
-							ft_strlen \
-							ft_putstr_fd \
-							ft_strchr \
-							ft_putchar_fd \
-							ft_strjoin \
-							ft_split \
-							ft_strlcat \
-							ft_strdup \
-							ft_strlcpy \
-							ft_calloc \
-							ft_bzero \
-							unset \
-							exit \
-							cd \
-							echo \
-							export \
-							pwd \
-							signals \
-							expand \
-							ft_squotes_dollar_expand \
-							ft_usual_dollar_expand \
-							ft_quotes_expand \
-							states \
-							states_2 \
-							parser \
-							ft_dquotes_dollar_expand \
-							ft_tokencat \
-							ft_dollar_expand 	\
-							ft_wildcards_expand	\
-							ast_init	\
-							ast_add_cmd_seq	\
-							ast_utils	\
-							ast_utils_2	\
-							lexer \
-							token \
-							exec_builtins \
-							builtins_redirections	\
-							manage_builtins			\
-							child_utils	\
-							manage_child	\
-							exec_child	\
-							execution	\
-							exec_utils	\
-							ft_memptr	\
-							ft_find_cmd_path	\
+override FILES			:=	$(addsuffix .c,				\
+							main						\
+							get_input					\
+							parsing						\
+							lexer						\
+							token						\
+							parser						\
+							states_1					\
+							states_2					\
+							expand						\
+							ft_tokencat					\
+							ft_usual_dollar_expand		\
+							ft_wildcards_expand			\
+							ft_dollar_expand			\
+							ft_quotes_expand			\
+							ft_dquotes_dollar_expand	\
+							ft_squotes_dollar_expand	\
+							ast_init					\
+							ast_utils_1					\
+							ast_utils_2					\
+							ast_add_cmd_seq				\
+							pwd							\
+							export						\
+							unset						\
+							ft_env						\
+							cd							\
+                            exit						\
+                            echo						\
+							execution					\
+							ft_find_cmd_path			\
+							manage_redirections			\
+							redirections_utils			\
+							ft_wait_children			\
+							manage_child				\
+							child_utils					\
+							exec_child					\
 							ft_interpret_child_status	\
-							ft_wait_children	\
-							exec_pipe_child		\
-							manage_pipe_child	\
-							manage_pipe_fds		\
-							pipe_redirections	\
-							manage_redirections	\
-							redirections_utils	\
-							set_heredoc_files	\
-							apply_heredoc		\
-							heredoc_child		\
-							ft_free_children	\
-							ft_free_ast			\
-							ft_unlink_tmp_file	\
-							ft_free_data		\
-							ft_free_token_lst	\
-							ft_free_ast_child	\
-							free_tab			\
-							utils \
-							env \
-							env_utils \
-							env_utils_2 \
-							env_utils_3 \
-							ft_free_env \
-							ft_error \
-							ft_strcpy \
-							ft_strcat \
-							ft_words_count \
-							ft_atoi \
-							ft_lst_to_tab \
-							ft_mega_join \
-							ft_strrchr \
-							get_next_line \
-							get_input \
-							ft_itoa)
+							manage_pipe_fds				\
+							exec_pipe_child				\
+							manage_pipe_child			\
+							pipe_redirections			\
+							set_heredoc_files			\
+							apply_heredoc				\
+							heredoc_child				\
+							manage_builtins				\
+							exec_builtins				\
+							builtins_redirections		\
+							exec_utils					\
+							env							\
+							env_utils_1					\
+							env_utils_2					\
+							env_utils_3					\
+							signals						\
+							ft_unlink_tmp_file			\
+							ft_free_ast					\
+							ft_free_children			\
+							ft_free_data				\
+							ft_free_ast_child			\
+							ft_free_token_lst			\
+							ft_free_env					\
+							ft_memptr					\
+							utils						\
+							ft_strrchr					\
+							ft_isalnum					\
+							ft_strcpy					\
+							ft_calloc					\
+							free_tab					\
+							ft_isdigit					\
+							ft_bzero					\
+							ft_mega_join				\
+							ft_strcat					\
+							ft_strchr					\
+							ft_putendl_fd				\
+							ft_findi					\
+							ft_putchar_fd				\
+							ft_swap_str					\
+							ft_strncmp					\
+							ft_strlcpy					\
+							ft_strcmp					\
+							ft_strndup					\
+							ft_lst_to_tab				\
+							ft_split					\
+							ft_atoi						\
+							ft_strdup					\
+							ft_strjoin					\
+							ft_isalpha					\
+							get_next_line				\
+							ft_strlen					\
+							ft_error					\
+							ft_itoa						\
+							ft_putstr_fd				\
+							ft_words_count				\
+							ft_strlcat)
 
 SRCDIR					:=	src
 INCDIR					:=	inc
@@ -161,11 +163,11 @@ DEPDIR					:=	_dep
 
 ### C O M P I L E R   F L A G S ################################################
 
-CC						:=	cc #$(shell which gcc)
-STD						:=	-std=c99
-CFLAGS					:=	-Wall -Wextra -Werror -g3 -D_GNU_SOURCE
+CC						:=	cc
+STD						:=	-std=gnu99
+CFLAGS					:=	-Wall -Wextra -Werror -g3
 IFLAGS					:=	-I$(INCDIR)
-LFLAGS					:=	-lreadline
+LFLAGS					:=	-L../minishell1 -lreadline -ltinfo
 LDFLAGS					?=	-MMD -MF
 
 override MKDIR			:=	mkdir -pv
@@ -175,34 +177,48 @@ override RM				:=	rm -rvf
 
 override SUB			:=	$(shell find $(SRCDIR) -type d)
 override OBJ			:=	$(FILES:%.c=$(OBJDIR)/%.o)
+override OBJ_BONUS		:=	$(FILES:%.c=$(OBJDIR)/bonus_%.o)
 override DEP			:=	$(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ))
+override DEP_BONUS		:=	$(patsubst $(OBJDIR)/%.o, $(DEPDIR)/%.d, $(OBJ_BONUS))
 
 ### U T I L I T Y ##############################################################
 
+.SECONDEXPANSION:
+DEL_BONUS_PREFIX = $$(subst bonus_,,%)
+
 ### C O M P I L A T I O N   F U N C T I O N ####################################
 
+#$(OBJDIR)/%.o:	$(1)/$$(subst bonus_,,%).c | $(OBJDIR) $(DEPDIR)
 define COMPILE_RULE
-$(OBJDIR)/%.o:		$(1)/%.c | $(OBJDIR) $(DEPDIR)
-	@$$(CC) $$(STD) $$(IFLAGS) $$(CFLAGS)	\
-	-c $$< -o $$@							\
+$(OBJDIR)/%.o:	$(1)/$$(DEL_BONUS_PREFIX).c | $(OBJDIR) $(DEPDIR)
+	@$$(CC) $$(STD) $$(IFLAGS) $$(CFLAGS) $$(DFLAGS)	\
+	-c $$< -o $$@									\
 	-MMD -MF $$(DEPDIR)/$$(*F).d
 	@$$(Progress) ; ProgressBar $$(shell basename $$<)
 endef
 
 ### R E C I P E S ##############################################################
 
-.PHONY:	all clean fclean re ascii
+.PHONY:	all bonus clean bclean fclean re
 
 all: $(NAME)
 
-bonus: $(NAME_BONUS)
+bonus: bonusflag $(NAME_BONUS)
 
 $(NAME): $(OBJ)
 	@$(CC) $^ $(LFLAGS) -o $@
 	@printf "\n\n $(CC_WHITE)Creating binary	: $(CC_GREEN)%s$(RESET)\n" $(NAME)
 	@$(call PRINT_ASCII_ART,$(PURPLE1),$(ART_NAME_1),$(PURPLE2),$(ART_NAME_2))
 
--include $(DEP)
+$(NAME_BONUS): $(OBJ_BONUS)
+	@$(CC) $^ $(LFLAGS) -o $@
+	@printf "\n\n $(CC_WHITE)Creating bonus binary	: $(CC_GREEN)%s$(RESET)\n" $(NAME)
+	@$(call PRINT_ASCII_ART,$(GREEN1),$(ART_BONUS_1),$(GREEN2),$(ART_BONUS_2))
+
+bonusflag:
+	$(eval DFLAGS := -D BONUS) 
+
+-include $(DEP) $(DEP_BONUS)
 $(foreach DIR, $(SUB), $(eval $(call COMPILE_RULE,$(DIR))))
 
 $(OBJDIR) $(DEPDIR):
@@ -219,11 +235,11 @@ clean:	;
 
 bclean:
 	@printf " $(CC_WHITE)Deleting binary files	: $(CC_RED)\e[31;9m$(NAME) $(NAME_BONUS)\n"
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_BONUS)
 	@printf "$(RESET)"
 
 fclean:	clean bclean
-	@$(call PRINT_ASCII_ART, $(RED1), $(ART_CLN1), $(RED2), $(ART_CLN2))
+	@$(call PRINT_ASCII_ART,$(RED1),$(ART_CLN1),$(RED2),$(ART_CLN2))
 
 leaks:
 	@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > rl_leaks.txt

@@ -6,7 +6,7 @@
 /*   By: momadani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:08 by momadani          #+#    #+#             */
-/*   Updated: 2022/11/13 20:07:55 by momadani         ###   ########.fr       */
+/*   Updated: 2022/12/08 23:44:26 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ int	ft_move_next(t_token **lst, t_type type, long *separator)
 
 int	parser(t_token *first)
 {
-	long	separators[3];
+	long	separators[2];
 
 	separators[BRACKETS] = 0;
-	separators[SQUOTES] = 0;
-	separators[DQUOTES] = 0;
+	separators[QUOTES] = 0;
 	return (ft_state_0(first, separators));
 }

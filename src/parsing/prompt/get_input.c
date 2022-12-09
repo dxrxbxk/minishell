@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:34:28 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/24 00:02:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2022/12/09 01:37:44 by momadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char	*get_prompt(int ret, t_env *lst)
 	char	*arrow;
 	char	*user;
 
+	if (THEME == 0)
+		return (ft_strdup("minish-1.0$ "));
 	if (ret == 0)
 		arrow = GREEN_ARROW;
 	else
