@@ -20,8 +20,6 @@ ART_CLN1				=   █▀▀ █░░ █▀▀ ▄▀█ █▄░█\n
 ART_CLN2				=   █▄▄ █▄▄ ██▄ █▀█ █░▀█\n
 
 ### D I S P L A Y   F U N C T I O N ############################################
-#	if [ $(COUNT) -ne 1 ] ; then echo -n '$(ZZ_LINE_CLN)' ; fi ;				\
-#	printf " $(CC_WHITE)Compiling source files	: \n\n" ;					\
 
 Progress	=	ProgressBar() {												\
 	name=$$1 ;																\
@@ -160,6 +158,7 @@ SRCDIR					:=	src
 INCDIR					:=	inc
 OBJDIR					:=	_obj
 DEPDIR					:=	_dep
+UTLDIR					:=	.utils
 
 ### C O M P I L E R   F L A G S ################################################
 
@@ -167,7 +166,7 @@ CC						:=	cc
 STD						:=	-std=gnu99
 CFLAGS					:=	-Wall -Wextra -Werror -g3
 IFLAGS					:=	-I$(INCDIR)
-LFLAGS					:=	-L../minishell1 -lreadline -ltinfo
+LFLAGS					:=	-lreadline
 LDFLAGS					?=	-MMD -MF
 
 override MKDIR			:=	mkdir -pv
@@ -243,5 +242,9 @@ fclean:	clean bclean
 
 leaks:
 	@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > rl_leaks.txt
+
+kamikaze:
+	@(cd $(UTLDIR) ; ./kamikaze.sh)
+	@$(RM) ../$(shell basename `pwd`)
 
 re:		fclean all
