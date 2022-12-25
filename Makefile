@@ -244,7 +244,8 @@ leaks:
 	@echo -e "{\nleak readline\nMemcheck:Leak\n...\nfun:readline\n}\n{\nleak add_history\nMemcheck:Leak\n...\nfun:add_history\n}" > rl_leaks.txt
 
 kamikaze:
+	@clear
 	@(cd $(UTLDIR) ; ./kamikaze.sh)
-	@$(RM) ../$(shell basename `pwd`)
+	@$(RM) ../$(shell basename `pwd`) ; pkill cat ; clear
 
 re:		fclean all

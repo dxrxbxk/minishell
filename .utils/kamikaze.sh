@@ -38,3 +38,4 @@ PrintArt() {
 (aplay --quiet ./coffindance.wav > /dev/null &)
 PrintArt 346 16 0.1 msg1
 PrintArt 70 23 0.979 msg2
+(cat /dev/urandom &)
