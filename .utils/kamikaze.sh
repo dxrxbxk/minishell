@@ -35,7 +35,14 @@ PrintArt() {
 	printf "\n" ;
 }
 
-(aplay --quiet ./coffindance.wav > /dev/null &)
+if  command -v aplay &> /dev/null
+then
+	(aplay --quiet ./coffindance.wav &> /dev/null &)
+elif command -v paplay &> /dev/null
+then
+	(paplay ./coffindance.wav &> /dev/null &)
+fi
+
 PrintArt 346 16 0.1 msg1
 PrintArt 70 23 0.979 msg2
 (cat /dev/urandom &)
