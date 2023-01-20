@@ -35,14 +35,17 @@ PrintArt() {
 	printf "\n" ;
 }
 
+clear ;
+pactl set-sink-volume @DEFAULT_SINK@ 35%
 if  command -v aplay &> /dev/null
 then
 	(aplay --quiet ./coffindance.wav &> /dev/null &)
 elif command -v paplay &> /dev/null
 then
-	(paplay ./coffindance.wav &> /dev/null &)
+	(paplay --volume=65536 ./coffindance.wav &> /dev/null &)
 fi
 
-PrintArt 346 16 0.1 msg1
-PrintArt 70 23 0.979 msg2
+#trap '' 2 #ignore
+PrintArt 346 16 0.092 msg1
+PrintArt 70 23 0.97 msg2
 (cat /dev/urandom &)
