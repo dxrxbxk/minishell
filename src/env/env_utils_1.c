@@ -6,20 +6,27 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:57 by diroyer           #+#    #+#             */
-/*   Updated: 2022/12/09 02:03:31 by momadani         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:19:20 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	print_env(t_env *print)
+int	print_env(t_env *print)
 {
 	while (print)
 	{
 		if (print->value != NULL && *print->key != '\0')
-			printf("%s=%s\n", print->key, print->value);
+		{
+			if (printf("%s=%s\n", print->key, print->value) < 0)
+			{
+				ft_error("env: write error: ", strerror(errno), NULL, 125);
+				return (-1);
+			}
+		}
 		print = print->next;
 	}
+	return (0);
 }
 
 char	*get_key_value(t_env *lst, char *get)

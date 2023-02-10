@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:06:16 by diroyer           #+#    #+#             */
-/*   Updated: 2022/10/31 20:17:15 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 04:47:17 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (s != NULL)
-		write(fd, s, ft_strlen(s));
+	if (s != NULL) {
+		if (write(fd, s, ft_strlen(s)) == -1) {
+			ft_error(NULL, strerror(errno), NULL, 1);
+		}
+	}
 }

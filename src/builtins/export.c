@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 06:05:04 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 05:21:38 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ int	ft_export(t_env **lst, char **av, int ac)
 	i = 0;
 	join = 0;
 	if (ac == 1)
-		print_env_export(*lst);
+	{
+		if (print_env_export(*lst) == -1)
+			return (1);
+	}
 	while (++i < ac)
 	{
 		if (export_key(av[i], &join) >= 0)

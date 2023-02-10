@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:03:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/20 20:05:56 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 05:04:18 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ static int	ft_echo_print(char **av, int ac, int i, int n)
 {
 	while (i < ac)
 	{
-		ft_putstr_fd(av[i], 1);
+		if (ft_putstr_fdr(av[i], 1) == 1)
+		{
+			ft_error("echo: write error: ", strerror(errno), NULL, 1);
+			return (1);
+		}
 		if (i++ + 1 < ac)
-			ft_putstr_fd(" ", 1);
+			ft_putchar_fd(' ', 1);
 	}
 	if (n)
-		ft_putstr_fd("\n", 1);
+		ft_putchar_fd('\n', 1);
 	return (0);
 }
 

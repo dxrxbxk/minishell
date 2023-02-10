@@ -6,13 +6,13 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:27:55 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 06:04:44 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 05:25:11 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	print_env_export(t_env *print)
+int	print_env_export(t_env *print)
 {
 	t_env	*tmp;
 
@@ -21,12 +21,24 @@ void	print_env_export(t_env *print)
 	while (tmp)
 	{
 		if (tmp->value)
-			printf("export %s=\"%s\"\n", tmp->key, tmp->value);
+		{
+			if (printf("export %s=\"%s\"\n", tmp->key, tmp->value) < 0)
+			{
+				ft_error("export: write error: ", strerror(errno), NULL, 1);
+				return -1;
+			}
+		}
 		else if (tmp->key)
-			printf("export %s\n", tmp->key);
+		{
+			if (printf("export %s\n", tmp->key) < 0)
+			{
+				ft_error("export: write error: ", strerror(errno), NULL, 1);
+				return -1;
+			}
+		}
 		tmp = tmp->next;
 	}
-	free_env(tmp);
+	return (free_env(tmp), 0);
 }
 
 t_env	*lst_copy(t_env *lst)

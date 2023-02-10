@@ -151,6 +151,7 @@ override FILES			:=	$(addsuffix .c,				\
 							ft_error					\
 							ft_itoa						\
 							ft_putstr_fd				\
+							ft_putstr_fdr				\
 							ft_words_count				\
 							ft_strlcat)
 

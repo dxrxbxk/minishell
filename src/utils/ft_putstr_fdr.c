@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fdr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 02:59:26 by diroyer           #+#    #+#             */
-/*   Updated: 2023/02/10 05:20:50 by diroyer          ###   ########.fr       */
+/*   Created: 2023/02/10 04:55:43 by diroyer           #+#    #+#             */
+/*   Updated: 2023/02/10 05:03:14 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_env(t_env **lst, char **av, int ac)
+int	ft_putstr_fdr(char *s, int fd)
 {
-	(void)av;
-	(void)ac;
-	if (print_env(*lst) == -1)
-		return (125);
+	if (s != NULL) {
+		if (write(fd, s, ft_strlen(s)) == -1)
+			return (1);
+	}
 	return (0);
 }
