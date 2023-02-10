@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 16:40:44 by diroyer           #+#    #+#             */
-/*   Updated: 2023/02/10 06:50:11 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 07:04:25 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ static void	fill_env(t_env **lst, char *av, int join)
 	else
 		value = NULL;
 	if (get_env_key(*lst, key) && join == 1)
-	{
 		ft_join_env(*lst, key, value);
-		free(key);
-	}
 	else if (get_env_key(*lst, key) && join == 0 && ft_strchr(av, '='))
 	{
 		ft_replace_env(*lst, key, value);
