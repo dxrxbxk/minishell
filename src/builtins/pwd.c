@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:44:24 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 01:55:18 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 06:54:56 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	ft_pwd(t_env **lst, char **av, int ac)
 	(void)av;
 	(void)ac;
 	if (get_key_value(*lst, "PWD"))
-		printf("%s\n", get_key_value(*lst, "PWD"));
+	{
+		if (printf("%s\n", get_key_value(*lst, "PWD")) < 0)
+			return (ft_error("pwd : write error: ", strerror(errno), NULL, 1), 1);
+	}
 	else
 	{
 		cwd = getcwd(NULL, 0);
@@ -30,7 +33,8 @@ int	ft_pwd(t_env **lst, char **av, int ac)
 		if (!new)
 			return (1);
 		ft_env_addback(lst, new);
-		printf("%s\n", get_key_value(*lst, "PWD"));
+		if (printf("%s\n", get_key_value(*lst, "PWD")) < 0)
+			return (ft_error("pwd : write error: ", strerror(errno), NULL, 1), 1);
 	}
 	return (0);
 }

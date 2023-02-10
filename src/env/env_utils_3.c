@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:19:46 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/21 21:36:39 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/10 06:51:43 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	create_env_node(t_env **first, void *key, void *value)
 {
 	t_env	*new;
 
-	new = ft_env_new(ft_strdup(key), ft_strdup(value));
+	new = ft_env_new(key, value);
 	if (!new)
 		return ;
 	ft_env_addback(first, new);
