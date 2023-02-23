@@ -6,7 +6,7 @@
 /*   By: diroyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:34:28 by diroyer           #+#    #+#             */
-/*   Updated: 2023/02/23 17:14:04 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/23 18:27:12 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*get_user_id(t_env *lst)
 		user = "not found";
 	else
 		user = get_key_value(lst, "USER");
-	user_color = ft_mega_join(SHELL, user, " \033[0m");
+	user_color = ft_mega_join(SHELL, user, "@\033[0m");
 	return (user_color);
 }
 
@@ -36,7 +36,7 @@ static char	*ret_pwd_color(void)
 	if (!cwd)
 		return (NULL);
 	tmp = cwd;
-	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/') + 1, " \033[0m ");
+	cwd = ft_mega_join(PWD_COLOR, ft_strrchr(cwd, '/') + 1, "\033[0m ");
 	free(tmp);
 	return (cwd);
 }
