@@ -6,7 +6,7 @@
 /*   By: diroyer <diroyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 12:16:29 by diroyer           #+#    #+#             */
-/*   Updated: 2022/11/23 06:16:32 by diroyer          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:44:21 by diroyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_exit(t_env **lst, char **av, int ac)
 	t_child	**child;
 
 	(void)lst;
-	ft_putstr_fd("exit\n", 2);
+	if (ft_putstr_fdr("exit\n", 2))
+		exit(0);
 	if (ac > 2)
 		return (ft_error("exit:", NULL, " too many arguments", 1));
 	else if (ac == 2 && ft_isnum(av[1]))
